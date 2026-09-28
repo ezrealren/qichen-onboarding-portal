@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>祺臣机械 · 专业知识100问 · 行业案例学习系统</title>
+<style>
+:root{
+  --bg:#0f172a;--panel:#ffffff;--page:#f1f5f9;--line:#e2e8f0;
+  --ink:#1e293b;--sub:#64748b;--brand:#0f766e;--brand2:#115e59;--brand-l:#ccfbf1;
+  --gold:#b45309;--gold-l:#fef3c7;--red:#b91c1c;--red-l:#fee2e2;--ok:#15803d;--ok-l:#dcfce7;
+  --blue:#1d4ed8;--blue-l:#dbeafe;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI","Microsoft YaHei",sans-serif;background:var(--page);color:var(--ink);line-height:1.75}
+header{background:linear-gradient(135deg,#134e4a,#0f766e 55%,#0d9488);color:#fff;padding:34px 24px 26px;text-align:center}
+header h1{font-size:27px;letter-spacing:1px}
+header .sub{opacity:.88;font-size:13.5px;margin-top:8px}
+.stats{display:flex;gap:12px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.stat{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:8px 20px;text-align:center;min-width:110px}
+.stat b{display:block;font-size:22px}
+.stat span{font-size:12px;opacity:.85}
+nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;background:#134e4a;padding:10px 14px;position:sticky;top:0;z-index:60;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+nav button{background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;padding:7px 16px;border-radius:18px;cursor:pointer;font-size:13.5px;transition:.2s}
+nav button:hover{background:rgba(255,255,255,.15)}
+nav button.on{background:#fff;color:var(--brand2);font-weight:700;border-color:#fff}
+main{max-width:1000px;margin:0 auto;padding:22px 16px 90px}
+section{display:none}section.on{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:16px;box-shadow:0 1px 3px rgba(15,23,42,.06)}
+.card h2{font-size:18.5px;color:var(--brand2);border-left:4px solid var(--brand);padding-left:10px;margin-bottom:10px}
+.card h3{font-size:15px;margin:12px 0 6px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:var(--brand-l);color:var(--brand2);white-space:nowrap}
+tr:nth-child(even) td{background:#f8fafc}
+.tag{display:inline-block;font-size:11.5px;padding:2px 9px;border-radius:10px;margin:0 5px 0 0;white-space:nowrap}
+.t-brand{background:var(--brand-l);color:var(--brand2)}
+.t-gold{background:var(--gold-l);color:var(--gold)}
+.t-red{background:var(--red-l);color:var(--red)}
+.t-ok{background:var(--ok-l);color:var(--ok)}
+.t-blue{background:var(--blue-l);color:var(--blue)}
+.note{background:var(--gold-l);border-left:4px solid var(--gold);padding:10px 14px;border-radius:6px;font-size:13.5px;margin:10px 0}
+.rednote{background:var(--red-l);border-left:4px solid var(--red);padding:10px 14px;border-radius:6px;font-size:13.5px;margin:10px 0}
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.toolbar input[type=search]{flex:1;min-width:220px;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:14px;background:#fff}
+.btn{background:var(--brand);color:#fff;border:none;border-radius:9px;padding:9px 18px;font-size:13.5px;cursor:pointer}
+.btn:hover{background:var(--brand2)}
+.btn.ghost{background:#fff;color:var(--brand2);border:1px solid var(--brand)}
+.qcard{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:10px 0;transition:.2s}
+.qcard:hover{border-color:var(--brand)}
+.qcard .qh{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.qnum{flex-shrink:0;background:var(--brand);color:#fff;border-radius:8px;padding:2px 9px;font-size:12.5px;font-weight:700;margin-top:3px}
+.qnum.pend{background:var(--gold)}
+.qtitle{font-weight:600;font-size:14.5px;flex:1}
+.qbody{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);font-size:14px}
+.qcard.open .qbody{display:block}
+.qsrc{font-size:12px;color:var(--sub);margin-top:8px}
+.casechip{display:inline-block;background:var(--blue-l);color:var(--blue);font-size:12px;border-radius:10px;padding:2px 10px;margin-top:8px;cursor:pointer}
+.casechip:hover{text-decoration:underline}
+.progress{background:var(--line);border-radius:8px;height:10px;overflow:hidden;margin:6px 0}
+.progress i{display:block;height:100%;background:var(--brand);transition:.3s}
+.casecard{background:#fff;border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:12px;padding:18px 20px;margin:14px 0}
+.casecard h3{font-size:15.5px;color:#1e3a8a;margin-bottom:6px}
+.casecard .lbl{font-weight:700;font-size:13px;margin:10px 0 2px}
+.casecard .scenario{background:#f8fafc;border-radius:8px;padding:8px 12px;font-size:13.5px}
+.casecard .wrong{background:var(--red-l);border-radius:8px;padding:8px 12px;font-size:13.5px}
+.casecard .right{background:var(--ok-l);border-radius:8px;padding:8px 12px;font-size:13.5px}
+.casecard .points{font-size:13.5px}
+.casecard .points li{margin:3px 0 3px 18px}
+footer{text-align:center;color:var(--sub);font-size:12.5px;padding:18px;border-top:1px solid var(--line);background:#fff}
+@media(max-width:640px){header h1{font-size:20px}.stat{min-width:80px;padding:6px 12px}}
+@media print{nav,.toolbar,.btn{display:none}section{display:block!important}.qbody{display:block!important}}
+</style>
+</head>
+<body>
+<header>
+  <h1>祺臣机械 · 专业知识 100 问</h1>
+  <div class="sub">行业案例学习系统 ｜ Qichen Paper Cup Machinery · Professional Knowledge Hub ｜ 版本 v2.0 · 2026-08-10 ｜ 事实源：MEMORY.md</div>
+  <div class="stats">
+    <div class="stat"><b>100</b><span>必问必答题</span></div>
+    <div class="stat"><b>7</b><span>知识模块</span></div>
+    <div class="stat"><b>12</b><span>行业实战案例</span></div>
+    <div class="stat"><b>10</b><span>工厂FAQ待补项</span></div>
+    <div class="stat"><b id="learnedStat">0</b><span>已掌握</span></div>
+  </div>
+</header>
+<nav>
+  <button class="on" data-t="home" onclick="go('home')">学习总览</button>
+  <button data-t="m1" onclick="go('m1')">①行业认知</button>
+  <button data-t="m2" onclick="go('m2')">②工艺结构</button>
+  <button data-t="m3" onclick="go('m3')">③产品机型</button>
+  <button data-t="m4" onclick="go('m4')">④封合材料</button>
+  <button data-t="m5" onclick="go('m5')">⑤产能算账</button>
+  <button data-t="m6" onclick="go('m6')">⑥买家FAQ</button>
+  <button data-t="m7" onclick="go('m7')">⑦异议应对</button>
+  <button data-t="cases" onclick="go('cases')">行业案例库</button>
+  <button data-t="faq" onclick="go('faq')">工厂FAQ接口</button>
+</nav>
+<main>
+
+<section id="home" class="on">
+  <div class="card">
+    <h2>系统定位</h2>
+    <p>本系统面向祺臣机械新业务员：把 100 道行业必答题 + 12 个行业化实战案例装进脑子，做到<b>参数有出处、原理讲得清、生意算得明、边界守得住</b>。</p>
+    <div class="note">📌 使用规则：每天背 10 题并勾选「已掌握」（进度自动保存）；案例库配合 A3 陪练使用；标注 <span class="tag t-gold">工厂FAQ待补</span> 的 9 项等待工厂实际数据，未补全前对外只说「需技术部确认」。</div>
+  </div>
+  <div class="card">
+    <h2>学习地图（对应 5 周 7 关 SOP）</h2>
+    <table>
+      <tr><th>周次</th><th>主攻模块</th><th>配套案例</th><th>关卡</th></tr>
+      <tr><td>Week 1</td><td>模块①②（行业认知+工艺结构）</td><td>C1 信任三连、C2 结构类比讲解</td><td>关卡1 机型连连看</td></tr>
+      <tr><td>Week 2</td><td>模块③④（产品机型+封合材料）</td><td>C3 咖啡店选型、C4 冰淇淋碗、C6 单双PE</td><td>关卡2 Top12快问快答</td></tr>
+      <tr><td>Week 3</td><td>模块⑤（产能算账）</td><td>C5 扩产方案、C7 净产出算账、C8 隐形成本</td><td>关卡3 算账演练</td></tr>
+      <tr><td>Week 4</td><td>模块⑥（买家FAQ）</td><td>C9 英文询盘实战</td><td>关卡4/5 诊断+英文回复</td></tr>
+      <tr><td>Week 5</td><td>模块⑦（异议应对）+全库</td><td>C10 印度比价、C11 折扣施压、C12 速度质疑</td><td>关卡6终考+关卡7 Lv3陪练</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h2>三条红线（Q100，任何场景不可违反）</h2>
+    <div class="rednote">
+      ① <b>不编造参数</b>——不确定就说「需技术部确认」；<br>
+      ② <b>不夸大产能</b>——额定速度≠净产出，主动讲 70–80% 系数；<br>
+      ③ <b>不越权承诺</b>——折扣/交期/独家代理/付款让步须老板拍板；成本价与利润结构保密。
+    </div>
+  </div>
+  <div class="card">
+    <h2>学习进度总览</h2>
+    <div class="progress"><i id="homeBar" style="width:0%"></i></div>
+    <p id="homeStat" style="font-size:13.5px;color:var(--sub)">已掌握 0 / 100 题</p>
+  </div>
+</section>
+
+<div id="modules"></div>
+<div id="casesArea"></div>
+
+<section id="faq">
+  <div class="card">
+    <h2>工厂 FAQ 补充接口（老板填写区）</h2>
+    <p>以下 10 项为知识库空洞（9 个待补题号 + 实际成交价目表），对应买家下单前必答题。请按「建议格式」提供数据，A6 复盘官收到后 48 小时内替换 <span class="tag t-gold">工厂FAQ待补</span> 条目并同步本系统。</p>
+    <table>
+      <tr><th>待补题号</th><th>需要的数据</th><th>建议格式</th></tr>
+      <tr><td>Q73</td><td>各机型换模时长（8oz→12oz 等）</td><td>机型 + 实测分钟数 + 视频链接</td></tr>
+      <tr><td>Q74</td><td>我方机器实际纸张损耗率（行业参考 8–10%，高精度裁切 3–5%，我方实测值待补）</td><td>机型 + 百分比</td></tr>
+      <tr><td>Q76</td><td>每千杯电耗</td><td>机型 + kWh + 测试条件</td></tr>
+      <tr><td>Q77</td><td>净速度实测值</td><td>机型 × 杯型 × 纸张 三列表格 + 试机视频</td></tr>
+      <tr><td>Q78</td><td>PLA/PE 兼容性</td><td>机型 × 材料 矩阵（能跑/需改造/不能跑）</td></tr>
+      <tr><td>Q79</td><td>易损件寿命与单价</td><td>部件 + 寿命 + 单价 + 建议备件量</td></tr>
+      <tr><td>Q80</td><td>远程诊断与备件时效</td><td>服务中心网点 + 响应小时 + 备件发货承诺</td></tr>
+      <tr><td>Q88</td><td>常规机型交期</td><td>机型 + 天数范围（常规/旺季）</td></tr>
+      <tr><td>Q92</td><td>试机视频素材</td><td>机型 + 视频链接</td></tr>
+      <tr><td>—</td><td>实际成交价目表</td><td>替换 MEMORY §2 挂牌参考价</td></tr>
+    </table>
+    <div class="note">工厂实际 FAQ 中如有本库未覆盖的客户真实问题，请一并提供，将作为 Q101+ 追加并同步进 MEMORY §5。</div>
+  </div>
+</section>
+
+</main>
+<footer>祺臣机械 · 专业知识100问行业案例学习系统 v2.0 ｜ 所有参数以 MEMORY.md 为唯一事实源 ｜ 案例为教学模拟场景，非真实客户记录 ｜ 编制：祺工</footer>
+
+<script>
+/* ============ 行业实战案例库（12例，教学模拟场景） ============ */
+const CASES=[
+{id:"C1",mod:"m1",qs:["Q3","Q4","Q12"],title:"C1 首复信任三连：客户问「你们是工厂还是贸易商？」",
+scenario:"东南亚初创买家首次询盘：\"Are you a real factory? I got cheated before.\" 对方曾被坑过，信任为零。",
+wrong:"只回 \"Yes we are factory, best quality\" —— 空口无凭，客户继续怀疑。",
+right:"直接上证据链：① \"16 years Gold Supplier on Alibaba.com, onsite-verified by SGS\"（平台+第三方双认证）；② \"8,400㎡ factory, 76 staff — you are welcome to a video factory tour anytime\"（敢开视频验厂）；③ \"100% on-time dispatch record, covered by Alibaba Trade Assurance\"（履约数据+担保）。随后立刻约视频验厂时间。",
+points:["信任要「证据三连」而不是形容词三连","16年金品+SGS+Trade Assurance 是祺臣现成的三张王牌（Q3/Q5）","主动邀请视频验厂是最强诚意信号（Q12）"]},
+{id:"C2",mod:"m2",qs:["Q13","Q14","Q28"],title:"C2 结构类比讲解：客户担心「机器太复杂，工人不会操作」",
+scenario:"中东买家：\"My workers have no experience. Is the machine difficult to run?\"",
+wrong:"甩一堆术语 \"Open cam intermittent indexing with PLC servo\" —— 客户更慌。",
+right:"用类比讲结构：凸轮分度像钟表擒纵机构——转一下、做一步、步步到位，动作是机器自动循环的，工人只需放纸和收杯；PLC 是大脑自动计数报警，缺纸自动停机不会出废品；再补一句「我们提供免费培训+视频指导，全自动线 1 人可看 2–3 台」。",
+points:["对外讲结构先类比后术语（Q14）","把「自动化」翻译成「省人、省心」（Q83：1人看2–3台）","安装培训政策随手跟上（Q85）"]},
+{id:"C3",mod:"m3",qs:["Q31","Q39","Q42"],title:"C3 咖啡店连锁一站式选型：双层杯+杯盖+包装打包卖",
+scenario:"连锁咖啡品牌采购：\"We need machines for double wall cups 8oz/12oz, with lids, daily 25,000 cups.\"",
+wrong:"只报一台 WT-22 单机价 —— 客户还要自己凑辅机，体验差、客单价低。",
+right:"整线方案：WT-22（双层杯专家，2–22oz 覆盖 8/12oz）+ PL-145 杯盖机（70–100 pcs/min）+ 空压机（气源必配）+ CP650 包装机，打包成「咖啡店一站式产线」；算账：WT-22 净产出约 2.5–2.9 万只/单班，覆盖 2.5 万日需求并留余量；报价分项呈现（EXW/FOB），价格走老板审批。",
+points:["双层杯首选 WT-22（Q31），杯盖配 PL-145（Q39）","配套销售逻辑：主机+空压机+包装机，双层杯机+杯盖机打包（Q42）","先算账再报价，产能刚好覆盖并留余量（Q67）"]},
+{id:"C4",mod:"m3",qs:["Q35","Q36","Q64"],title:"C4 冰淇淋碗客户：双面淋膜纸的热风封合陷阱",
+scenario:"冰淇淋厂：\"We use double PE coated paper for bowls. Your competitor's hot air machine failed on it.\"",
+wrong:"不分辨封合方式就推普通热风机器 —— 重蹈客户被坑的覆辙。",
+right:"直击痛点：\"Double PE coated paper cannot be sealed by hot air — it needs ultrasonic welding. Our ZBJ-DP35 is built exactly for this: ultrasonic sealing + servo paper feeding, 70–80 pcs/min, 10–35oz, 14KW.\" 说明超声波靠高频振动摩擦生热，不伤纸纤维，专治双面淋膜。",
+points:["双面 PE 热风封不住，必须超声波——这是 DP35 的差异化价值（Q36/Q64）","客户提竞品失败案例时，正是讲技术差异的最佳时机","报参数的同时讲原理，专业感立住（Q51）"]}
+];
+</script>
+<script>
+const CASES2=[
+{id:"C5",mod:"m5",qs:["Q68","Q69","Q70"],title:"C5 扩产选型算账：日产5万只怎么选机台数",
+scenario:"纸杯工厂扩产：\"We need 50,000 cups/day of 12oz hot drink cups, single shift 8 hours. Which and how many machines?\"",
+wrong:"拍脑袋说 \"one G12 is enough\" —— 没算账，旺季产能缺口就是丢单。",
+right:"按公式算：5万 × 1.2（增长缓冲）= 6万只目标。方案A：OC12 PRO 双班 ≈ 6.5万只/日（90×75%×480×2），够且留余量；方案B：G12 单班净产出约 4–5.4万/班，需评估。给客户双方案对比表（预算 vs 厂房 vs 班次），让客户按实际选。",
+points:["选型公式：峰值日产量×1.2÷(净速度×运行小时)（Q68）","1.2倍缓冲防旺季拒单（Q70）","永远给方案对比而不是单一答案，把选择权留给客户"]},
+{id:"C6",mod:"m4",qs:["Q52","Q55","Q56"],title:"C6 单PE还是双PE：冷饮客户选错纸的代价",
+scenario:"新客户：\"We want to make iced coffee cups. Single PE paper is cheaper, can we use it?\"",
+wrong:"为了促成订单顺着客户说 \"Yes single PE is fine\" —— 杯子外壁冷凝水浸软，客户产品翻车连累祺臣口碑。",
+right:"专业纠偏：热饮才用单 PE；冰咖啡是冷饮，外壁会挂冷凝水，必须双面 PE 防浸软（并说明双面 PE 需超声波封合，推荐 DP35 系列或确认机型配置）。再给 GSM 口径：120ml 以上用 190–220gsm + 15–17g 膜。",
+points:["单PE=热饮、双PE=冷饮，这是材料题的标准判断（Q52）","敢纠正客户的错误想法，专业信任 > 短期讨好","GSM 规格随口报出（Q55/Q56）"]},
+{id:"C7",mod:"m5",qs:["Q65","Q66","Q67"],title:"C7 净产出算账：客户拿「额定速度」压你",
+scenario:"客户：\"Your competitor says 100 pcs/min but only $14,000. Yours is 80 pcs/min at $16,000. Why?\"",
+wrong:"跟着报额定速度 \"Actually we can also reach 100\" —— 虚标产能，违反铁律2。",
+right:"把行业真相摆上桌：额定速度是实验室理想值，所有机器实际净产出都只有额定的 70–80%（换卷、卡纸、质检损耗）。算账对比：\"Our WT-22 at 70–80 rated gives you a real 25,000–29,000 cups per 8h shift — we state this openly and can prove it by video trial. May I ask what NET output the competitor guarantees in writing?\" 反问对方敢不敢书面承诺净产出。",
+points:["主动讲净产出系数是祺臣的诚实差异化（Q65）","算出每班实际产量，把「速度」翻译成「生意」（Q66/Q67）","反问「敢不敢书面承诺净产出」——把虚标对手一军"]},
+{id:"C8",mod:"m5",qs:["Q71","Q72","Q74"],title:"C8 隐形成本：多杯型客户忽视的换模与纸耗",
+scenario:"贸易商要做 6 种杯型：\"One machine can make all sizes, right?\"",
+wrong:"只答 \"Yes, change mold\" —— 隐瞒换模成本，客户买后叫苦就是售后灾难。",
+right:"讲透两个隐形成本：① 换模时间——多杯型频繁换模直接吃产能，必须提前确认换模时长（带视频最好）；② 纸张边料损耗——行业普通机 8–10%，高精度裁切 3–5%，百万只杯子的纸钱差很大。祺臣实测数据待技术部提供，先给行业参考值并承诺补实测。",
+points:["换模时间是隐形产能杀手，多杯型客户必讲（Q71/Q72）","纸耗 3–5% vs 8–10% 是总拥有成本论据（Q74）","我方实测数据未入库时，给行业参考+承诺补数据，不编造（红线①）"]}
+];
+</script>
+<script>
+const CASES3=[
+{id:"C9",mod:"m6",qs:["Q81","Q82","Q84"],title:"C9 英文询盘实战：三个高频技术问题一次接住",
+scenario:"非洲买家连珠炮：\"1. What is the real speed? 2. What cup sizes? 3. Our voltage is different, can you handle?\"",
+wrong:"回一段模板话术不针对性作答，或三问只答一问。",
+right:"逐条硬接：① \"Rated 80–100 pcs/min (OC12 PRO), real net output about 70–80% of rated — we'll state both and show video trial.\" ② \"3–16oz, just change the mold; WT-22 covers 2–22oz if you need wider range.\" ③ \"Standard is 380V/3-phase; please tell us your local voltage — 415V or 220V can be customized with transformer.\" 结尾反问日产量目标，推进选型。",
+points:["多问题询盘要逐条编号作答，一条不漏（Q81/Q82/Q84）","速度题永远额定+净产出双报","电压题先报标准再问当地——这是出口机的标准流程（Q25/Q84）"]},
+{id:"C10",mod:"m7",qs:["Q95","Q74","Q97"],title:"C10 印度供应商比价：总拥有成本反击战",
+scenario:"客户摊牌：\"Indian supplier quotes $11,000 for similar spec. Your price is too high.\"",
+wrong:"立刻降价或贬低对手 \"Indian machines are bad quality\" —— 前者越权，后者失格。",
+right:"不比价格比总拥有成本，只讲客观差异：① 净产出率——同标称速度下实际产量可能差 20%+；② 纸张损耗 3–5% vs 8–10%，一年百万只杯子的纸钱就是差价；③ 备件供应与远程支持——16 年金品+SGS+Trade Assurance，国际服务中心；④ 邀请视频验厂眼见为实。结尾：\"The cheapest machine is the one that wastes the least paper and downtime.\" 任何让步须老板审批。",
+points:["比价应对=总拥有成本四件套（Q95）","不贬低同行，只讲客观差异——SOUL 边界","金句收尾比纠缠数字更有力"]},
+{id:"C11",mod:"m7",qs:["Q99","Q43","Q89"],title:"C11 折扣逼单：客户当场要15%折扣+今天下单",
+scenario:"视频通话中客户施压：\"Give me 15% discount and I sign today. Otherwise I go to another supplier.\"",
+wrong:"当场答应 \"OK I apply for you\" —— 越权埋雷；或生硬拒绝把客户谈崩。",
+right:"四步拆解：① 感谢认可不接招；② \"Our pricing follows configuration and needs my manager's approval — I cannot promise 15% on the spot, that wouldn't be honest to you.\"（诚实+流程挡箭）；③ 把话题拉回价值：净产出、纸耗、服务、验厂；④ 推进实质动作：约试机视频/发正式报价单（价格需老板确认）。绝不当场承诺任何折扣与付款让步。",
+points:["折扣/交期/账期让步=老板拍板项（Q99/Q89）","用「审批流程」做挡箭牌，诚实不伤感情","逼单时把对话从价格拉回价值"]},
+{id:"C12",mod:"m7",qs:["Q96","Q77","Q92"],title:"C12 速度质疑：客户要求证明「100 pcs/min 是真的」",
+scenario:"专业买家：\"Every supplier claims high speed. Prove yours is real.\"",
+wrong:"口头保证 \"Trust me, our machine is very fast\" —— 行业谎言听多了，空话无效。",
+right:"用证据链回应：① 主动拆分额定 vs 净产出（70–80%），先立诚实人设；② 邀请视频试机或 FAT（工厂验收测试）——\"You can watch live video trial with your cup size and paper\"；③ 我方实测数据（机型×杯型×纸张净速度+试机视频）正由技术部整理，到位后随报价附上；④ SGS 验厂报告+16 年店铺记录背书。",
+points:["速度质疑应对=主动坦白净产出+邀请实证（Q96）","FAT/视频试机是信任大杀器","实测数据未入库时如实说明进度，不编数字（Q77待补）"]}
+];
+</script>
+<script>
+/* 题库数据 [编号,问题,答案,出处,关联案例] */
+const M1=[
+[1,"纸杯机的英文标准叫法是什么？","Paper Cup Forming Machine / Paper Cup Making Machine，祺臣机型前缀为 ZBJ 系列。","MEMORY §6"],
+[2,"祺臣机械的公司全称与国际站店铺是什么？","Wenzhou Qichen Trading Co., Ltd.（品牌：QiChen，中文名「祺臣机械」），店铺 machine-china.en.alibaba.com。","MEMORY §1"],
+[3,"我们店铺在国际站的资历与第三方认证是什么？","16 年金品供应商（16 YRS），SGS 实地认证（onsite-verified），Trade Assurance 全覆盖。","MEMORY §1","C1"],
+[4,"工厂规模数据（对外话术）怎么说？","占地 8,400㎡，约 76 名员工；可主动邀请视频验厂：\"you are welcome to a video factory tour anytime\"。","MEMORY §1","C1"],
+[5,"我们的履约数据有哪些可以拿来做信任背书？","准时发货率 100%、平均响应时间 ≤6h、Trade Assurance 担保。","MEMORY §1"],
+[6,"我们的服务能力包含哪四项？","图纸定制（Drawing-based customization）、国际服务中心、质量管控（QC）、成品检验。","MEMORY §1"],
+[7,"与祺臣联合署名机型的关联制造主体是谁？","Guohao Machinery（WT-22 等机型联合署名「Qichen & Guohao Machinery」）。","MEMORY §1"],
+[8,"公司位于哪个产业带？这对外有什么用？","浙江温州（瑞安）——中国纸包装机械产业带。说明供应链配套成熟，可作为专业背书。","MEMORY §1"],
+[9,"店铺对外联系人是谁？","Leon Guo。","MEMORY §1"],
+[10,"我们的产品线覆盖多少个大类？举出主要的 6 类。","14 个分类。主要：纸杯成型机、纸碗机、杯盖机、包装机、纸盘机、纸盒机（另有铝箔容器机、纸餐具线、纸袋机、塑料热成型机、纸吸管机、印刷机、模切机等）。","MEMORY §1"],
+[11,"纸杯机行业的标准质保惯例是多久？","1–2 年；祺臣对外口径为一年质保 + 易损件包随货 + 国际服务中心。","MEMORY §3.5 / §5 FAQ#8"],
+[12,"我们对外输出的三条核心信任话术是什么？","① \"16 years Gold Supplier on Alibaba.com, onsite-verified by SGS.\" ② \"8,400㎡ factory, 76 staff — you are welcome to a video factory tour anytime.\" ③ \"100% on-time dispatch record, covered by Alibaba Trade Assurance.\"","MEMORY §1","C1"]
+];
+const M2=[
+[13,"纸杯成型机的 8 工位流程是什么？","① 送纸 → ② 卷筒成型（围成杯身）→ ③ 侧缝封合（热风或超声波）→ ④ 上油/润滑 → ⑤ 卷口（杯沿卷边）→ ⑥ 底部冲切 → ⑦ 底部预热+压合密封 → ⑧ 滚花压实（knurling）出杯。","MEMORY §3.1","C2"],
+[14,"OC12/WT-22 系列的核心传动方式是什么？怎么解释给客户？","开式凸轮间歇分度（Open Cam Intermittent Indexing）+ 齿轮传动。凸轮把连续旋转变成工位的间歇运动，齿轮保证各工位同步。","MEMORY §3.1","C2"],
+[15,"纸杯机的全部成型动作由几个转盘完成？","三个转盘（turn-plates）。","MEMORY §3.1"],
+[16,"送纸精度靠什么控制？能达到什么水平？","PLC + 光电传感器 + 伺服送纸，底部纸间隙可控制在 0.1mm 内。","MEMORY §3.1"],
+[17,"底部纸用完时机器会怎样？这个设计的价值是什么？","自动停机。价值：防废品、省纸、提稳定性。","MEMORY §3.1"],
+[18,"纸杯机的主要部件有哪四大类？","电机（主电机+滚花电机）、电气元件（PLC、变频器、接触器、光电开关）、气动部件（电磁阀等）、轴承。","MEMORY §3.1 + Saintyco FAQ"],
+[19,"热风封合的温度控制不当会导致什么后果？","温度过高或过低都会导致杯底渗漏。","MEMORY §3.2"],
+[20,"超声波封合的维护要点是什么？","频率与压力需调节，压力不可过高。","MEMORY §3.2"],
+[21,"滚花轮（Knurling Roller）的作用和维护提醒？","压实杯底出杯，是纸杯机最关键也最难调的部件之一，压力不可随意加大。","MEMORY §6 + 行业资料"],
+[22,"机器日常维护首先要检查哪些部位？","加热器、滚花轮、超声波焊头、各转盘与平台的同步性；保持润滑。","MEMORY §3.2 + 行业资料"],
+[23,"纸杯机的易损件有哪些？","切刀、加热元件、滚花轮、超声波焊头——报价时主动建议客户随货备易损件包。","MEMORY §3.5"],
+[24,"纸杯机的常规整机尺寸与重量是多少？怎么运输？","约 2700×1400×1900mm、约 2.5 吨，按 20GP 集装箱规划运输。","MEMORY §3.5"],
+[25,"机器的电压与电力要求是什么？","标准 380V/三相（行业最低门槛）；行业资料提示多数机器还需约 5HP/5KVA 电力配置 [研究]。出口需确认客户当地电压（印度 415V、部分国家 220V 需定制变压器）。","MEMORY §3.5","C9"],
+[26,"为什么纸杯机必须配套空压机？","气动元件（电磁阀等）由压缩空气驱动，无气源无法运行。","MEMORY §3.5"],
+[27,"「伺服送纸」（Servo Paper Feeding）是什么意思？哪款机型有此配置？","用伺服电机精确控制送纸行程，提升精度、省纸；DP35 纸碗机有此配置。","MEMORY §2.2 / §6"],
+[28,"PLC 在纸杯机里起什么作用？","系统大脑——控制速度、计数、故障报警，保证稳定高速运行。","MEMORY §3.1","C2"]
+];
+const M3=[
+[29,"ZBJ-OC12 的核心参数与定位？","70–80 pcs/min、2.5–12oz、~3–8KW、开式凸轮+齿轮传动；参考价 $16,000–17,000；入门主力，小生意首选。","MEMORY §2.1"],
+[30,"OC12 PRO 相比 OC12 升级在哪里？","速度提至 80–100 pcs/min、杯型扩至 3–16oz、功率 8KW、PLC+电机+齿轮+轴承；价格同为 $16,000–17,000 区间。","MEMORY §2.1","C5"],
+[31,"WT-22 为什么叫「双层咖啡杯专家」？","专做双层杯，杯型覆盖 2–22oz（全线最广），70–80 pcs/min、3KW、开式间歇分度凸轮+PLC；参考价 $16,000–19,000。","MEMORY §2.1","C3"],
+[32,"G12 高速机的参数与目标客户？","110–150 pcs/min、2–12oz、20KW、PLC+电机+齿轮；参考价 $24,000–25,000；面向中大型工厂。","MEMORY §2.1","C5"],
+[33,"KBM 超高速线的定位与价格带？","全伺服高端产线，参考价 $51,000–55,000，面向大产能客户。","MEMORY §2.1"],
+[34,"客户只做茶水杯，推哪款？","ZBJ-X35，茶水杯专用，全自动，参考价 $17,000。","MEMORY §2.1"],
+[35,"ZBJ-DP35 纸碗机的完整参数？","70–80 pcs/min、10–35oz、14KW、超声波焊接+伺服送纸；参考价 $22,000–25,000；汤碗/冰淇淋碗主力。","MEMORY §2.2","C4"],
+[36,"DP35 的差异化卖点一句话怎么说？","「双面 PE 淋膜纸用热风封不住，DP35 的超声波封合专为此设计」——它是双面淋膜的克星。","MEMORY §3.2","C4"],
+[37,"做爆米花桶这类大口径产品用哪款？","ZBJ-X64 / X135，大口径（爆米花桶级），参考价约 $30,000。","MEMORY §2.2"],
+[38,"牛皮纸汤碗高产能需求推哪款？","GH1500，高速、全自动产线级，参考价约 $44,000。","MEMORY §2.2"],
+[39,"PL-02 和 PL-145 两款杯盖机怎么区分？","PL-02 高速、做平面印刷纸盖，参考价 $31,000–35,000；PL-145 是主力机型，70–100 pcs/min、12KW、PLC 控制，参考价 $26,000–28,000。","MEMORY §2.3","C3"],
+[40,"纸杯包装机有哪些型号？","CP650（冷热饮纸杯包装）、LP-450（冰淇淋杯/碗盖包装），价格询老板。","MEMORY §2.4","C3"],
+[41,"我们还有哪些辅机品类？","QH-9905 纸箱成型/立箱机（$21,000–22,000）、V-Bottom 纸袋机（约 $29,000）、纸杯机配件 Parts（按件询价）。","MEMORY §2.4"],
+[42,"纸杯机的标准配套销售逻辑是什么？","纸杯机必须配空压机（气源）+ 成品包装机；双层杯机常与杯盖机打包成「咖啡店一站式产线」。","MEMORY §2.4","C3"],
+[43,"客户问价格，能直接报死价吗？","不能。给机型区间价 + 配置说明，反问客户产能需求后再精确报价；折扣与成交价的拍板权在老板。","MEMORY §5 FAQ#4 + SOUL 边界","C11"],
+[44,"我们挂牌价的总体区间是多少？","$16,000–$55,000（OC12 系列最低 $16,000 起，KBM 高端线最高 $55,000）。","MEMORY §2"],
+[45,"杯型覆盖最广的是哪款机型？","WT-22（2–22oz）。","MEMORY §2.1"],
+[46,"速度最快的是哪款机型？","G12 额定 110–150 pcs/min（高速档）；KBM 为超高速高端线（具体速度以工厂确认为准）。","MEMORY §2.1"],
+[47,"功率最低和最高的机型分别是？","最低 WT-22（3KW）；最高 G12（20KW）。","MEMORY §2.1"],
+[48,"客户要「一台机器既能做小杯又能做大杯」，怎么回应？","说明同一台机器有杯型范围（如 OC12 PRO 3–16oz、WT-22 2–22oz），范围内换模即可；超出范围需另一台或定制模具；换模时长是必讲项。","MEMORY §2.1 / §3.4","C8"]
+];
+</script>
+<script>
+const M4=[
+[49,"纸杯机有哪两种侧缝封合方式？","热风封合（Hot Air Sealing）与超声波封合（Ultrasonic Sealing）。","MEMORY §3.2","C4"],
+[50,"热风封合适用于什么纸？原理是什么？","单面 PE 淋膜纸；热风加热 PE 膜使其熔合。成本低、技术成熟。","MEMORY §3.2"],
+[51,"超声波封合适用于什么纸？原理是什么？","单/双面 PE、PLA 环保材料；高频振动摩擦生热熔合。优势：不伤纸纤维、适合双面淋膜与环保材料。","MEMORY §3.2","C4"],
+[52,"客户问 Single PE 还是 Double PE，标准回答逻辑是什么？","热饮用单 PE（内壁单层，成本低）；冷饮/冰淇淋碗用双面 PE（防外壁冷凝水浸软）；再据此推荐封合方式匹配的机型。","MEMORY §3.3","C6"],
+[53,"PLA 是什么材料？封合上有什么特殊性？","可降解环保淋膜材料，欧美环保订单常用。封合温度窗口比 PE 低 10–15°C、封合时间更长，跑 PLA 的机器需独立温控加热区。","MEMORY §3.3"],
+[54,"客户问「机器能不能做 PLA 杯」，业务员的标准动作是什么？","说明需确认机型温控配置，升级至工厂工程师确认后再答复——不装懂、不猜测。","MEMORY §5 FAQ#10 + SOUL 边界"],
+[55,"小杯（65–90ml）的原纸与淋膜规格是什么？","155–165gsm 原纸 + 13–15g PE 膜。","MEMORY §3.3","C6"],
+[56,"中大杯（120ml 以上）的原纸与淋膜规格是什么？","190–220gsm 原纸 + 15–17g PE 膜。","MEMORY §3.3","C6"],
+[57,"纸碗类用纸的克重范围一般是多少？","150–350gsm。","MEMORY §3.3"],
+[58,"GSM 是什么意思？","克重（grams per square meter），每平方米纸的克数，是纸张厚度/挺度的核心指标。","MEMORY §6"],
+[59,"牛皮纸（Kraft）常用在什么产品上？配什么机型？","汤碗常用，视觉高端；配 GH1500 / DP35。","MEMORY §3.3"],
+[60,"oz 与 ml 怎么换算？常用杯型对应多少 ml？","1 oz ≈ 29.6ml；8oz≈240ml、12oz≈360ml、16oz≈480ml。","行业资料，[待确认]——建议与工厂口径核对后正式入库"],
+[61,"行业常用的 8oz/12oz/16oz 杯参考尺寸是什么？","行业通用参考：8ozA 口径 80mm×高 92mm；8ozB 口径 90mm×高 85mm；12ozC 口径 90mm×高 112mm；16oz 口径 90mm×高 137mm。","行业资料，[待确认]——各厂模具不同，对外引用前须与工厂实际模具口径核对"],
+[62,"卷边（Curling）是什么工序？","杯口边缘卷起成型（第 5 工位），提升杯沿刚性与饮用口感。","MEMORY §3.1 / §6"],
+[63,"波纹套筒杯（Ripple Sleeve Cup）我们有对应能力吗？","有对应机型（双层波纹套筒咖啡杯成型机）。","MEMORY §6 / 店铺产品"],
+[64,"双面 PE 纸为什么不能用热风封合？","热风靠加热 PE 膜熔合，双面淋膜时内外膜层结构导致热风无法有效穿透封合，必须用超声波（摩擦生热）——这正是 DP35 的差异化价值。","MEMORY §3.2","C4"]
+];
+const M5=[
+[65,"额定速度和实际产能是一回事吗？","不是。实际净产出 ≈ 额定速度 × 70–80%（换卷、卡纸、质检、清理损耗）。必须主动向客户说明。","MEMORY §3.4 + SOUL 铁律 2","C7"],
+[66,"单班（8 小时）产量怎么算？以额定 90 pcs/min 为例。","90 × 75% × 8 × 60 ≈ 32,400 只/单班。","MEMORY §3.4","C7"],
+[67,"WT-22 单班 8 小时的合理净产出预估是多少？","约 25,000–29,000 只（70–80 × 75% × 480min ≈ 25,200–28,800）。","MEMORY §3.4 / IDENTITY 话术","C3"],
+[68,"给客户做选型的机台数公式是什么？","所需机台数 = 需求峰值日产量 × 1.2（增长缓冲） ÷ (净速度 × 每日运行小时)。","MEMORY §3.4","C5"],
+[69,"客户目标日产 5 万只 12oz 热饮杯、单班 8 小时，怎么给方案？","按 5 万×1.2=6 万算：OC12 PRO 双班约 6.5 万只/日可覆盖；或 G12 单班（净约 4–5.4 万/班）。给客户双方案对比，按预算与厂房选。","MEMORY §2.1 / §3.4","C5"],
+[70,"为什么选型要留 1.2 倍增长缓冲？","防止旺季订单超出产能导致拒单或外发；按峰值+缓冲选型是行业选型准则。","MEMORY §3.4","C5"],
+[71,"换模时间（Changeover Time）为什么重要？","它是隐形产能杀手——多杯型客户频繁换模（如 8oz→12oz），换模耗时直接吃掉产能；行业资料警示：若单次换模耗时过长且一天换模多次，标称再快的机器也会变成瓶颈 [研究]。我方具体换模数据见 Q73（待工厂实测）。","MEMORY §3.4 + 行业资料","C8"],
+[72,"客户要多个杯型，我们必须主动提供什么？","8oz→12oz 换模时长（最好带视频证明）+ 换模操作说明。","MEMORY §3.4 / §4.2","C8"],
+[73,"我们的换模时长数据目前是多少？","[工厂FAQ待补] —— 需技术部逐机型实测并提供视频后补入。","MEMORY §4.2 待补全",null,true],
+[74,"纸张边料损耗行业水平是多少？","普通机器 8–10%，高精度裁切可降到 3–5%——百万只杯子的纸钱差距不小，是对比竞品时的总拥有成本论据。","MEMORY §3.4","C8"],
+[75,"全自动线省人账怎么算？","全自动线 1 人可看 2–3 台；全自动比半自动贵约 $30,000，但三班制每班省 1 人（合计 3 人），回本常 <12 个月。","MEMORY §5 FAQ#5 + 行业资料"],
+[76,"每 1,000 只杯子的电耗是多少？","[工厂FAQ待补] —— 买家下单前 6 必答题之一，需技术部按机型实测。","MEMORY §4.2",null,true],
+[77,"各机型在指定杯型+纸张下的净速度实测值有吗？","[工厂FAQ待补] —— 6 必答题第 1 题，需「机型×杯型×纸张」三列表格+试机视频。","MEMORY §4.2","C12",true],
+[78,"各机型 PLA/PE 兼容性矩阵有吗？","[工厂FAQ待补] —— 6 必答题第 5 题，需逐机型确认（能跑/需改造/不能跑）。","MEMORY §4.2",null,true],
+[79,"易损件寿命与价格表有吗？","[工厂FAQ待补] —— 6 必答题第 6 题（切刀、加热元件、滚花轮、超声波焊头寿命+单价+建议备件清单）。","MEMORY §4.2",null,true],
+[80,"远程诊断能力与备件发货时效承诺有吗？","[工厂FAQ待补] —— 6 必答题第 4 题（国际服务中心网点、响应时效）；现有对外口径仅有「国际服务中心」服务能力。","MEMORY §4.2 / §1",null,true]
+];
+const M6=[
+[81,"What is the machine speed? 怎么答？","报额定速度 + 主动说明实际净产出约 70–80%，并给出每班次产量。","MEMORY §5 FAQ#1","C9"],
+[82,"What cup sizes can it make? 怎么答？","按机型报 oz 范围（OC12 PRO 3–16oz / WT-22 2–22oz / G12 2–12oz），说明换模即可切换。","MEMORY §5 FAQ#2","C9"],
+[83,"How many workers needed? 怎么答？","全自动线 1 人可看 2–3 台。","MEMORY §5 FAQ#5","C2"],
+[84,"Power / voltage? 怎么答？","标准 380V/三相，按机型报 KW（如 WT-22 3KW、G12 20KW）；可定制当地电压（印度 415V 等）。","MEMORY §5 FAQ#6","C9"],
+[85,"Installation & training? 怎么答？","提供视频指导 / 工程师海外安装（客户承担差旅），免费培训。","MEMORY §5 FAQ#7","C2"],
+[86,"Warranty & spare parts? 怎么答？","一年质保（行业惯例 1–2 年），易损件包随货，国际服务中心。","MEMORY §5 FAQ#8"],
+[87,"Raw material (paper)? 怎么答？","说明 PE 淋膜卷纸规格（GSM+膜重，按 Q55–57 口径），可协助对接纸厂。","MEMORY §5 FAQ#9","C6"],
+[88,"Delivery time? 怎么答？","[工厂FAQ待补] —— 需老板确认常规机型交期范围后才能对外承诺。","MEMORY §5 FAQ#11",null,true],
+[89,"Payment terms? 怎么答？","标准口径 30% 定金 + 70% 发货前，或走 Trade Assurance；任何让步需老板确认。","MEMORY §5 FAQ#12 + SOUL 边界","C11"],
+[90,"Can it make PLA cups? 怎么答？","需确认机型温控配置，升级至工厂工程师确认（见 Q54）。","MEMORY §5 FAQ#10"],
+[91,"Can you customize by our drawings? 怎么答？","可以——图纸定制（Drawing-based customization）是我们的官方服务能力。","MEMORY §1"],
+[92,"Do you have a machine running video / factory video? 怎么答？","有店铺认证视频与验厂报告（SGS），可安排视频验厂；指定机型的实时试机视频 [工厂FAQ待补]（建议备素材库）。","MEMORY §1 / §4.2","C12",true]
+];
+const M7=[
+[93,"买家下单前的 6 个必答题是哪 6 个？","① 净速度实测值 ② 换模时长（要视频）③ 每千杯电耗 ④ 远程诊断/48h 备件 ⑤ PLA+PE 兼容 ⑥ 易损件寿命。","MEMORY §4.2"],
+[94,"四类买家画像分别是什么？应对策略各是什么？","初创投资人（算账、推入门线）/ 纸杯工厂扩产（数据硬碰硬、主动提 FAT）/ 贸易商（批量价、供应稳定）/ 餐饮连锁自用（信保+长期协议）。","MEMORY §4.1"],
+[95,"客户说「印度供应商比你们便宜」，怎么应对？","不比价格比总拥有成本：净产出率、纸张损耗 3–5% vs 8–10%、备件供应、远程支持；不贬低同行，只讲客观差异。","MEMORY §4.3 + SOUL 边界","C10"],
+[96,"客户质疑「速度是不是真的 100 pcs/min」，怎么应对？","主动讲额定 vs 净产出，邀请视频试机或 FAT（工厂验收测试）。","MEMORY §4.3","C12"],
+[97,"客户问「你们工厂可信吗」，三连话术是什么？","16 年金品 + SGS 认证 + Trade Assurance + 视频验厂。","MEMORY §4.3","C1"],
+[98,"询盘分级的 A/B/C 标准是什么？","A（参数明确、可直接报价）/ B（有意向但信息不全）/ C（泛泛询价，先养）。先诊断再回复。","AGENTS A1"],
+[99,"客户当场要 15% 折扣并承诺今天下单，怎么处理？","不当场答应；感谢认可→说明价格需按配置走老板审批（标注「需老板确认」）→把话题拉回价值（净产出、纸耗、服务）→以视频验厂/试机推进。","SOUL 铁律 4 + 行为边界","C11"],
+[100,"业务员对外输出的三条红线是什么？","① 不编造参数（不确定就说需技术部确认）② 不夸大产能（额定≠净产出）③ 不越权承诺（折扣/交期/独家代理/付款让步须老板拍板；成本价与利润结构保密）。","SOUL 六条铁律 + 行为边界"]
+];
+const MODULES=[
+{key:"m1",num:"①",title:"行业认知与公司背景",range:"Q1–Q12",data:M1,intro:"信任从了解自家底牌开始：资历、认证、履约数据、信任话术。"},
+{key:"m2",num:"②",title:"工艺流程与机械结构",range:"Q13–Q28",data:M2,intro:"8 工位流程、凸轮分度、四大部件、维护要点——讲得出原理才立得住专业。"},
+{key:"m3",num:"③",title:"产品线与机型参数",range:"Q29–Q48",data:M3,intro:"12 款机型的参数与一句话定位，选型推荐的弹药库。"},
+{key:"m4",num:"④",title:"封合技术与淋膜纸材料",range:"Q49–Q64",data:M4,intro:"热风 vs 超声波、单/双 PE、PLA、GSM——材料题是专业分水岭。"},
+{key:"m5",num:"⑤",title:"产能换算与选型算账",range:"Q65–Q80",data:M5,intro:"净产出公式、选型公式、隐形成本——把参数翻译成客户的生意。"},
+{key:"m6",num:"⑥",title:"买家高频问题（Top 12 扩展）",range:"Q81–Q92",data:M6,intro:"买家最常问的 12 类问题标准口径，英文应对模板。"},
+{key:"m7",num:"⑦",title:"买家心理与异议应对",range:"Q93–Q100",data:M7,intro:"6 必答题、四类画像、比价与逼单应对、三条红线。"}
+];
+</script>
+<script>
+/* ============ 渲染与交互 ============ */
+const ALLC=CASES.concat(CASES2).concat(CASES3);
+const learned=new Set(JSON.parse(localStorage.getItem('qc100')||'[]'));
+function saveLearn(){localStorage.setItem('qc100',JSON.stringify([...learned]));updStat()}
+function updStat(){
+  const n=learned.size;
+  document.getElementById('learnedStat').textContent=n;
+  document.getElementById('homeBar').style.width=n+'%';
+  document.getElementById('homeStat').textContent=`已掌握 ${n} / 100 题`;
+}
+function caseLink(cid){
+  const c=ALLC.find(x=>x.id===cid);
+  return c?`<span class="casechip" onclick="goCase('${cid}')">📘 关联案例 ${cid}：${c.title.split('：')[0].replace(/^C\d+\s*/,'')}</span>`:'';
+}
+function renderModules(){
+  const wrap=document.getElementById('modules');
+  wrap.innerHTML=MODULES.map(m=>`
+  <section id="${m.key}">
+    <div class="card">
+      <h2>模块${m.num} ${m.title} <span class="tag t-brand">${m.range}</span></h2>
+      <p style="font-size:13.5px;color:var(--sub)">${m.intro}</p>
+      <div class="toolbar">
+        <input type="search" placeholder="🔍 在本模块搜索关键词（如：超声波 / WT-22 / 折扣）…" oninput="filterMod('${m.key}',this.value)">
+        <button class="btn ghost" onclick="expandAll('${m.key}',true)">全部展开</button>
+        <button class="btn ghost" onclick="expandAll('${m.key}',false)">全部收起</button>
+      </div>
+      <div id="list-${m.key}">${m.data.map(q=>qCard(q)).join('')}</div>
+    </div>
+  </section>`).join('');
+}
+function qCard(q){
+  const [num,title,ans,src,cs,pend]=q;
+  return `<div class="qcard" data-q="${num}" data-text="${(title+' '+ans).toLowerCase()}">
+    <div class="qh" onclick="toggleQ(this)">
+      <span class="qnum ${pend?'pend':''}">Q${num}</span>
+      <span class="qtitle">${title}</span>
+      <span style="color:var(--sub)">▾</span>
+    </div>
+    <div class="qbody">
+      <p>${pend?'<span class="tag t-gold">工厂FAQ待补</span> ':''}${ans}</p>
+      <div class="qsrc">出处：${src}</div>
+      ${cs?caseLink(cs):''}
+      <div style="margin-top:10px"><label style="font-size:13px;cursor:pointer"><input type="checkbox" ${learned.has(num)?'checked':''} onchange="markLearn(${num},this.checked)"> 我已掌握此题</label></div>
+    </div>
+  </div>`;
+}
+function toggleQ(h){h.parentElement.classList.toggle('open')}
+function expandAll(k,open){document.querySelectorAll(`#list-${k} .qcard`).forEach(c=>c.classList.toggle('open',open))}
+function filterMod(k,v){
+  v=v.trim().toLowerCase();
+  document.querySelectorAll(`#list-${k} .qcard`).forEach(c=>{
+    c.style.display=(!v||c.dataset.text.includes(v))?'':'none';
+  });
+}
+function markLearn(n,on){on?learned.add(n):learned.delete(n);saveLearn()}
+function renderCases(){
+  document.getElementById('casesArea').innerHTML=`
+  <section id="cases">
+    <div class="card">
+      <h2>行业实战案例库（12 例）</h2>
+      <p style="font-size:13.5px;color:var(--sub)">每个案例 = 真实业务场景模拟 + 错误应对 + 标准应对 + 知识点回链。案例为教学模拟场景，非真实客户记录。配合 A3 陪练使用：先看案例，再让陪练扮演买家追问。</p>
+    </div>
+    <div id="caseList">${ALLC.map(c=>caseCard(c)).join('')}</div>
+  </section>`;
+}
+function caseCard(c){
+  return `<div class="casecard" id="case-${c.id}">
+    <h3>${c.title} <span class="tag t-blue">${c.qs.join(' · ')}</span></h3>
+    <div class="lbl">🎯 场景</div><div class="scenario">${c.scenario}</div>
+    <div class="lbl">❌ 错误应对</div><div class="wrong">${c.wrong}</div>
+    <div class="lbl">✅ 标准应对</div><div class="right">${c.right}</div>
+    <div class="lbl">💡 知识点</div><ul class="points">${c.points.map(p=>`<li>${p}</li>`).join('')}</ul>
+  </div>`;
+}
+function goCase(cid){go('cases');const el=document.getElementById('case-'+cid);if(el){el.scrollIntoView({behavior:'smooth'});el.style.boxShadow='0 0 0 3px var(--gold)';setTimeout(()=>el.style.boxShadow='',2000)}}
+function go(id){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  const b=document.querySelector(`nav button[data-t="${id}"]`);if(b)b.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+renderModules();renderCases();updStat();
+</script>
+</body>
+</html>
