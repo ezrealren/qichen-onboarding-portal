@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>祺臣机械 · 全机型一体式 PI 单模板</title>
+<style>
+:root{--page:#f1f5f9;--panel:#fff;--line:#e2e8f0;--ink:#1e293b;--sub:#64748b;
+--brand:#0f766e;--brand2:#115e59;--brand-l:#ccfbf1;
+--gold:#b45309;--gold-l:#fef3c7;--red:#b91c1c;--red-l:#fee2e2;
+--ok:#15803d;--ok-l:#dcfce7;--blue:#1d4ed8;--blue-l:#dbeafe}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI","Microsoft YaHei",sans-serif;background:var(--page);color:var(--ink);line-height:1.65}
+header{background:linear-gradient(135deg,#134e4a,#0f766e 55%,#0d9488);color:#fff;padding:26px 24px;text-align:center}
+header h1{font-size:24px;letter-spacing:.5px}
+header .sub{opacity:.86;font-size:13px;margin-top:8px}
+nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;background:#134e4a;padding:10px 14px;position:sticky;top:0;z-index:60;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+nav button{background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;padding:7px 16px;border-radius:18px;cursor:pointer;font-size:13px}
+nav button:hover{background:rgba(255,255,255,.15)}
+nav button.on{background:#fff;color:var(--brand2);font-weight:700;border-color:#fff}
+main{max-width:1100px;margin:0 auto;padding:20px 16px 90px}
+section{display:none}section.on{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:16px;box-shadow:0 1px 3px rgba(15,23,42,.06)}
+.card h2{font-size:17.5px;color:var(--brand2);border-left:4px solid var(--brand);padding-left:10px;margin-bottom:10px}
+.card h3{font-size:14.5px;margin:12px 0 6px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:var(--brand-l);color:var(--brand2);white-space:nowrap}
+tr:nth-child(even) td{background:#f8fafc}
+.tag{display:inline-block;font-size:11px;padding:2px 9px;border-radius:10px;margin:0 4px 0 0;white-space:nowrap}
+.t-gold{background:var(--gold-l);color:var(--gold)}.t-red{background:var(--red-l);color:var(--red)}
+.t-ok{background:var(--ok-l);color:var(--ok)}.t-blue{background:var(--blue-l);color:var(--blue)}.t-brand{background:var(--brand-l);color:var(--brand2)}
+.note{background:var(--brand-l);border-left:4px solid var(--brand);padding:9px 13px;border-radius:6px;font-size:13px;margin:10px 0}
+.goldnote{background:var(--gold-l);border-left:4px solid var(--gold);padding:9px 13px;border-radius:6px;font-size:13px;margin:10px 0}
+.rednote{background:var(--red-l);border-left:4px solid var(--red);padding:9px 13px;border-radius:6px;font-size:13px;margin:10px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:760px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
+label.f{display:block;font-size:12.5px;color:var(--sub);margin:9px 0 3px;font-weight:600}
+input[type=text],input[type=date],input[type=number],select,textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13.5px;background:#fff;font-family:inherit}
+textarea{min-height:60px;resize:vertical}
+.btn{background:var(--brand);color:#fff;border:none;border-radius:9px;padding:9px 18px;font-size:13.5px;cursor:pointer;margin:6px 6px 0 0}
+.btn:hover{background:var(--brand2)}
+.btn.ghost{background:#fff;color:var(--brand2);border:1px solid var(--brand)}
+.btn.gold{background:var(--gold)}.btn.gold:hover{background:#92400e}
+.btn.sm{padding:5px 11px;font-size:12px}
+.itemrow{border:1px solid var(--line);border-radius:11px;padding:12px 14px;margin:10px 0;background:#fff}
+.itemrow .ir-h{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.itemrow .spec{font-size:12px;color:var(--sub);margin-top:4px}
+.itemrow .inputs{display:grid;grid-template-columns:100px 130px 130px auto;gap:8px;align-items:end;margin-top:8px}
+@media(max-width:760px){.itemrow .inputs{grid-template-columns:1fr 1fr}}
+.tot{background:var(--brand-l);border:1px solid #99f6e4;border-radius:11px;padding:12px 16px;font-size:15px;margin-top:12px}
+.tot b{font-size:20px;color:var(--brand2)}
+.chk{margin:6px 0;font-size:13.5px}
+.chk input{margin-right:8px;transform:scale(1.15)}
+.pi{background:#fff;border:1px solid var(--line);border-radius:4px;padding:28px 32px;font-size:13px;color:#111;line-height:1.55;font-family:"Segoe UI",Arial,sans-serif}
+.pi h1{font-size:20px;color:#0f766e;text-align:center;letter-spacing:2px;margin-bottom:2px}
+.pi .co{text-align:center;font-size:12px;color:#444;margin-bottom:14px}
+.pi table{font-size:12.5px}
+.pi .totrow td{font-weight:700;background:#f0fdfa}
+.pi .clauses{font-size:12px;margin-top:14px}
+.pi .clauses p{margin:4px 0}
+.pi .sign{display:flex;justify-content:space-between;margin-top:34px;font-size:12.5px}
+.pi .sign .s{width:260px;border-top:1px solid #333;padding-top:4px;text-align:center}
+footer{text-align:center;color:var(--sub);font-size:12px;padding:18px;border-top:1px solid var(--line);background:#fff}
+@media print{
+  nav,header,.no-print,footer{display:none!important}
+  body{background:#fff}main{max-width:none;padding:0}
+  section{display:none!important}#preview{display:block!important}
+  .card{border:none;box-shadow:none;padding:0}
+  .pi{border:none;padding:0}
+}
+</style>
+</head>
+<body>
+<header>
+<h1>祺臣机械 · 全机型一体式 PI 单模板</h1>
+<div class="sub">Proforma Invoice Generator ｜ 覆盖 MEMORY §2 全部 15 类机型 + 空压机/易损件包 2 项必配条目 ｜ 选型自动带规格与参考价 ｜ 版本 v1.0 ｜ 事实源：MEMORY.md</div>
+</header>
+<nav>
+<button class="on" data-t="quick" onclick="go('quick')">⑤ 选型快生成</button>
+<button data-t="fill" onclick="go('fill')">① PI 填写</button>
+<button data-t="terms" onclick="go('terms')">② 条款库</button>
+<button data-t="preview" onclick="go('preview')">③ PI 预览与打印</button>
+<button data-t="check" onclick="go('check')">④ 发出前检查清单</button>
+</nav>
+<main>
+
+<!-- ============ ⑤ 选型快生成 ============ -->
+<section id="quick" class="on">
+<div class="card">
+<h2>⑤ 智能选型快生成（输入参数 → 直接生成 PI 行项目）</h2>
+<div class="note">工作流：① 输入客户参数 → ② 点「智能选型」得主推机型与台数 → ③ 点「一键填充 PI 行项目」自动带入主机+辅机+易损件包 → ④ 到「① PI 填写」补买方信息后生成 PI。选型公式：净产出=额定×75%，机台数=峰值日产量×1.2÷日净产出（MEMORY §3.4）。</div>
+<div class="grid3">
+<div><label class="f">客户类型（决定画像话术）</label>
+<select id="q_type"><option value="start">初创投资人（预算敏感）</option><option value="scale">工厂扩产（要产能）</option><option value="trader">贸易商（走量）</option><option value="chain">连锁/餐饮自用</option></select></div>
+<div><label class="f">产品类型 *</label>
+<select id="q_prod"><option value="cup">单层纸杯（热饮）</option><option value="double">双层咖啡杯</option><option value="bowl">纸碗（汤碗/冰淇淋碗）</option><option value="tea">茶水杯</option><option value="lid">杯盖</option></select></div>
+<div><label class="f">目标日产量（只）*</label><input type="number" id="q_daily" min="0" value="30000"></div>
+<div><label class="f">班制</label>
+<select id="q_shift"><option value="8">单班 8 小时</option><option value="16">双班 16 小时</option><option value="24">三班 24 小时</option></select></div>
+<div><label class="f">淋膜要求（纸碗必问）</label>
+<select id="q_coat"><option value="single">单面 PE（热饮）</option><option value="double">双面 PE（冷饮/冰淇淋碗）</option><option value="unknown">不确定</option></select></div>
+<div><label class="f">目标杯型（自动写入 PI 配置）</label><input type="text" id="q_cup" placeholder="如：8oz & 12oz double wall"></div>
+</div>
+<button class="btn" onclick="smartSelect()">⚡ 智能选型</button>
+<div id="quickOut"></div>
+</div>
+
+<div class="card">
+<h2>产品速查表（MEMORY §2 · 点击「加入行项目」直接进 PI）</h2>
+<div style="overflow-x:auto"><table>
+<tr><th>机型</th><th>品类</th><th>速度</th><th>规格范围</th><th>挂牌参考价(USD)</th><th>操作</th></tr>
+<tr><td>ZBJ-OC12</td><td>纸杯机</td><td>70–80 pcs/min</td><td>2.5–12oz</td><td>$16,000–17,000</td><td><button class="btn sm" onclick="addMachineByKey('ZBJ-OC12')">＋加入行项目</button></td></tr>
+<tr><td>ZBJ-OC12 PRO</td><td>纸杯机</td><td>80–100 pcs/min</td><td>3–16oz</td><td>$16,000–17,000</td><td><button class="btn sm" onclick="addMachineByKey('ZBJ-OC12 PRO')">＋加入行项目</button></td></tr>
+<tr><td>WT-22（双层）</td><td>纸杯机</td><td>70–80 pcs/min</td><td>2–22oz</td><td>$16,000–19,000</td><td><button class="btn sm" onclick="addMachineByKey('WT-22')">＋加入行项目</button></td></tr>
+<tr><td>G12（高速）</td><td>纸杯机</td><td>110–150 pcs/min</td><td>2–12oz</td><td>$24,000–25,000</td><td><button class="btn sm" onclick="addMachineByKey('G12')">＋加入行项目</button></td></tr>
+<tr><td>KBM（超高速）</td><td>纸杯机</td><td>以工厂确认为准</td><td>大产能产线</td><td>$51,000–55,000</td><td><button class="btn sm" onclick="addMachineByKey('KBM')">＋加入行项目</button></td></tr>
+<tr><td>ZBJ-X35</td><td>纸杯机</td><td>中速</td><td>茶水杯</td><td>$17,000</td><td><button class="btn sm" onclick="addMachineByKey('ZBJ-X35')">＋加入行项目</button></td></tr>
+<tr><td>ZBJ-DP35</td><td>纸碗机</td><td>70–80 pcs/min</td><td>10–35oz</td><td>$22,000–25,000</td><td><button class="btn sm" onclick="addMachineByKey('ZBJ-DP35')">＋加入行项目</button></td></tr>
+<tr><td>ZBJ-X64/X135</td><td>纸碗机</td><td>中速</td><td>大口径/爆米花桶</td><td>约 $30,000</td><td><button class="btn sm" onclick="addMachineByKey('ZBJ-X64/X135')">＋加入行项目</button></td></tr>
+<tr><td>GH1500</td><td>纸碗机</td><td>高速产线级</td><td>牛皮纸汤碗</td><td>约 $44,000</td><td><button class="btn sm" onclick="addMachineByKey('GH1500')">＋加入行项目</button></td></tr>
+<tr><td>PL-02</td><td>杯盖机</td><td>高速</td><td>平面印刷纸盖</td><td>$31,000–35,000</td><td><button class="btn sm" onclick="addMachineByKey('PL-02')">＋加入行项目</button></td></tr>
+<tr><td>PL-145</td><td>杯盖机</td><td>70–100 pcs/min</td><td>纸杯盖主力</td><td>$26,000–28,000</td><td><button class="btn sm" onclick="addMachineByKey('PL-145')">＋加入行项目</button></td></tr>
+<tr><td>CP650 包装机</td><td>辅机</td><td>—</td><td>冷热饮纸杯包装</td><td>询价</td><td><button class="btn sm" onclick="addMachineByKey('CP650')">＋加入行项目</button></td></tr>
+<tr><td>LP-450 包装机</td><td>辅机</td><td>—</td><td>冰淇淋杯/碗盖包装</td><td>询价</td><td><button class="btn sm" onclick="addMachineByKey('LP-450')">＋加入行项目</button></td></tr>
+<tr><td>QH-9905 纸箱机</td><td>辅机</td><td>—</td><td>纸箱成型/立箱</td><td>$21,000–22,000</td><td><button class="btn sm" onclick="addMachineByKey('QH-9905')">＋加入行项目</button></td></tr>
+<tr><td>V-Bottom 纸袋机</td><td>辅机</td><td>—</td><td>V 底纸袋</td><td>约 $29,000</td><td><button class="btn sm" onclick="addMachineByKey('V-Bottom 纸袋机')">＋加入行项目</button></td></tr>
+<tr><td>空压机</td><td>辅机</td><td>—</td><td>气源必配</td><td>询价</td><td><button class="btn sm" onclick="addMachineByKey('Air Compressor')">＋加入行项目</button></td></tr>
+<tr><td>易损件包</td><td>辅机</td><td>—</td><td>切刀/加热元件/滚花轮/焊头</td><td>按件询价</td><td><button class="btn sm" onclick="addMachineByKey('Spare Parts Package')">＋加入行项目</button></td></tr>
+</table></div>
+<div class="goldnote">📌 口径：速度为额定值，净产出约 70–80%；询价项价格由老板确认，系统不生成假价格；单价改出挂牌区间自动标「需老板确认」。</div>
+</div>
+</section>
+
+<!-- ============ 填写 ============ -->
+<section id="fill">
+<div class="card">
+<h2>PI 基本信息</h2>
+<div class="rednote">⚠ SOUL 边界提醒：单价（折扣后成交价）、交期、付款方式让步均为<b>老板拍板项</b>——本系统默认价为 MEMORY §2 挂牌参考价区间中值，任何修改都会标记「需老板确认」，未确认的 PI 不得发出。</div>
+<div class="grid4">
+<div><label class="f">PI 编号（自动生成，可改）</label><input type="text" id="pi_no"></div>
+<div><label class="f">PI 日期</label><input type="date" id="pi_date"></div>
+<div><label class="f">有效期（天）</label><input type="number" id="pi_valid" value="15" min="1"></div>
+<div><label class="f">业务员</label><input type="text" id="pi_sales" placeholder="如：Leon Guo"></div>
+</div>
+</div>
+
+<div class="card">
+<h2>买方信息（Buyer）</h2>
+<div class="grid3">
+<div><label class="f">公司 / 客户名 *</label><input type="text" id="b_name" placeholder="CairoPack Co."></div>
+<div><label class="f">联系人</label><input type="text" id="b_contact" placeholder="Mr. Ahmed"></div>
+<div><label class="f">国家 / 地区 *</label><input type="text" id="b_country" placeholder="Egypt"></div>
+<div><label class="f">地址</label><input type="text" id="b_addr"></div>
+<div><label class="f">电话 / WhatsApp</label><input type="text" id="b_phone"></div>
+<div><label class="f">邮箱</label><input type="text" id="b_email"></div>
+</div>
+<div class="grid2">
+<div><label class="f">当地电压（Q3 必问项，写入 PI 配置）</label>
+<select id="b_volt"><option>380V / 3-phase / 50Hz（标准）</option><option>415V / 3-phase / 50Hz（印度等，按客户确认）</option><option>220V（需定制变压器，配置变更须老板确认）</option><option>待确认（发出前必须补齐）</option></select></div>
+<div><label class="f">目标杯型 / 模具规格（写入 PI 配置）</label><input type="text" id="b_cup" placeholder="如：8oz & 12oz double wall, with molds"></div>
+</div>
+</div>
+
+<div class="card">
+<h2>行项目（主机 + 辅机 + 易损件，整线思维）</h2>
+<div class="note">整线报价结构（A4 参谋）：主机 + 空压机 + 包装机 + 模具/易损件包分项列出。选型后自动带出规格与挂牌参考价区间，单价默认为区间中值。</div>
+<div class="grid2" style="align-items:end">
+<div><label class="f">选择机型（MEMORY §2 全库）</label><select id="sel_machine"></select></div>
+<div><button class="btn" onclick="addItem()">＋ 添加行项目</button>
+<button class="btn ghost" onclick="addLineSet()">＋ 一键加整线配套（空压机+包装机）</button></div>
+</div>
+<div id="items"></div>
+<div class="tot" id="totalBox">合计：USD 0.00（未含运费/保费）</div>
+</div>
+
+<div class="card">
+<h2>贸易条款（自动带标准口径，可微调）</h2>
+<div class="grid3">
+<div><label class="f">贸易术语</label>
+<select id="t_incoterm"><option>FOB Ningbo</option><option>EXW Wenzhou</option><option>CIF（目的港另填）</option><option>CFR（目的港另填）</option></select></div>
+<div><label class="f">目的港 / 交货地（CIF/CFR 必填）</label><input type="text" id="t_port" placeholder="Alexandria Port"></div>
+<div><label class="f">付款方式（标准口径 MEMORY §5 FAQ#12）</label>
+<select id="t_payment"><option>T/T: 30% deposit, 70% before shipment</option><option>Alibaba Trade Assurance</option><option>T/T: 30% deposit, 70% against B/L copy（需老板确认）</option><option>其他（需老板确认）</option></select></div>
+<div><label class="f">交货期 Delivery Time</label><input type="text" id="t_delivery" placeholder="需老板/生产部确认后填写"></div>
+<div><label class="f">装运港</label><input type="text" id="t_loading" value="Ningbo / Wenzhou, China"></div>
+<div><label class="f">运输方式</label><select id="t_ship"><option>By sea (20GP container)</option><option>By sea (40GP container)</option><option>By air (spare parts only)</option></select></div>
+</div>
+<div class="goldnote">📌 Delivery Time 与特殊付款条款为「待老板确认」项（MEMORY §5 FAQ#11/#12）：生产部未确认交期前，PI 上只写 "To be confirmed"，不得凭业务员估计填写。</div>
+</div>
+
+<div class="card">
+<h2>质保与售后条款（标准口径，随 PI 附送）</h2>
+<div class="grid2">
+<div>
+<label class="chk"><input type="checkbox" id="cl_warranty" checked> Warranty: 12 months from installation date (industry standard 1–2 years), excluding wear parts.（一年质保，易损件除外）</label>
+<label class="chk"><input type="checkbox" id="cl_parts" checked> Wear parts package (cutting knives, heating elements, knurling rollers, ultrasonic horns) available with shipment.（易损件包随货）</label>
+<label class="chk"><input type="checkbox" id="cl_training" checked> Free installation guidance (video) & operator training provided; overseas engineer installation available at buyer's travel cost.（免费视频指导与培训）</label>
+</div>
+<div>
+<label class="chk"><input type="checkbox" id="cl_ta" checked> Order covered by Alibaba Trade Assurance; supplier is 16-year Gold Supplier, SGS onsite verified, 100% on-time dispatch record.（信任背书条款）</label>
+<label class="chk"><input type="checkbox" id="cl_voltage" checked> Voltage configured as specified above; buyer to confirm local power supply before production.（电压配置确认条款）</label>
+<label class="chk"><input type="checkbox" id="cl_valid" checked> This Proforma Invoice is valid within the validity period stated above; prices subject to final confirmation by seller.（有效期与价格确认条款）</label>
+</div>
+</div>
+</div>
+
+<div class="card">
+<h2>生成 PI</h2>
+<button class="btn" onclick="renderPI()">生成 PI 预览 →</button>
+<button class="btn gold" onclick="go('check')">先过检查清单 →</button>
+<span id="genMsg"></span>
+</div>
+</section>
+
+<!-- ============ 条款库 ============ -->
+<section id="terms">
+<div class="card">
+<h2>条款库（中英对照，复制即用）</h2>
+<div class="note">PI 常用条款的标准口径全部对齐 MEMORY §3.5/§5 与 SOUL 边界；涉及价格/交期/账期让步的条款必须经老板确认后使用。</div>
+<h3>付款方式条款</h3>
+<table>
+<tr><th>场景</th><th>英文标准条款</th><th>口径出处</th></tr>
+<tr><td>标准 T/T</td><td>Payment terms: 30% T/T deposit upon order confirmation, 70% balance before shipment.</td><td>MEMORY §5 FAQ#12</td></tr>
+<tr><td>信保在线</td><td>Payment via Alibaba Trade Assurance, order protected by Alibaba.com.</td><td>MEMORY §1/§5</td></tr>
+<tr><td>见提单副本付尾款</td><td>30% T/T deposit, 70% balance against copy of B/L.（风险较高，须老板确认）</td><td>需老板确认</td></tr>
+<tr><td>L/C 或账期</td><td>—（L/C、90 天账期等非常规条款一律先报老板审批，业务员不得自行接受）</td><td>SOUL 行为边界</td></tr>
+</table>
+<h3>交期条款</h3>
+<table>
+<tr><th>场景</th><th>英文标准条款</th><th>口径出处</th></tr>
+<tr><td>交期未确认</td><td>Delivery time: To be confirmed after order confirmation.（生产部确认前唯一合规写法）</td><td>MEMORY §5 FAQ#11 待补</td></tr>
+<tr><td>交期已获确认</td><td>Delivery time: within __ working days after receiving the deposit.（天数由生产部/老板提供）</td><td>需老板确认</td></tr>
+</table>
+<h3>质保售后条款</h3>
+<table>
+<tr><th>条款</th><th>英文</th><th>口径出处</th></tr>
+<tr><td>质保期</td><td>Warranty: 12 months from installation, excluding wear parts (industry practice: 1–2 years).</td><td>MEMORY §3.5</td></tr>
+<tr><td>易损件</td><td>Wear parts include cutting knives, heating elements, knurling rollers and ultrasonic horns; spare parts package recommended with shipment.</td><td>MEMORY §3.5</td></tr>
+<tr><td>安装培训</td><td>Free video installation guidance & operator training; overseas engineer installation available, buyer covers travel cost.</td><td>MEMORY §5 FAQ#7</td></tr>
+<tr><td>售后服务</td><td>After-sales service supported by our International Service Center.（响应时效细则待工厂确认）</td><td>MEMORY §1 / Q80 待补</td></tr>
+</table>
+<h3>信任背书条款（16 年金品三连）</h3>
+<table>
+<tr><th>条款</th><th>英文</th></tr>
+<tr><td>资历</td><td>Seller is a 16-year Gold Supplier on Alibaba.com, onsite verified by SGS.</td></tr>
+<tr><td>履约</td><td>100% on-time dispatch record, average response within 6 hours.</td></tr>
+<tr><td>担保</td><td>Transaction covered by Alibaba Trade Assurance.</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ============ 预览 ============ -->
+<section id="preview">
+<div class="card no-print">
+<h2>PI 预览</h2>
+<div class="note">检查无误后点「打印 / 另存为 PDF」导出。打印样式已优化（仅打印 PI 正文）。价格如与挂牌区间不符，页面上会保留「需老板确认」标记——打印前请确保已获批准。</div>
+<button class="btn" onclick="window.print()">🖨 打印 / 另存为 PDF</button>
+<button class="btn ghost" onclick="go('fill')">← 返回修改</button>
+</div>
+<div class="card"><div id="piPaper" class="pi"><p style="text-align:center;color:#999">尚未生成——请在「① PI 填写」完成后点击「生成 PI 预览」。</p></div></div>
+</section>
+
+<!-- ============ 检查清单 ============ -->
+<section id="check">
+<div class="card">
+<h2>PI 发出前检查清单（S6/S8 红线）</h2>
+<div class="rednote">全部勾选且老板批准后，PI 才能发出。任何一项存疑 = 不发出。</div>
+<label class="chk"><input type="checkbox" class="ck"> ① 机型、数量、规格与客户需求确认一致（杯型模具/电压已写入配置）</label>
+<label class="chk"><input type="checkbox" class="ck"> ② 单价已获老板确认（挂牌区间外的价格 = 折扣，必须审批）</label>
+<label class="chk"><input type="checkbox" class="ck"> ③ 交期已由生产部/老板确认，未确认写 "To be confirmed"</label>
+<label class="chk"><input type="checkbox" class="ck"> ④ 付款方式为标准口径（30/70 或信保）或已获老板批准</label>
+<label class="chk"><input type="checkbox" class="ck"> ⑤ 整线配套齐全：空压机、包装机、易损件包是否已列入（漏项=售后隐患）</label>
+<label class="chk"><input type="checkbox" class="ck"> ⑥ 客户当地电压已确认（印度 415V / 220V 定制变压器需注明）</label>
+<label class="chk"><input type="checkbox" class="ck"> ⑦ 质保与售后条款完整（一年质保、易损件除外、培训口径）</label>
+<label class="chk"><input type="checkbox" class="ck"> ⑧ PI 编号、日期、有效期填写完整</label>
+<label class="chk"><input type="checkbox" class="ck"> ⑨ 未编造任何参数或承诺（SOUL 铁律 1/2/3 三条红线）</label>
+<label class="chk"><input type="checkbox" class="ck"> ⑩ 运输规划已核对：整机约 2.5 吨/台，按 20GP 集装箱计算柜量</label>
+<button class="btn" onclick="checkAll()">检查清单状态</button>
+<div id="checkMsg"></div>
+</div>
+</section>
+
+</main>
+<footer>祺臣机械 · 全机型一体式 PI 单模板 v1.0 ｜ 机型参数与参考价以 MEMORY §2 为准（挂牌价，成交价老板确认）｜ 编制：祺工（A4 报价参谋）</footer>
+
+<script>
+/* ============ 机型数据库（MEMORY §2，价格为挂牌参考价区间，USD） ============ */
+var MACHINES=[
+{k:'ZBJ-OC12',cat:'纸杯成型机',en:'Open Cam Paper Cup Forming Machine ZBJ-OC12',spec:'70-80 pcs/min; cup size 2.5-12oz; ~3-8KW; open cam + gear drive; 380V/3-phase',p0:16000,p1:17000},
+{k:'ZBJ-OC12 PRO',cat:'纸杯成型机',en:'Paper Cup Forming Machine ZBJ-OC12 PRO',spec:'80-100 pcs/min; cup size 3-16oz; 8KW; PLC + motor + gear + bearing; 380V/3-phase',p0:16000,p1:17000},
+{k:'WT-22',cat:'纸杯成型机（双层）',en:'Double Wall Paper Cup Forming Machine WT-22 (Qichen & Guohao)',spec:'70-80 pcs/min; cup size 2-22oz; 3KW; open intermittent indexing cam + PLC; 380V/3-phase',p0:16000,p1:19000},
+{k:'G12',cat:'纸杯成型机（高速）',en:'High Speed Paper Cup Forming Machine G12',spec:'110-150 pcs/min; cup size 2-12oz; 20KW; PLC + motor + gear; 380V/3-phase',p0:24000,p1:25000},
+{k:'KBM',cat:'纸杯成型机（超高速）',en:'Full-Servo High Speed Paper Cup Production Line KBM',spec:'Ultra-high speed full-servo line for large capacity plants; 380V/3-phase',p0:51000,p1:55000},
+{k:'ZBJ-X35',cat:'纸杯成型机（茶水杯）',en:'Automatic Tea Cup Forming Machine ZBJ-X35',spec:'Medium speed; tea cup dedicated; fully automatic; 380V/3-phase',p0:17000,p1:17000},
+{k:'ZBJ-DP35',cat:'纸碗机',en:'Ultrasonic Paper Bowl Forming Machine ZBJ-DP35',spec:'70-80 pcs/min; bowl size 10-35oz; 14KW; ultrasonic welding + servo paper feeding; 380V/3-phase',p0:22000,p1:25000},
+{k:'ZBJ-X64/X135',cat:'纸碗机（大口径）',en:'Large Caliber Paper Bowl Machine ZBJ-X64 / X135',spec:'Medium speed; large caliber bowls / popcorn buckets; 380V/3-phase',p0:30000,p1:30000},
+{k:'GH1500',cat:'纸碗机（高速）',en:'High Speed Kraft Soup Bowl Production Line GH1500',spec:'High speed; kraft soup bowls; full line level; 380V/3-phase',p0:44000,p1:44000},
+{k:'PL-02',cat:'杯盖机',en:'High Speed Paper Cup Lid Machine PL-02',spec:'High speed; flat printed paper lids; 380V/3-phase',p0:31000,p1:35000},
+{k:'PL-145',cat:'杯盖机',en:'Paper Cup Lid Machine PL-145',spec:'70-100 pcs/min; 12KW; PLC controlled; 380V/3-phase',p0:26000,p1:28000},
+{k:'CP650',cat:'包装机',en:'Paper Cup Packing Machine CP650 (hot/cold drink cups)',spec:'Automatic packing for hot & cold drink cups; price to be confirmed by boss',p0:null,p1:null},
+{k:'LP-450',cat:'包装机',en:'Ice Cream Cup / Lid Packing Machine LP-450',spec:'Packing for ice cream cups & bowl lids; price to be confirmed by boss',p0:null,p1:null},
+{k:'QH-9905',cat:'纸箱机',en:'Carton Erecting Machine QH-9905',spec:'Carton forming / erecting; 380V/3-phase',p0:21000,p1:22000},
+{k:'V-Bottom 纸袋机',cat:'纸袋机',en:'V-Bottom Paper Bag Machine',spec:'V-bottom paper bags; 380V/3-phase',p0:29000,p1:29000},
+{k:'Air Compressor',cat:'辅机',en:'Air Compressor (required pneumatic power source)',spec:'Required for all forming machines; spec per line size; price to be confirmed',p0:null,p1:null},
+{k:'Spare Parts Package',cat:'易损件包',en:'Wear Parts Package (knives, heating elements, knurling rollers, ultrasonic horns)',spec:'Recommended spare parts package shipped with machine; price per list',p0:null,p1:null}
+];
+var items=[]; /* 行项目 */
+
+/* ============ 初始化 ============ */
+function localDate(d){
+  var y=d.getFullYear();
+  var m=String(d.getMonth()+1).padStart(2,'0');
+  var day=String(d.getDate()).padStart(2,'0');
+  return y+'-'+m+'-'+day;
+}
+function init(){
+  var sel=document.getElementById('sel_machine');
+  sel.innerHTML=MACHINES.map(function(m,i){
+    return '<option value="'+i+'">'+m.cat+' ｜ '+m.k+' ｜ '+(m.p0?('$'+fmt(m.p0)+'-'+fmt(m.p1)):'询价')+'</option>';
+  }).join('');
+  var d=new Date();
+  var ds=localDate(d); /* 本地日期，避免 UTC 时差 */
+  document.getElementById('pi_date').value=ds;
+  document.getElementById('pi_no').value='QCPI-'+ds.replace(/-/g,'')+'-01';
+}
+function fmt(n){return n.toLocaleString('en-US')}
+function mid(m){return m.p0?Math.round((m.p0+m.p1)/2/100)*100:null}
+
+/* ============ 行项目 ============ */
+function addItem(idx){
+  var m=MACHINES[idx!=null?idx:parseInt(document.getElementById('sel_machine').value)];
+  items.push({name:m.en,spec:m.spec,k:m.k,p:mid(m),range:m.p0?('$'+fmt(m.p0)+' - $'+fmt(m.p1)):'询价（需老板确认）',qty:1,changed:false});
+  renderItems();
+}
+function addLineSet(){
+  var hasPack=items.some(function(x){return x.k==='CP650'||x.k==='LP-450'});
+  var hasAir=items.some(function(x){return x.k==='Air Compressor'});
+  if(!hasAir)addItem(MACHINES.findIndex(function(m){return m.k==='Air Compressor'}));
+  if(!hasPack)addItem(MACHINES.findIndex(function(m){return m.k==='CP650'}));
+  addItem(MACHINES.findIndex(function(m){return m.k==='Spare Parts Package'}));
+}
+function renderItems(){
+  var box=document.getElementById('items');
+  if(!items.length){box.innerHTML='<p style="color:var(--sub);font-size:13px">尚未添加行项目。</p>';updateTotal();return;}
+  box.innerHTML=items.map(function(it,i){
+    return '<div class="itemrow">'+
+      '<div class="ir-h"><b>'+(i+1)+'. '+it.name+'</b>'+
+      '<button class="btn sm ghost" onclick="removeItem('+i+')">删除</button></div>'+
+      '<div class="spec">'+it.spec+'<br>挂牌参考价区间：'+it.range+'</div>'+
+      '<div class="inputs">'+
+      '<div><label class="f">数量</label><input type="number" min="1" value="'+it.qty+'" onchange="setQty('+i+',this.value)"></div>'+
+      '<div><label class="f">单价 USD（默认区间中值）</label><input type="number" min="0" value="'+(it.p!=null?it.p:'')+'" placeholder="询价项须老板定价" onchange="setPrice('+i+',this.value)"></div>'+
+      '<div><label class="f">小计 USD</label><input type="text" value="'+(it.p!=null?fmt(it.p*it.qty):'—')+'" readonly></div>'+
+      '<div>'+(it.changed?'<span class="tag t-red">单价已改 · 需老板确认</span>':'<span class="tag t-brand">挂牌区间中值</span>')+'</div>'+
+      '</div></div>';
+  }).join('');
+  updateTotal();
+}
+function setQty(i,v){items[i].qty=Math.max(1,parseInt(v)||1);renderItems()}
+function setPrice(i,v){
+  var m=MACHINES.find(function(x){return x.k===items[i].k});
+  var nv=parseFloat(v);
+  items[i].p=isNaN(nv)?null:nv;
+  items[i].changed=m&&m.p0?(nv<m.p0||nv>m.p1):true; /* 区间外或询价项=需老板确认 */
+  renderItems();
+}
+function removeItem(i){items.splice(i,1);renderItems()}
+function updateTotal(){
+  var sum=0;var priced=true;
+  items.forEach(function(it){if(it.p!=null)sum+=it.p*it.qty;else priced=false});
+  document.getElementById('totalBox').innerHTML='合计：USD <b>'+fmt(sum)+'</b>（未含运费/保费）'+
+    (priced?'':'<br><span style="font-size:12.5px;color:var(--gold)">⚠ 存在未定价行项目（询价项），须老板定价后 PI 才完整。</span>');
+}
+
+/* ============ ⚡ 智能选型快生成 ============ */
+var quickPlan=null; /* 最近一次选型结果 */
+function addMachineByKey(k){
+  var idx=MACHINES.findIndex(function(m){return m.k===k});
+  if(idx>=0){addItem(idx);alert('已加入行项目：'+MACHINES[idx].k+'（当前共 '+items.length+' 项，见「① PI 填写」）');}
+}
+function smartSelect(){
+  var type=gv('q_type'),prod=gv('q_prod'),daily=parseInt(gv('q_daily'))||0;
+  var hours=parseInt(gv('q_shift')),coat=gv('q_coat');
+  if(!daily){document.getElementById('quickOut').innerHTML='<div class="rednote">请填写目标日产量。</div>';return;}
+  var rated=null,mkey='',mname='',why='',auxPack=null;
+  if(prod==='cup'){
+    if(daily<=25000){rated=90;mkey='ZBJ-OC12 PRO';mname='ZBJ-OC12 PRO（80–100 pcs/min，3–16oz，$16,000–17,000）';why='入门档性价比之王，同价位速度更快、杯型更宽';auxPack='CP650';}
+    else if(daily<=50000){rated=130;mkey='G12';mname='G12 高速（110–150 pcs/min，2–12oz，$24,000–25,000）';why='净产出单班约 4–5.4 万只，覆盖中型产能';auxPack='CP650';}
+    else{rated=130;mkey='G12';mname='G12 × 多台（或升级 KBM 全伺服线 $51,000–55,000）';why='大产能走多机台；KBM 具体速度以工厂确认为准，机台数按 G12 口径估算';auxPack='CP650';}
+  }else if(prod==='double'){
+    rated=75;mkey='WT-22';
+    mname='WT-22 双层（70–80 pcs/min，2–22oz，$16,000–19,000）'+(daily>30000?' × 多台':'');
+    why='双层咖啡杯专家，杯型覆盖全线最广，净产出约 2.5–2.9 万只/班';auxPack='CP650';
+  }else if(prod==='bowl'){
+    rated=75;mkey='ZBJ-DP35';
+    if(coat==='double'){mname='ZBJ-DP35（70–80 pcs/min，10–35oz，超声波+伺服送纸，$22,000–25,000）';why='双面 PE 淋膜纸热风封不住，DP35 超声波封合专为此设计';}
+    else{mname='ZBJ-DP35（汤碗/冰淇淋碗主力，$22,000–25,000）';why='碗机主力机型；大口径看 X64/X135，牛皮纸大产能看 GH1500';}
+    auxPack='LP-450';
+  }else if(prod==='tea'){
+    rated=null;mkey='ZBJ-X35';mname='ZBJ-X35 茶水杯专用（全自动，$17,000）';why='专机专用，茶饮市场标准答案';auxPack='CP650';
+  }else{
+    rated=85;mkey='PL-145';mname='PL-145 杯盖主力（70–100 pcs/min，12KW，$26,000–28,000）';why='PLC 控制稳定，双层杯线标配配套';auxPack=null;
+  }
+  var count=null,netDay=null;
+  if(rated){
+    netDay=Math.round(rated*0.75*hours*60);
+    count=Math.ceil(daily*1.2/netDay);
+  }
+  quickPlan={mkey:mkey,qty:count||1,prod:prod,auxPack:auxPack,addLid:(prod==='double')};
+  var personaTip={start:'对初创客户：讲回本账——净产出×本地杯价估回本周期，强调 1 人看 2–3 台省人工。',scale:'对扩产客户：数据硬碰硬——主动报额定+净产出双数据，邀请视频试机/FAT。',trader:'对贸易商：谈批量与供应稳定性——16 年金品+100% 准时发货背书。',chain:'对连锁客户：推整线+信保+长期协议——WT-22+PL-145 咖啡店一站式。'}[type];
+  var html='<div class="note" style="margin-top:12px"><b>🎯 主推机型：</b>'+mname+'<br><span style="font-size:12.5px;color:var(--sub)">理由：'+why+'</span></div>';
+  if(count){
+    html+='<div class="note"><b>📐 机台数估算：</b>日净产出约 '+fmt(netDay)+' 只/台（额定 '+rated+' ×75% × '+hours+'h），目标 '+fmt(daily)+' ×1.2 缓冲 → <b>'+count+' 台</b>（参考值，正式方案以确认为准）</div>';
+  }else{
+    html+='<div class="goldnote">该机型速度 MEMORY 记「中速」，机台数量化估算升级工厂工程师确认——不编造速度是祺臣的规矩。</div>';
+  }
+  html+='<div class="note"><b>💬 画像话术：</b>'+personaTip+'</div>';
+  html+='<div style="margin-top:10px"><button class="btn gold" onclick="fillQuickToPI()">🚀 一键填充 PI 行项目（主机'+(count?'×'+count:'')+
+    (quickPlan.addLid?'+PL-145 杯盖机':'')+(auxPack?'+包装机':'')+'+空压机+易损件包）→</button></div>';
+  document.getElementById('quickOut').innerHTML=html;
+}
+function fillQuickToPI(){
+  if(!quickPlan){alert('请先点击「智能选型」');return;}
+  items=[]; /* 清空重建，避免重复 */
+  var mainIdx=MACHINES.findIndex(function(m){return m.k===quickPlan.mkey});
+  if(mainIdx>=0){
+    addItem(mainIdx);
+    items[0].qty=quickPlan.qty;
+  }
+  if(quickPlan.addLid)addItem(MACHINES.findIndex(function(m){return m.k==='PL-145'}));
+  if(quickPlan.auxPack)addItem(MACHINES.findIndex(function(m){return m.k===quickPlan.auxPack}));
+  if(quickPlan.prod!=='lid')addItem(MACHINES.findIndex(function(m){return m.k==='Air Compressor'}));
+  addItem(MACHINES.findIndex(function(m){return m.k==='Spare Parts Package'}));
+  if(gv('q_cup'))document.getElementById('b_cup').value=gv('q_cup');
+  renderItems();
+  alert('✅ 已生成 '+items.length+' 个行项目并写入杯型配置。请补全买方信息（公司名与国家必填）后点击「生成 PI 预览」。\n提醒：询价项（空压机/包装机/易损件包）须老板定价；成交价与交期须老板确认。');
+  go('fill');
+}
+
+/* ============ PI 预览 ============ */
+function gv(id){return document.getElementById(id).value.trim()}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function renderPI(){
+  if(!gv('b_name')||!gv('b_country')){document.getElementById('genMsg').innerHTML='<span class="tag t-red">买方名称与国家为必填项</span>';return;}
+  if(!items.length){document.getElementById('genMsg').innerHTML='<span class="tag t-red">请至少添加一个行项目</span>';return;}
+  var no=gv('pi_no'),date=gv('pi_date'),valid=gv('pi_valid'),sales=gv('pi_sales');
+  var rows='',sum=0;
+  items.forEach(function(it,i){
+    var amt=it.p!=null?it.p*it.qty:null;
+    if(amt!=null)sum+=amt;
+    rows+='<tr><td>'+(i+1)+'</td><td>'+esc(it.name)+(it.changed?'<br><span style="color:#b91c1c;font-size:11px">*price modified, pending boss approval</span>':'')+
+      '<br><span style="font-size:11px;color:#555">'+esc(it.spec)+'</span></td>'+
+      '<td style="text-align:center">'+it.qty+'</td>'+
+      '<td style="text-align:right">'+(it.p!=null?'USD '+fmt(it.p):'TBC')+'</td>'+
+      '<td style="text-align:right">'+(amt!=null?'USD '+fmt(amt):'TBC')+'</td></tr>';
+  });
+  var cls=[];
+  if(document.getElementById('cl_warranty').checked)cls.push('1. Warranty: 12 months from installation date, excluding wear parts.');
+  if(document.getElementById('cl_parts').checked)cls.push('2. Wear parts package (cutting knives, heating elements, knurling rollers, ultrasonic horns) available with shipment.');
+  if(document.getElementById('cl_training').checked)cls.push('3. Free installation guidance by video & operator training; overseas engineer installation available at buyer\'s travel cost.');
+  if(document.getElementById('cl_ta').checked)cls.push('4. Seller: 16-year Alibaba Gold Supplier, SGS onsite verified, 100% on-time dispatch record; order covered by Alibaba Trade Assurance.');
+  if(document.getElementById('cl_voltage').checked)cls.push('5. Machine voltage configured as stated; buyer shall confirm local power supply before production.');
+  if(document.getElementById('cl_valid').checked)cls.push('6. This Proforma Invoice is valid for '+esc(valid)+' days; prices subject to final confirmation by the Seller.');
+  var incoterm=gv('t_incoterm')||'FOB Ningbo';
+  var port=gv('t_port');
+  var incotermLine=incoterm+(incoterm.indexOf('CIF')>=0||incoterm.indexOf('CFR')>=0?(port?' to '+esc(port):' (destination port TBC)'):'');
+  document.getElementById('piPaper').innerHTML=
+  '<h1>PROFORMA INVOICE</h1>'+
+  '<div class="co"><b>Wenzhou Qichen Trading Co., Ltd. (QiChen Machinery)</b><br>'+
+  'Alibaba Store: machine-china.en.alibaba.com ｜ 16 Years Gold Supplier ｜ SGS Onsite Verified<br>'+
+  'Zhejiang, China ｜ Contact: '+esc(sales||'Leon Guo')+'</div>'+
+  '<table><tr><th style="width:25%">P.I. No.</th><td>'+esc(no)+'</td><th style="width:20%">Date</th><td>'+esc(date)+'</td></tr>'+
+  '<tr><th>Validity</th><td>'+esc(valid)+' days</td><th>Currency</th><td>USD</td></tr>'+
+  '<tr><th>Buyer</th><td colspan="3"><b>'+esc(gv('b_name'))+'</b>'+
+  (gv('b_contact')?' ｜ Attn: '+esc(gv('b_contact')):'')+' ｜ '+esc(gv('b_country'))+
+  (gv('b_addr')?'<br>'+esc(gv('b_addr')):'')+
+  (gv('b_phone')?'<br>Tel/WhatsApp: '+esc(gv('b_phone')):'')+
+  (gv('b_email')?' ｜ Email: '+esc(gv('b_email')):'')+'</td></tr></table>'+
+  '<h3 style="margin:14px 0 4px;font-size:13px">ORDER ITEMS</h3>'+
+  '<table><tr><th style="width:30px">#</th><th>Item & Specification</th><th style="width:60px">Qty</th><th style="width:110px">Unit Price</th><th style="width:120px">Amount</th></tr>'+
+  rows+
+  '<tr class="totrow"><td colspan="4" style="text-align:right">TOTAL ('+esc(incotermLine)+')</td><td style="text-align:right">USD '+fmt(sum)+'</td></tr></table>'+
+  '<div class="clauses"><h3 style="font-size:13px;margin-bottom:4px">TERMS & CONDITIONS</h3>'+
+  '<p><b>Trade Term:</b> '+esc(incotermLine)+' ｜ <b>Loading Port:</b> '+esc(gv('t_loading'))+' ｜ <b>Shipment:</b> '+esc(gv('t_ship'))+'</p>'+
+  '<p><b>Payment:</b> '+esc(gv('t_payment'))+'</p>'+
+  '<p><b>Delivery Time:</b> '+esc(gv('t_delivery')||'To be confirmed')+'</p>'+
+  '<p><b>Cup Size / Mold:</b> '+esc(gv('b_cup')||'As per buyer\'s requirement')+' ｜ <b>Voltage:</b> '+esc(gv('b_volt'))+'</p>'+
+  cls.map(function(c){return '<p>'+c+'</p>'}).join('')+
+  '<p style="margin-top:8px;font-size:11px;color:#555">Note: Machine prices are reference list prices; final transaction price is subject to the Seller\'s written confirmation. Net production output of forming machines is approx. 70-80% of rated speed.</p>'+
+  '</div>'+
+  '<div class="sign"><div class="s">Seller: Wenzhou Qichen Trading Co., Ltd.</div><div class="s">Buyer: '+esc(gv('b_name'))+'</div></div>';
+  document.getElementById('genMsg').innerHTML='<span class="tag t-ok">PI 已生成 →</span>';
+  go('preview');
+}
+
+/* ============ 检查清单 ============ */
+function checkAll(){
+  var cks=document.querySelectorAll('.ck');var n=0;cks.forEach(function(c){if(c.checked)n++});
+  var msg=document.getElementById('checkMsg');
+  if(n===cks.length)msg.innerHTML='<div class="note" style="background:var(--ok-l);border-color:var(--ok)">✅ 10/10 全部通过——确认老板已批准后即可发出 PI。</div>';
+  else msg.innerHTML='<div class="rednote">⚠ 已完成 '+n+'/10——未通过的项处理完再发出；涉及价格/交期/付款的项必须老板点头。</div>';
+}
+
+/* ============ 导航 ============ */
+function go(id){
+  document.querySelectorAll('section').forEach(function(s){s.classList.remove('on')});
+  document.querySelectorAll('nav button').forEach(function(b){b.classList.remove('on')});
+  document.getElementById(id).classList.add('on');
+  var b=document.querySelector('nav button[data-t="'+id+'"]');if(b)b.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+init();
+</script>
+</body>
+</html>
