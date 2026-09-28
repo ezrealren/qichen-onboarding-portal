@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>祺臣机械 · 厂房摆放规划标准问答与案例模板</title>
+<style>
+:root{--page:#f1f5f9;--panel:#fff;--line:#e2e8f0;--ink:#1e293b;--sub:#64748b;
+--brand:#0f766e;--brand2:#115e59;--brand-l:#ccfbf1;
+--blue:#1d4ed8;--blue-l:#dbeafe;--gold:#b45309;--gold-l:#fef3c7;
+--red:#b91c1c;--red-l:#fee2e2;--ok:#15803d;--ok-l:#dcfce7;--purple:#7c3aed;--purple-l:#ede9fe}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI","Microsoft YaHei",sans-serif;background:var(--page);color:var(--ink);line-height:1.65}
+header{background:linear-gradient(135deg,#134e4a,#0f766e 55%,#0d9488);color:#fff;padding:30px 24px;text-align:center}
+header h1{font-size:25px;letter-spacing:.5px}
+header .sub{opacity:.86;font-size:13px;margin-top:8px}
+nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;background:#134e4a;padding:10px 14px;position:sticky;top:0;z-index:60;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+nav button{background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;padding:7px 16px;border-radius:18px;cursor:pointer;font-size:13px}
+nav button:hover{background:rgba(255,255,255,.15)}
+nav button.on{background:#fff;color:var(--brand2);font-weight:700;border-color:#fff}
+main{max-width:1060px;margin:0 auto;padding:22px 16px 90px}
+section{display:none}section.on{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:16px;box-shadow:0 1px 3px rgba(15,23,42,.06)}
+.card h2{font-size:17.5px;color:var(--brand2);border-left:4px solid var(--brand);padding-left:10px;margin-bottom:10px}
+.card h3{font-size:14.5px;margin:13px 0 6px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:var(--brand-l);color:var(--brand2);white-space:nowrap}
+tr:nth-child(even) td{background:#f8fafc}
+.tag{display:inline-block;font-size:11px;padding:2px 9px;border-radius:10px;margin:0 4px 0 0;white-space:nowrap}
+.t-brand{background:var(--brand-l);color:var(--brand2)}.t-blue{background:var(--blue-l);color:var(--blue)}
+.t-gold{background:var(--gold-l);color:var(--gold)}.t-red{background:var(--red-l);color:var(--red)}
+.t-ok{background:var(--ok-l);color:var(--ok)}.t-purple{background:var(--purple-l);color:var(--purple)}
+.note{background:var(--brand-l);border-left:4px solid var(--brand);padding:9px 13px;border-radius:6px;font-size:13px;margin:10px 0}
+.goldnote{background:var(--gold-l);border-left:4px solid var(--gold);padding:9px 13px;border-radius:6px;font-size:13px;margin:10px 0}
+.rednote{background:var(--red-l);border-left:4px solid var(--red);padding:9px 13px;border-radius:6px;font-size:13px;margin:10px 0}
+.qa{border:1px solid var(--line);border-radius:13px;background:#fff;margin:12px 0;overflow:hidden}
+.qa .qh{background:linear-gradient(90deg,#0f766e,#0d9488);color:#fff;padding:12px 16px;display:flex;gap:10px;align-items:center;cursor:pointer}
+.qa .qh .num{background:rgba(255,255,255,.22);border-radius:8px;padding:2px 10px;font-weight:700;font-size:13px;flex-shrink:0}
+.qa .qh .qt{font-weight:600;font-size:14.5px;flex:1}
+.qa .qh .chev{font-size:14px;opacity:.8}
+.qa .qb{padding:14px 18px;display:none}
+.qa.open .qb{display:block}
+.qa.open .chev{transform:rotate(90deg)}
+.en{font-size:12.5px;color:var(--sub);font-style:italic;margin-bottom:8px}
+.ans{background:#f0fdfa;border:1px solid #99f6e4;border-radius:9px;padding:10px 13px;font-size:13.5px;margin:8px 0}
+.key{font-size:13px}
+.key b{color:var(--brand2)}
+.src{font-size:11.5px;color:var(--sub);margin-top:8px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.zone{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+.zone .z{flex:1;min-width:150px;border-radius:10px;padding:10px 12px;color:#fff;font-size:12.5px}
+.zone .z b{display:block;font-size:13px;margin-bottom:3px}
+.z1{background:linear-gradient(150deg,#b45309,#d97706)}
+.z2{background:linear-gradient(150deg,#0f766e,#0d9488)}
+.z3{background:linear-gradient(150deg,#1d4ed8,#3b82f6)}
+.z4{background:linear-gradient(150deg,#15803d,#22c55e)}
+.z5{background:linear-gradient(150deg,#7c3aed,#8b5cf6)}
+label.f{display:block;font-size:12.5px;color:var(--sub);margin:9px 0 3px;font-weight:600}
+input[type=text],input[type=number],select,textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13.5px;background:#fff;font-family:inherit}
+textarea{min-height:64px;resize:vertical}
+.btn{background:var(--brand);color:#fff;border:none;border-radius:9px;padding:9px 18px;font-size:13.5px;cursor:pointer;margin:6px 6px 0 0}
+.btn:hover{background:var(--brand2)}
+.btn.ghost{background:#fff;color:var(--brand2);border:1px solid var(--brand)}
+.btn.all{background:var(--blue)}.btn.all:hover{background:#1e40af}
+.calcout{background:var(--blue-l);border:1px solid #bfdbfe;border-radius:11px;padding:14px 16px;font-size:14px;margin-top:12px}
+.calcout b{color:var(--blue)}
+.caseprev{background:#f8fafc;border:1px solid var(--line);border-radius:11px;padding:14px 16px;font-size:13px;white-space:pre-wrap;margin-top:10px;line-height:1.7}
+footer{text-align:center;color:var(--sub);font-size:12px;padding:18px;border-top:1px solid var(--line);background:#fff}
+@media print{nav,.btn{display:none}section{display:block!important}.qa .qb{display:block!important}}
+</style>
+</head>
+<body>
+<header>
+<h1>祺臣机械 · 客户厂房摆放规划</h1>
+<div class="sub">Factory Layout Planning — 标准问答提示卡片 + 案例模板 ｜ 版本 v1.0 ｜ 事实源：MEMORY §3.5 设备参数 + 行业研究（标注[研究]/[建议]）</div>
+</header>
+<nav>
+<button class="on" data-t="use" onclick="go('use')">使用说明</button>
+<button data-t="qa" onclick="go('qa')">标准问答卡片（12）</button>
+<button data-t="calc" onclick="go('calc')">厂房面积估算器</button>
+<button data-t="zone" onclick="go('zone')">五大功能区速查</button>
+<button data-t="case" onclick="go('case')">案例模板</button>
+</nav>
+<main>
+
+<!-- 使用说明 -->
+<section id="use" class="on">
+<div class="card">
+<h2>这套工具给谁用、怎么用</h2>
+<p style="font-size:14px">机械客户在下单前几乎都会问「我的厂房要怎么摆、要多大、电怎么接」。厂房规划答得专业，是<b>把「卖一台机器」升级成「帮客户建成一条产线」</b>的关键信任动作。本系统分四块：</p>
+<table>
+<tr><th>模块</th><th>用途</th><th>使用时机</th></tr>
+<tr><td><span class="tag t-brand">标准问答卡片</span></td><td>12 个客户厂房高频问题的标准应答（中英双语 + 要点 + 出处 + 红线）</td><td>客户问厂房/场地时，点开对应卡片照着答</td></tr>
+<tr><td><span class="tag t-blue">面积估算器</span></td><td>输入机型与台数，自动估算各功能区面积与总厂房建议值</td><td>给客户做初步规划建议、显得有方案能力</td></tr>
+<tr><td><span class="tag t-purple">五大功能区</span></td><td>原料仓储 / 生产 / 质检 / 成品 / 空压辅机的布局要点速查</td><td>讲解分区逻辑、画草图时对照</td></tr>
+<tr><td><span class="tag t-ok">案例模板</span></td><td>填写式表单 → 自动生成标准厂房规划案例文本，可复制</td><td>为客户出规划方案、沉淀成交案例</td></tr>
+</table>
+<div class="rednote">⚠ 红线纪律（SOUL 铁律）：① 机型净尺寸/功率/重量只用 MEMORY §3.5 数据；② 面积、间距等规划值标注 [建议] 或 [研究]，属经验参考，须请客户按当地厂房实际核对；③ 涉及消防、环评、食品级认证的合规要求，一律提示「以当地法规为准」，不代替专业设计；④ 不确定的定制布局升级工厂工程师。</div>
+</div>
+</section>
+
+<!-- 标准问答卡片 -->
+<section id="qa">
+<div class="card">
+<h2>标准问答提示卡片（12 张）<span class="tag t-brand">点击展开</span></h2>
+<div style="display:flex;gap:8px;margin-bottom:6px">
+<button class="btn all sm" onclick="expandAll(true)">全部展开</button>
+<button class="btn ghost sm" onclick="expandAll(false)">全部收起</button>
+</div>
+<div class="note">每张卡片 = 客户问题（中英）→ 标准应答要点 → 出处/红线。应答前先看出处标注：[MEMORY] 是我方硬数据可直接引用；[研究] 为行业资料；[建议] 为经验参考须请客户核实。</div>
+</div>
+
+<div class="qa"><div class="qh" onclick="toggleQA(this)"><span class="num">Q1</span><span class="qt">我的厂房要多大面积才能放你们的机器？</span><span class="chev">▸</span></div>
+<div class="qb">
+<div class="en">How much factory space do I need for your machine?</div>
+<div class="ans">① 先报机器净尺寸：整机约 2700×1400×1900mm、约 2.5 吨（单台）；② 但厂房不是只放机器——还要原料仓储、成品区、通道、维护空间；③ 行业经验：小型起步车间净生产空间不少于 800–1000 平方英尺（约 75–95㎡）；④ 推荐用「面积估算器」按机型台数给出分区建议。</div>
+<div class="key"><b>要点：</b>报净尺寸 + 讲分区思维 + 给估算工具，不拍脑袋报一个数字。</div>
+<div class="src">出处：净尺寸 [MEMORY §3.5]；起步面积 [研究 guimapaper]；分区 [研究 mingyuan]。红线：估算结果须注明为参考值。</div>
+</div></div>
+
+<div class="qa"><div class="qh" onclick="toggleQA(this)"><span class="num">Q2</span><span class="qt">机器四周要留多少维护通道？</span><span class="chev">▸</span></div>
+<div class="qb">
+<div class="en">How much clearance / maintenance access should be left around the machine?</div>
+<div class="ans">① 车间必须为机器操作、检验、打包、维护留出通道（行业通行要求）；② 经验建议：机器四周至少留 1 米通道，操作面（送纸/收杯侧）留 1.5 米以上；③ 多台并排时机间距建议 ≥1.2 米，便于换模与检修；④ 靠墙一侧预留换模与纸卷上料空间。</div>
+<div class="key"><b>要点：</b>先讲「为什么」（换模、上纸、检修都要空间），再给建议值。</div>
+<div class="src">出处：通道必要性 [研究 mingyuan checklist]；具体数值 [建议]。红线：数值为经验参考，提醒客户按厂房实际核对。</div>
+</div></div>
+
+<div class="qa"><div class="qh" onclick="toggleQA(this)"><span class="num">Q3</span><span class="qt">电力要怎么接？要配变压器吗？</span><span class="chev">▸</span></div>
+<div class="qb">
+<div class="en">What power supply do I need? Is a transformer required?</div>
+<div class="ans">① 标准机型 380V/三相；行业参考多数机型还需约 5HP/5KVA 电力配置 [研究]；② 按机型报功率：WT-22 3KW、OC12 PRO 8KW、DP35 14KW、G12 20KW；③ 出口先问客户当地电压——印度 415V、部分国家 220V 需定制变压器；④ 多台机+空压机总功率要叠加计算，建议留 20% 余量；⑤ 空压机单独一路电更稳。</div>
+<div class="key"><b>要点：</b>先问客户当地电压再谈方案——这是出口机标准流程。</div>
+<div class="src">出处：380V/三相、印度 415V、220V 定制变压器、各机型功率 [MEMORY §3.5/§2]；5HP/5KVA [研究 Saintyco]；留余量 [建议]。红线：变压器定制涉及配置变更，报价须老板确认。</div>
+</div></div>
+
+<div class="qa"><div class="qh" onclick="toggleQA(this)"><span class="num">Q4</span><span class="qt">空压机放在哪里合适？</span><span class="chev">▸</span></div>
+<div class="qb">
+<div class="en">Where should the air compressor be placed?</div>
+<div class="ans">① 纸杯机气动元件靠压缩空气驱动，空压机是必配套；② 摆放原则：靠近用气设备减少管路压降，但要有通风散热空间；③ 经验建议：靠墙独立区域，与主机保持 2 米以上或隔间放置（降噪），预留检修位；④ 管路走向避免横跨主通道，防止绊倒与压损。</div>
+<div class="key"><b>要点：</b>讲清「必配→靠近→通风→降噪」四个词，客户就能落地。</div>
+<div class="src">出处：空压机为气源刚需 [MEMORY §3.5]；空压机作用 [研究 baidu b2bwiki]；距离数值 [建议]。</div>
+</div></div>
+
+<div class="qa"><div class="qh" onclick="toggleQA(this)"><span class="num">Q5</span><span class="qt">纸卷原料仓库要注意什么？</span><span class="chev">▸</span></div>
+<div class="qb">
+<div class="en">What should I pay attention to for paper roll storage?</div>
+<div class="ans">① 原料区必须干燥、通风，防止纸张受潮影响质量（行业硬性要求）；② 纸卷用托盘/货架存放，离地防潮、防压、防倒垛；③ 远离水源与窗户直晒，不与化学品混放；④ 纸卷要先进先出，避免长期压放变形；⑤ 原料区建议占厂房面积 30% 左右（行业布局经验）。</div>
+<div class="key"><b>要点：</b>纸怕潮——这一条讲透，客户就知道你懂他的成本。</div>
+<div class="src">出处：干燥通风防潮 [研究 mingguo/mingyuan]；托盘存放 [研究 hannai]；30% 占比 [研究 cngc]。</div>
+</div></div>
+
+<div class="qa"><div class="qh" onclick="toggleQA(this)"><span class="num">Q6</span><span class="qt">车间要不要分区？怎么分？</span><span class="chev">▸</span></div>
+<div class="qb">
+<div class="en">Should the workshop be divided into zones?</div>
+<div class="ans">① 必须分区：生产区、原料仓储、质检区、成品区、维护通道各司其职；② 行业经验面积分配：原料约 30%、生产约 50%、质检约 20%（起步规模参考）；③ 分区价值：物流顺畅、防止交叉污染（食品级纸杯尤其重要）、便于 5S 管理；④ 有印刷/模切工序的客户还要加印刷区、模切区。</div>
+<div class="key"><b>要点：</b>分区 = 效率 + 食品安全 + 可扩展，三点讲给客户。</div>
+<div class="src">出处：功能区划分 [研究 mingyuan/rolangear]；30/50/20 [研究 cngc]。</div>
+</div></div>
+
+<div class="qa"><div class="qh" onclick="toggleQA(this)"><span class="num">Q7</span><span class="qt">车间温湿度有要求吗？</span><span class="chev">▸</span></div>
+<div class="qb">
+<div class="en">Are there temperature / humidity requirements for the workshop?</div>
+<div class="ans">① 纸张与封合质量对温湿度敏感：行业参考控温约 ±2°C、相对湿度 50%±5% 区间为宜；② 湿度过高纸张吸潮变形、封合不稳；过低易产生静电；③ 建议车间通风、避免窗户直晒与雨水侵入；④ 热带/潮湿地区客户建议配除湿设备，这一条能帮客户避免整批废品。</div>
+<div class="key"><b>要点：</b>温湿度直接影响封合质量——这是工程师级认知，能显著加分。</div>
+<div class="src">出处：±2°C、50%±5% [研究 newdebao]；防潮逻辑 [研究 mingguo]。红线：精确控制参数以当地气候与纸张供应商建议为准。</div>
+</div></div>
+
+<div class="qa"><div class="qh" onclick="toggleQA(this)"><span class="num">Q8</span><span class="qt">地面和厂房结构有什么要求？</span><span class="chev">▸</span></div>
+<div class="qb">
+<div class="en">Any requirements for the floor and building structure?</div>
+<div class="ans">① 整机约 2.5 吨且运行有振动：地面要平整、硬化、承重达标，建议混凝土地面；② 机器就位后用地脚固定，防止位移影响精度；③ 厂房层高满足机器高度（约 1.9m）+ 上料/检修空间；④ 电力线路与气管走线提前规划，避免后期开槽；⑤ 运输提醒：单台按 20GP 集装箱规划到港，卸货位与进厂通道要提前留好。</div>
+<div class="key"><b>要点：</b>先报机器重量与尺寸（硬数据），再讲地面与固定。</div>
+<div class="src">出处：2.5 吨、2700×1400×1900mm、20GP 运输 [MEMORY §3.5]；地面固定为通用安装常识 [建议]。</div>
+</div></div>
+
+<div class="qa"><div class="qh" onclick="toggleQA(this)"><span class="num">Q9</span><span class="qt">成品和废品怎么存放管理？</span><span class="chev">▸</span></div>
+<div class="qb">
+<div class="en">How should finished products and rejects be stored?</div>
+<div class="ans">① 成品区独立、干燥、远离原料粉尘区，包装后码放整齐防压；② 质检区放在生产区与成品区之间，抽检下线的杯子（渗漏、卷口、堆叠）；③ 废品/边料单独收集点，纸张边料可回收出售（也是成本项，值得跟客户讲）；④ 出货通道与生产通道分开，物流不打结。</div>
+<div class="key"><b>要点：</b>把「边料可回收」讲出来——客户会记住你帮他省钱。</div>
+<div class="src">出处：检验/打包/成品区 [研究 mingyuan checklist]；边料价值 [MEMORY §3.4 纸耗论据延伸]。</div>
+</div></div>
+
+<div class="qa"><div class="qh" onclick="toggleQA(this)"><span class="num">Q10</span><span class="qt">多台机器怎么排产线最合理？</span><span class="chev">▸</span></div>
+<div class="qb">
+<div class="en">What is the best line layout for multiple machines?</div>
+<div class="ans">① 按工艺流程排：原料区 → 成型机（并联）→ 质检 → 包装机 → 成品区，物流单向不回头；② 同型号机器并排便于统一上料与管理；③ 整线逻辑：纸杯机 + 包装机（CP650）+ 空压机 + 杯盖机（双层线加 PL-145）——打包报价时同步给布局建议；④ 机间距 ≥1.2 米、主通道 ≥1.5 米。</div>
+<div class="key"><b>要点：</b>布局跟着配套方案走——卖整线的同时送产线图，成交率更高。</div>
+<div class="src">出处：流程分区 [研究 rolangear]；整线配套 [MEMORY §2.4]；间距数值 [建议]。</div>
+</div></div>
+
+<div class="qa"><div class="qh" onclick="toggleQA(this)"><span class="num">Q11</span><span class="qt">需要办什么证件或合规手续？</span><span class="chev">▸</span></div>
+<div class="qb">
+<div class="en">What permits or compliance do I need?</div>
+<div class="ans">① 诚实边界：各国/地区要求不同，我们不代替专业合规咨询；② 通用提示：食品接触类产品可能涉及食品级/卫生相关许可，厂房建设可能涉及消防、环评——以当地法规为准；③ 我方可提供：机器参数资料、SGS 验厂报告、安装指导配合验收；④ 建议客户开工前咨询当地主管部门。</div>
+<div class="key"><b>要点：</b>不装懂、不包办，给资料、给配合——边界清晰反而赢得信任。</div>
+<div class="src">出处：SOUL 行为边界（超出知识范围标注升级）；食品接触提示 [行业通识]。红线：绝不承诺「保证能过审批」。</div>
+</div></div>
+
+<div class="qa"><div class="qh" onclick="toggleQA(this)"><span class="num">Q12</span><span class="qt">你们能帮我画厂房布局图吗？</span><span class="chev">▸</span></div>
+<div class="qb">
+<div class="en">Can you help me draw the factory layout?</div>
+<div class="ans">① 可以——图纸定制（Drawing-based customization）与技术服务是我们的官方服务能力；② 标准动作：请客户提供厂房尺寸图（长宽、柱位、门窗、电源位置）→ 我方结合机型尺寸与功能区建议出布局草图；③ 复杂产线升级工厂工程师出正式方案；④ 布局服务与整线报价打包呈现，是差异化信任动作。</div>
+<div class="key"><b>要点：</b>这是把「设备商」变成「建厂伙伴」的钩子，主动要客户的厂房图。</div>
+<div class="src">出处：图纸定制能力 [MEMORY §1]；流程 [建议]。红线：正式施工图须工程师确认，业务员不出结构图。</div>
+</div></div>
+</section>
+
+<!-- 面积估算器 -->
+<section id="calc">
+<div class="card">
+<h2>厂房面积估算器 <span class="tag t-blue">给客户初步规划建议用</span></h2>
+<div class="note">计算口径：单台机器占地 = 净尺寸（2700×1400mm [MEMORY §3.5]）+ 四周维护通道（经验值每侧约 1 米 [建议]）；原料/成品/质检按行业经验占比推算 [研究 cngc]。<b>输出为参考值，须注明请客户按实际厂房核对。</b></div>
+<div class="grid2">
+<div>
+<label class="f">主机机型（决定功率口径）</label>
+<select id="ca_model">
+<option value="oc12">ZBJ-OC12 / OC12 PRO（~3–8KW）</option>
+<option value="wt22">WT-22 双层（3KW）</option>
+<option value="dp35">ZBJ-DP35 纸碗机（14KW）</option>
+<option value="g12">G12 高速（20KW）</option>
+</select>
+<label class="f">纸杯/碗主机台数</label>
+<input type="number" id="ca_num" min="1" value="1">
+<label class="f">是否配包装机（CP650/LP-450）</label>
+<select id="ca_pack"><option value="1">是</option><option value="0">否</option></select>
+</div>
+<div>
+<label class="f">是否配杯盖机（双层线加 PL-145）</label>
+<select id="ca_lid"><option value="0">否</option><option value="1">是</option></select>
+<label class="f">原料库存放周期（天，影响仓储面积）</label>
+<input type="number" id="ca_days" min="7" value="15">
+<label class="f">客户当地电压（Q3 必问项）</label>
+<select id="ca_volt"><option>380V/三相（标准）</option><option>415V（印度等，需确认）</option><option>220V（需定制变压器）</option><option>未知（待确认）</option></select>
+</div>
+</div>
+<button class="btn" onclick="calcArea()">生成面积与电力估算</button>
+<div id="calcOut"></div>
+</div>
+</section>
+
+<!-- 五大功能区 -->
+<section id="zone">
+<div class="card">
+<h2>五大功能区布局速查</h2>
+<div class="zone">
+<div class="z z1"><b>① 原料仓储区 ≈30%</b>干燥通风、托盘离地、防潮防晒、先进先出，远离水源窗户</div>
+<div class="z z2"><b>② 生产区 ≈50%</b>主机按工艺单向排布、机间距≥1.2m、操作面通道≥1.5m、地脚固定</div>
+<div class="z z3"><b>③ 质检区 ≈10–20%</b>介于生产与成品之间，抽检渗漏/卷口/堆叠，配检验台与光源</div>
+<div class="z z4"><b>④ 成品暂存区 ≈10–20%</b>包装后码放、防压防尘、出货通道独立不与生产交叉</div>
+<div class="z z5"><b>⑤ 辅机区</b>空压机靠墙通风、与主机 2m+ 或隔间降噪、气管不跨主通道</div>
+</div>
+<div class="note">面积占比来源：行业经验 30% 原料 / 50% 生产 / 20% 质检 [研究 cngc]，其余分区为功能要点归纳；实际按客户厂房形状调整。</div>
+<h3>布局三原则（对客户讲）</h3>
+<table>
+<tr><th>原则</th><th>一句话解释</th></tr>
+<tr><td><b>物流单向</b></td><td>原料→成型→质检→包装→成品一条线不回头，省搬运、防交叉污染</td></tr>
+<tr><td><b>留足通道</b></td><td>换模、上纸、检修都要空间——通道不是浪费，是产能的一部分</td></tr>
+<tr><td><b>预留扩展</b></td><td>按峰值产量×1.2 选机（MEMORY §3.4），布局同样给加机留位置</td></tr>
+</table>
+</div>
+</section>
+
+<!-- 案例模板 -->
+<section id="case">
+<div class="card">
+<h2>厂房规划案例模板（填写即生成标准文本）</h2>
+<div class="note">用途：① 为客户出规划方案时照模板填；② 成交客户稳定运行后，把真实案例填入此模板沉淀为案例库素材（S12 案例授权流程）。<b>示例数值为占位，实际必须用真实数据，严禁编造（SOUL 铁律 1）。</b></div>
+<div class="grid2">
+<div>
+<label class="f">客户 / 国家（未授权可匿名）</label><input type="text" id="t1" placeholder="例：某连锁咖啡品牌 / 东南亚">
+<label class="f">采购机型与台数</label><input type="text" id="t2" placeholder="例：WT-22 × 2 台 + PL-145 杯盖机 × 1 + CP650 包装机 × 1">
+<label class="f">厂房实际面积（㎡）</label><input type="text" id="t3" placeholder="例：约 300㎡（20m × 15m）">
+<label class="f">分区方案</label><textarea id="t4" placeholder="例：原料仓储区约 90㎡（干燥通风、托盘离地）；生产区约 150㎡，两台 WT-22 并排、机间距 1.5m；质检+成品区约 50㎡；空压机隔间放置"></textarea>
+<label class="f">电力与气源方案</label><input type="text" id="t5" placeholder="例：380V/三相，总功率预留 20% 余量；空压机独立一路电">
+</div>
+<div>
+<label class="f">温湿度控制措施</label><input type="text" id="t6" placeholder="例：车间通风 + 除湿机，湿度控制在 50%±5%">
+<label class="f">实施结果 / 客户反馈</label><textarea id="t7" placeholder="例：安装当周投产，换模通道充足，客户产能达标；30 天回访运行稳定"></textarea>
+<label class="f">经验沉淀（可复用的要点）</label><textarea id="t8" placeholder="例：并排布局+共用上料通道使占地省 15%；热带地区除湿机是必需品"></textarea>
+<label class="f">状态</label><select id="t9"><option>方案阶段（给客户建议）</option><option>实施中</option><option>已投产（案例素材）</option><option>已获客户授权（入库）</option></select>
+</div>
+</div>
+<button class="btn" onclick="genCase()">生成案例文本</button>
+<button class="btn ghost" onclick="clearCase()">清空</button>
+<button class="btn ghost" onclick="loadDemo()">填入演示示例</button>
+<div class="caseprev" id="caseOut" style="display:none"></div>
+</div>
+</section>
+
+</main>
+<footer>祺臣机械 · 厂房摆放规划问答卡片与案例模板 v1.0 ｜ 设备参数以 MEMORY §3.5 为准 ｜ 布局经验值标注 [研究]/[建议] 须请客户实地核对 ｜ 编制：祺工</footer>
+
+<script>
+/* 问答卡片展开/收起 */
+function toggleQA(h){h.parentElement.classList.toggle('open')}
+function expandAll(open){document.querySelectorAll('.qa').forEach(function(q){q.classList.toggle('open',open)})}
+
+/* 面积估算器 */
+function calcArea(){
+  var model=document.getElementById('ca_model');
+  var modelName=model.options[model.selectedIndex].text;
+  var n=Math.max(1,parseInt(document.getElementById('ca_num').value)||1);
+  var pack=document.getElementById('ca_pack').value==='1';
+  var lid=document.getElementById('ca_lid').value==='1';
+  var days=Math.max(7,parseInt(document.getElementById('ca_days').value)||15);
+  var volt=document.getElementById('ca_volt').value;
+  /* 单台占地：净尺寸 2.7×1.4m + 四周约1米通道 [MEMORY §3.5 尺寸 / 建议通道] */
+  var perMachine=Math.ceil(4.7*3.4);
+  var prod=n*perMachine+(pack?20:0)+(lid?16:0);
+  var storage=Math.ceil(prod*0.3*(days/15)); /* 原料区≈生产区30% [研究 cngc]，按库存周期线性 */
+  var qc=Math.ceil(prod*0.2); /* 质检≈20% [研究 cngc] */
+  var aux=8; /* 空压机辅机区 */
+  var total=Math.ceil((prod+storage+qc+aux)*1.15); /* 主通道与余量 +15% [建议] */
+  var power=modelName.indexOf('20KW')>=0?20:(modelName.indexOf('14KW')>=0?14:(modelName.indexOf('8KW')>=0?8:(modelName.indexOf('3KW')>=0?3:6)));
+  var totalPower=(power*n+(pack?4:0)+(lid?12:0)+7.5); /* 空压机约7.5KW估算 [建议] */
+  document.getElementById('calcOut').innerHTML=
+  '<div class="calcout">'+
+  '<div>📐 <b>生产区（含操作/维护通道）</b>：约 '+prod+' ㎡（'+n+' 台主机，单台占地按 '+perMachine+' ㎡）'+(pack?'，含包装机区约 20㎡':'')+(lid?'，含杯盖机区约 16㎡':'')+'</div>'+
+  '<div>📦 <b>原料仓储区</b>：约 '+storage+' ㎡（按 '+days+' 天库存、占比≈30% 推算）</div>'+
+  '<div>🔍 <b>质检+成品区</b>：约 '+(qc)+' ㎡（占比≈20% 推算）</div>'+
+  '<div>⚙️ <b>辅机区（空压机等）</b>：约 '+aux+' ㎡</div>'+
+  '<div>🏭 <b>建议厂房总面积</b>：约 <b>'+total+' ㎡</b>（含主通道与 15% 余量）</div>'+
+  '<div>⚡ <b>电力口径</b>：'+modelName+' × '+n+'，设备总功率约 '+totalPower.toFixed(1)+'KW，建议按 ×1.2 预留余量 → 约 '+Math.ceil(totalPower*1.2)+'KW；当地电压：'+volt+'</div>'+
+  '<div style="margin-top:8px;font-size:12.5px;color:var(--sub)">⚠ 以上为参考估算（通道/占比为行业经验值），正式布局请以客户厂房实际尺寸与工厂工程师方案为准。</div>'+
+  '</div>';
+}
+
+/* 案例模板 */
+function gv(id){return document.getElementById(id).value.trim()}
+function genCase(){
+  if(!gv('t1')&&!gv('t2')){alert('请至少填写客户与机型信息');return;}
+  var txt='【祺臣机械 · 厂房规划案例】'+
+  '\n■ 客户/市场：'+(gv('t1')||'（未填）')+
+  '\n■ 采购配置：'+(gv('t2')||'（未填）')+
+  '\n■ 厂房面积：'+(gv('t3')||'（未填）')+
+  '\n■ 分区方案：'+(gv('t4')||'（未填）')+
+  '\n■ 电力与气源：'+(gv('t5')||'（未填）')+
+  '\n■ 温湿度控制：'+(gv('t6')||'（未填）')+
+  '\n■ 实施结果：'+(gv('t7')||'（未填）')+
+  '\n■ 经验沉淀：'+(gv('t8')||'（未填）')+
+  '\n■ 状态：'+gv('t9')+
+  '\n——————————————'+
+  '\n口径说明：设备净尺寸 2700×1400×1900mm、约2.5吨（MEMORY §3.5）；面积占比参考行业经验（原料30%/生产50%/质检20%）；具体布局经客户实地核对。';
+  var o=document.getElementById('caseOut');o.style.display='block';o.textContent=txt;
+}
+function clearCase(){['t1','t2','t3','t4','t5','t6','t7','t8'].forEach(function(id){document.getElementById(id).value=''});document.getElementById('caseOut').style.display='none'}
+function loadDemo(){
+  document.getElementById('t1').value='（示例）某连锁咖啡品牌 / 东南亚';
+  document.getElementById('t2').value='（示例）WT-22 × 2 台 + PL-145 杯盖机 × 1 + CP650 包装机 × 1';
+  document.getElementById('t3').value='（示例）约 300㎡（20m × 15m）';
+  document.getElementById('t4').value='（示例）原料仓储区约 90㎡（干燥通风、托盘离地）；生产区约 150㎡，两台 WT-22 并排、机间距 1.5m、操作面通道 1.5m；质检+成品区约 50㎡；空压机隔间放置降噪';
+  document.getElementById('t5').value='（示例）380V/三相，总功率预留 20% 余量；空压机独立一路电';
+  document.getElementById('t6').value='（示例）车间通风 + 除湿机，相对湿度控制在 50%±5%';
+  document.getElementById('t7').value='（示例）安装当周投产，换模通道充足，客户产能达标；30 天回访运行稳定';
+  document.getElementById('t8').value='（示例）并排布局+共用上料通道使占地省 15%；热带地区除湿机是必需品';
+}
+
+/* 导航 */
+function go(id){
+  document.querySelectorAll('section').forEach(function(s){s.classList.remove('on')});
+  document.querySelectorAll('nav button').forEach(function(b){b.classList.remove('on')});
+  document.getElementById(id).classList.add('on');
+  var b=document.querySelector('nav button[data-t="'+id+'"]');if(b)b.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
