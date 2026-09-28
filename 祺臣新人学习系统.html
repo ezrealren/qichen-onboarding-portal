@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>祺臣机械 · 新人学习系统 v1.0</title>
+<style>
+:root{
+  --ink:#1f2937;--sub:#6b7280;--line:#e5e7eb;
+  --brand:#0f766e;--brand-l:#ccfbf1;--brand-d:#115e59;
+  --gold:#b45309;--gold-l:#fef3c7;
+  --ok:#15803d;--ok-l:#dcfce7;--bad:#b91c1c;--bad-l:#fee2e2;
+  --bg:#f6f8fa;--card:#ffffff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+header{background:linear-gradient(135deg,#0f766e,#134e4a);color:#fff;padding:28px 24px;text-align:center}
+header h1{font-size:26px;letter-spacing:1px}
+header p{opacity:.85;font-size:14px;margin-top:6px}
+nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;background:#134e4a;padding:10px 16px;position:sticky;top:0;z-index:50}
+nav button{background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;padding:8px 18px;border-radius:20px;cursor:pointer;font-size:14px;transition:.2s}
+nav button:hover{background:rgba(255,255,255,.15)}
+nav button.on{background:#fff;color:var(--brand-d);font-weight:700;border-color:#fff}
+main{max-width:960px;margin:0 auto;padding:24px 16px 80px}
+section{display:none}
+section.on{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:18px}
+.card h2{font-size:19px;color:var(--brand-d);border-left:4px solid var(--brand);padding-left:10px;margin-bottom:12px}
+.card h3{font-size:15.5px;margin:14px 0 8px;color:#374151}
+.tag{display:inline-block;font-size:12px;padding:2px 10px;border-radius:10px;margin-right:6px;vertical-align:middle}
+.t-brand{background:var(--brand-l);color:var(--brand-d)}
+.t-gold{background:var(--gold-l);color:var(--gold)}
+.t-ok{background:var(--ok-l);color:var(--ok)}
+.t-bad{background:var(--bad-l);color:var(--bad)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:var(--brand-l);color:var(--brand-d);white-space:nowrap}
+tr:nth-child(even) td{background:#fafcfc}
+.kbd{background:#f3f4f6;border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:13px}
+ul,ol{padding-left:22px}
+li{margin:4px 0}
+.note{background:var(--gold-l);border-left:4px solid var(--gold);padding:10px 14px;border-radius:6px;font-size:14px;margin:10px 0}
+.okbox{background:var(--ok-l);border-left:4px solid var(--ok);padding:10px 14px;border-radius:6px;font-size:14px;margin:10px 0}
+.badbox{background:var(--bad-l);border-left:4px solid var(--bad);padding:10px 14px;border-radius:6px;font-size:14px;margin:10px 0}
+/* quiz */
+.q{border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0;background:#fff}
+.q .stem{font-weight:600;margin-bottom:10px}
+.q .meta{font-size:12px;color:var(--sub);margin-bottom:8px}
+.opt{display:block;border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin:7px 0;cursor:pointer;transition:.15s;font-size:14.5px}
+.opt:hover{border-color:var(--brand);background:var(--brand-l)}
+.opt.sel{border-color:var(--brand);background:var(--brand-l);font-weight:600}
+.opt.right{border-color:var(--ok);background:var(--ok-l)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-l)}
+.opt input{margin-right:8px}
+.explain{display:none;background:#f0fdfa;border-left:4px solid var(--brand);padding:10px 14px;border-radius:6px;font-size:13.5px;margin-top:10px}
+textarea.ans{width:100%;min-height:90px;border:1px solid var(--line);border-radius:8px;padding:10px;font-size:14px;font-family:inherit;margin-top:6px}
+.btn{background:var(--brand);color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:15px;cursor:pointer;margin:8px 6px 0 0}
+.btn:hover{background:var(--brand-d)}
+.btn.ghost{background:#fff;color:var(--brand-d);border:1px solid var(--brand)}
+.score-panel{background:linear-gradient(135deg,#134e4a,#0f766e);color:#fff;border-radius:12px;padding:22px;margin:16px 0;text-align:center}
+.score-panel .big{font-size:42px;font-weight:800}
+.pill{display:inline-block;background:rgba(255,255,255,.18);border-radius:16px;padding:3px 14px;font-size:13px;margin:4px}
+/* accordion course */
+details.lesson{border:1px solid var(--line);border-radius:10px;margin:10px 0;background:#fff;overflow:hidden}
+details.lesson summary{cursor:pointer;padding:14px 18px;font-weight:700;background:#fafcfc;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details.lesson summary::-webkit-details-marker{display:none}
+details.lesson[open] summary{background:var(--brand-l);color:var(--brand-d)}
+details.lesson .body{padding:14px 20px;border-top:1px solid var(--line)}
+.chev{transition:.2s}
+details[open] .chev{transform:rotate(90deg)}
+/* flash cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.flash{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;cursor:pointer;transition:.2s;min-height:110px}
+.flash:hover{border-color:var(--brand);box-shadow:0 2px 8px rgba(15,118,110,.15)}
+.flash .en{font-weight:700;color:var(--brand-d);font-size:15px}
+.flash .zh{color:var(--sub);font-size:13.5px;margin-top:4px}
+.flash .note2{font-size:12px;color:var(--gold);margin-top:6px}
+.progress{background:var(--line);border-radius:8px;height:10px;overflow:hidden;margin:8px 0}
+.progress i{display:block;height:100%;background:var(--brand);transition:.3s}
+footer{text-align:center;color:var(--sub);font-size:12.5px;padding:20px;border-top:1px solid var(--line);background:#fff}
+@media(max-width:640px){th,td{padding:5px 6px;font-size:12.5px}header h1{font-size:20px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>祺臣机械 · 新人学习系统</h1>
+  <p>QiChen Paper Cup Machinery Training Hub ｜ 数据基准：MEMORY.md（核实于 2026-08-10）｜ 版本 v1.0</p>
+</header>
+<nav>
+  <button class="on" data-tab="home" onclick="go('home')">首页·学习地图</button>
+  <button data-tab="course" onclick="go('course')">六课大纲</button>
+  <button data-tab="quiz" onclick="go('quiz')">必考题库</button>
+  <button data-tab="exam" onclick="go('exam')">模拟考</button>
+  <button data-tab="scene" onclick="go('scene')">场景演练</button>
+  <button data-tab="term" onclick="go('term')">术语卡</button>
+</nav>
+<main>
+
+<!-- ================= HOME ================= -->
+<section id="home" class="on">
+  <div class="card">
+    <h2>欢迎，新同学</h2>
+    <p>你是温州祺臣机械（QiChen）的新业务员。你所在的店铺是阿里巴巴国际站 <b>16 年金品供应商</b>，SGS 实地认证，8400㎡ 厂区，76 名员工，准时发货率 100%。这些是你对客户的底气——但底气要靠你讲得出参数、讲得清原理才立得住。</p>
+    <p style="margin-top:8px">本系统依据《新人培训SOP与行业卡点地图》构建，对应 5 周 7 关培训流程。你的目标：<b>像 10 年经验的机械工程师一样与客户对话</b>。</p>
+  </div>
+  <div class="card">
+    <h2>5 周学习地图（7 关）</h2>
+    <table>
+      <tr><th>周次</th><th>主题</th><th>学习模块</th><th>关卡</th><th>通过标准</th></tr>
+      <tr><td>Week 1</td><td>行业 + 产品线</td><td>第1课 工艺流程、第2课 产品线</td><td>关卡1 机型连连看</td><td>10 场景对 8</td></tr>
+      <tr><td>Week 2</td><td>材料 + FAQ</td><td>第3课 淋膜纸规格、第4课 Top 12 FAQ</td><td>关卡2 默写+快问快答</td><td>12 题全对</td></tr>
+      <tr><td>Week 3</td><td>结构 + 算账</td><td>第5课 机械结构、第6课 产能换算</td><td>关卡3 算账演练</td><td>计算正确并讲给客户</td></tr>
+      <tr><td>Week 4</td><td>实战影子期</td><td>真实询盘诊断与回复起草</td><td>关卡4 诊断3条、关卡5 英文回复2封</td><td>分级准确、六段结构完整</td></tr>
+      <tr><td>Week 5</td><td>综合考核</td><td>全库复习</td><td>关卡6 终考、关卡7 Lv3陪练</td><td>笔试≥85 且口试≥70；陪练≥70分</td></tr>
+    </table>
+    <div class="note">⚠ 铁律提醒：① 参数必须有出处（本系统内所有答案可在 MEMORY.md 查到）；② 额定速度≠实际产能，净产出按 70–80% 算；③ 价格、交期、折扣的拍板权永远在老板手上。</div>
+  </div>
+  <div class="card">
+    <h2>业务九大卡点速览（为什么学这些）</h2>
+    <table>
+      <tr><th>#</th><th>卡点</th><th>一句话本质</th></tr>
+      <tr><td>★1</td><td>信任不对称</td><td>买家花 $16k–55k 买没摸过的机器，谁证据链硬谁赢</td></tr>
+      <tr><td>2</td><td>速度虚标通病</td><td>行业都报额定值，我们主动讲净产出，诚实即差异</td></tr>
+      <tr><td>3</td><td>买家不懂机器</td><td>用「需求四问」把模糊询价变成明确选型</td></tr>
+      <tr><td>4</td><td>换模时间黑洞</td><td>多杯型客户的隐形产能杀手</td></tr>
+      <tr><td>5</td><td>PLA 环保分水岭</td><td>欧美订单必问，答不上丢高端单</td></tr>
+      <tr><td>6</td><td>地区电力合规</td><td>380V/415V/220V + 气源，落地条件先确认</td></tr>
+      <tr><td>7</td><td>服务半径</td><td>用总拥有成本+服务网络反击价格战</td></tr>
+      <tr><td>8</td><td>单机 vs 整线</td><td>主机+辅机+易损件包的整线思维</td></tr>
+      <tr><td>9</td><td>询盘无分级</td><td>先诊断 A/B/C 再回复，精力花在刀刃上</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h2>新人八大成长卡点（对照自查）</h2>
+    <table>
+      <tr><th>#</th><th>卡点</th><th>典型症状</th><th>解药</th></tr>
+      <tr><td>G1</td><td>不认识产品线</td><td>给单层杯客户推 WT-22</td><td>第2课 + 场景演练</td></tr>
+      <tr><td>G2</td><td>不懂工艺流程</td><td>客户问结构就哑火</td><td>第1课 + 第5课</td></tr>
+      <tr><td>G3</td><td>参数只会背书</td><td>不会算每天产多少</td><td>第6课 + 算账题</td></tr>
+      <tr><td>G4</td><td>不会翻译成生意</td><td>只会报价不会算回本</td><td>第6课</td></tr>
+      <tr><td>G5</td><td>不会识别买家</td><td>对贸易商讲情怀</td><td>买家画像专项 + 诊断演练</td></tr>
+      <tr><td>G6</td><td>英文表达弱</td><td>回复模板堆砌</td><td>A2 六段结构训练</td></tr>
+      <tr><td>G7</td><td>不敢追问客户</td><td>信息不全也硬报价</td><td>诊断卡训练</td></tr>
+      <tr><td>G8</td><td>不懂报价边界</td><td>随口承诺折扣交期</td><td>行为边界考试</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ================= COURSE ================= -->
+<section id="course">
+  <div class="card">
+    <h2>机械知识六课大纲</h2>
+    <p>点击每课展开学习目标、知识要点与自测题。所有答案在「必考题库」中可核对。</p>
+  </div>
+
+  <details class="lesson">
+    <summary><span>第 1 课 ｜ 纸杯是怎么造出来的（8 工位流程）</span><span class="chev">▶</span></summary>
+    <div class="body">
+      <p><span class="tag t-brand">学习目标</span>能用 2 分钟向客户讲清：一张纸如何变成一只杯子。</p>
+      <h3>八工位流程（必背）</h3>
+      <table>
+        <tr><th>工位</th><th>动作</th><th>一句话解释</th></tr>
+        <tr><td>①</td><td>送纸</td><td>冲切好的扇形杯身纸送入（伺服送纸，底部间隙可控制在 0.1mm）</td></tr>
+        <tr><td>②</td><td>卷筒成型</td><td>纸片围成杯身锥筒</td></tr>
+        <tr><td>③</td><td>侧缝封合</td><td>热风或超声波把侧缝熔合（高频考点，见第5课）</td></tr>
+        <tr><td>④</td><td>上油/润滑</td><td>保证后续动作顺畅</td></tr>
+        <tr><td>⑤</td><td>卷口</td><td>杯沿卷边（curling），提升刚性与口感</td></tr>
+        <tr><td>⑥</td><td>底部冲切</td><td>从底部卷纸冲出圆片</td></tr>
+        <tr><td>⑦</td><td>底部预热+压合</td><td>杯底与杯身密封——温度过高/过低都会渗漏</td></tr>
+        <tr><td>⑧</td><td>滚花压实</td><td>滚花轮（knurling roller）压实杯底，出杯</td></tr>
+      </table>
+      <h3>必须能讲的结构点</h3>
+      <ul>
+        <li><b>开式凸轮间歇分度（Open Cam Intermittent Indexing）</b>：凸轮把连续旋转变成工位间歇运动，齿轮保证各工位同步——OC12/WT-22 的结构基础；</li>
+        <li><b>三个转盘（turn-plates）</b>完成全部成型动作；</li>
+        <li><b>PLC + 光电传感器 + 伺服送纸</b>控制精度；底部纸用完自动停机，防废品省纸。</li>
+      </ul>
+      <div class="note">🎯 自测：不看资料，给客户讲一遍八工位流程（去题库「简答题 S1」核对）。</div>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary><span>第 2 课 ｜ 认识我们的产品线（一句话定位）</span><span class="chev">▶</span></summary>
+    <div class="body">
+      <p><span class="tag t-brand">学习目标</span>10 个客户需求场景，8 秒内选出正确机型。</p>
+      <h3>纸杯成型机（MEMORY §2.1，价格为挂牌参考价）</h3>
+      <table>
+        <tr><th>机型</th><th>速度</th><th>杯型</th><th>功率</th><th>参考价(USD)</th><th>定位</th></tr>
+        <tr><td>ZBJ-OC12</td><td>70–80 pcs/min</td><td>2.5–12oz</td><td>~3–8KW</td><td>16,000–17,000</td><td>入门主力，小生意首选</td></tr>
+        <tr><td>ZBJ-OC12 PRO</td><td>80–100 pcs/min</td><td>3–16oz</td><td>8KW</td><td>16,000–17,000</td><td>升级版，更快更大杯型</td></tr>
+        <tr><td>WT-22（双层）</td><td>70–80 pcs/min</td><td>2–22oz</td><td>3KW</td><td>16,000–19,000</td><td>双层咖啡杯专家，杯型覆盖最广</td></tr>
+        <tr><td>G12（高速）</td><td>110–150 pcs/min</td><td>2–12oz</td><td>20KW</td><td>24,000–25,000</td><td>高速主力，中大型工厂</td></tr>
+        <tr><td>KBM（超高速）</td><td>高速</td><td>—</td><td>—</td><td>51,000–55,000</td><td>全伺服高端产线</td></tr>
+        <tr><td>ZBJ-X35</td><td>中速</td><td>茶水杯</td><td>—</td><td>17,000</td><td>茶水杯专用</td></tr>
+      </table>
+      <h3>纸碗机 / 杯盖机 / 辅机（§2.2–§2.4）</h3>
+      <table>
+        <tr><th>机型</th><th>关键参数</th><th>参考价(USD)</th><th>定位</th></tr>
+        <tr><td>ZBJ-DP35 纸碗机</td><td>70–80 pcs/min｜10–35oz｜14KW｜超声波+伺服送纸</td><td>22,000–25,000</td><td>汤碗/冰淇淋碗主力，双面PE克星</td></tr>
+        <tr><td>ZBJ-X64/X135</td><td>大口径（爆米花桶级）</td><td>~30,000</td><td>大碗/爆米花桶专用</td></tr>
+        <tr><td>GH1500</td><td>高速，牛皮纸汤碗，产线级</td><td>~44,000</td><td>牛皮纸汤碗高产能线</td></tr>
+        <tr><td>PL-02 杯盖机</td><td>高速，平面印刷纸盖</td><td>31,000–35,000</td><td>小生意可做</td></tr>
+        <tr><td>PL-145 杯盖机</td><td>70–100 pcs/min｜12KW｜PLC</td><td>26,000–28,000</td><td>杯盖主力机型</td></tr>
+        <tr><td>CP650 / LP-450</td><td>纸杯包装机 / 冰淇淋杯盖包装机</td><td>询老板</td><td>整线配套</td></tr>
+        <tr><td>QH-9905</td><td>纸箱成型/立箱机</td><td>21,000–22,000</td><td>包装配套</td></tr>
+      </table>
+      <div class="note">🎯 口诀：<b>单层入门 OC12，双层咖啡 WT22，要快上 G12，汤碗冰淇淋找 DP35，牛皮纸大线 GH1500。</b>配套必提空压机+包装机。</div>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary><span>第 3 课 ｜ 淋膜纸与杯型规格</span><span class="chev">▶</span></summary>
+    <div class="body">
+      <p><span class="tag t-brand">学习目标</span>分清热饮/冷饮/环保三种用纸，看懂 GSM，会 oz↔ml 换算。</p>
+      <h3>三种淋膜（MEMORY §3.3）</h3>
+      <table>
+        <tr><th>类型</th><th>说明</th><th>适用</th></tr>
+        <tr><td>单面 PE（Single PE）</td><td>杯内壁单层淋膜，成本低</td><td>热饮</td></tr>
+        <tr><td>双面 PE（Double PE）</td><td>内外都淋膜，防冷凝水浸软</td><td>冷饮、冰淇淋碗必用</td></tr>
+        <tr><td>PLA 淋膜</td><td>可降解环保；封合温度窗口比 PE 低 10–15°C、时间更长；需独立温控加热区</td><td>欧美环保订单</td></tr>
+      </table>
+      <h3>GSM 适配规律</h3>
+      <ul>
+        <li>小杯（65–90ml）：155–165gsm 原纸 + 13–15g PE 膜；</li>
+        <li>中大杯（120ml 以上）：190–220gsm + 15–17g PE 膜；</li>
+        <li>纸碗类一般 150–350gsm；牛皮纸（Kraft）常用于汤碗，视觉高端。</li>
+      </ul>
+      <h3>常用规格参考（行业通用，[研究] Saintyco）</h3>
+      <ul>
+        <li>8ozA：口径 80mm × 高 92mm；8ozB：口径 90mm × 高 85mm；</li>
+        <li>12ozB：90×85mm；12ozC：口径 90mm × 高 112mm；16oz：口径 90mm × 高 137mm；</li>
+        <li>记住 1 oz ≈ 29.6ml：8oz≈240ml、12oz≈360ml、16oz≈480ml。</li>
+      </ul>
+      <div class="note">🎯 高频问答：客户问「single or double PE」→ 热饮单 PE、冷饮双 PE；双面 PE 用热风封不住，要用超声波（DP35 卖点）。</div>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary><span>第 4 课 ｜ 客户最关心的 12 个问题（Top 12 FAQ）</span><span class="chev">▶</span></summary>
+    <div class="body">
+      <p><span class="tag t-brand">学习目标</span>12 题中英对照，快问快答零迟疑。这是关卡 2 的考核内容。</p>
+      <table>
+        <tr><th>#</th><th>客户问题（English）</th><th>回答要点</th></tr>
+        <tr><td>1</td><td>What is the machine speed?</td><td>报额定速度 + 主动说明实际净产出约 70–80%，给出每班次产量</td></tr>
+        <tr><td>2</td><td>What cup sizes can it make?</td><td>按机型报 oz 范围（OC12 PRO 3–16oz / WT-22 2–22oz / G12 2–12oz），说明换模</td></tr>
+        <tr><td>3</td><td>Single PE or double PE?</td><td>热饮单 PE、冷饮双 PE；DP35 超声波专攻双面淋膜</td></tr>
+        <tr><td>4</td><td>What is the price?</td><td>给机型区间价 + 配置说明，反问客户产能需求后再精确报价</td></tr>
+        <tr><td>5</td><td>How many workers needed?</td><td>全自动线 1 人可看 2–3 台</td></tr>
+        <tr><td>6</td><td>Power / voltage?</td><td>标准 380V/三相，按机型报 KW；可定制当地电压（印度 415V 等）</td></tr>
+        <tr><td>7</td><td>Installation & training?</td><td>视频指导/工程师海外安装（客户承担差旅），免费培训</td></tr>
+        <tr><td>8</td><td>Warranty & spare parts?</td><td>一年质保（行业惯例 1–2 年），易损件包随货，国际服务中心</td></tr>
+        <tr><td>9</td><td>Raw material (paper)?</td><td>PE 淋膜卷纸规格（GSM+膜重），可协助对接纸厂</td></tr>
+        <tr><td>10</td><td>Can it make PLA cups?</td><td>需确认机型温控配置，升级至工厂工程师确认（不装懂）</td></tr>
+        <tr><td>11</td><td>Delivery time?</td><td>需老板确认，常规机型给范围</td></tr>
+        <tr><td>12</td><td>Payment terms?</td><td>30/70 或 Trade Assurance，具体需老板确认</td></tr>
+      </table>
+      <div class="note">🎯 红线：第 10/11/12 题涉及「需确认/老板拍板」——回答时给出流程而不是拍胸脯。这就是 SOUL 铁律 1 与行为边界。</div>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary><span>第 5 课 ｜ 机械结构认知（凸轮·齿轮·封合·控制）</span><span class="chev">▶</span></summary>
+    <div class="body">
+      <p><span class="tag t-brand">学习目标</span>客户问「你们机器结构怎么样」时，能讲出所以然。</p>
+      <h3>传动：开式凸轮间歇分度 + 齿轮</h3>
+      <ul>
+        <li>凸轮把电机的连续旋转转换成各工位的「动—停—动」间歇动作；</li>
+        <li>齿轮传动保证多工位同步；轴承降低摩擦、支撑转动件；</li>
+        <li>类比：像钟表的擒纵机构——转一下，做一步，步步到位。</li>
+      </ul>
+      <h3>封合：热风 vs 超声波（高频考点，§3.2）</h3>
+      <table>
+        <tr><th></th><th>热风封合 Hot Air</th><th>超声波封合 Ultrasonic</th></tr>
+        <tr><td>适用</td><td>单面 PE 淋膜纸</td><td>单/双面 PE、PLA 环保材料</td></tr>
+        <tr><td>原理</td><td>热风加热 PE 膜熔合</td><td>高频振动摩擦生热熔合</td></tr>
+        <tr><td>优势</td><td>成本低、技术成熟</td><td>不伤纸纤维、适合双面淋膜与环保材料</td></tr>
+        <tr><td>维护要点</td><td>温度过高/过低都会导致杯底渗漏</td><td>频率与压力需调节，压力不可过高</td></tr>
+      </table>
+      <div class="okbox">💡 DP35 卖点话术：双面 PE 淋膜纸用热风封不住，DP35 的超声波封合专为此设计——这是它对冰淇淋碗客户的差异化价值。</div>
+      <h3>控制：PLC + 光电 + 伺服</h3>
+      <ul>
+        <li>PLC 是大脑：控制速度、计数、故障报警；</li>
+        <li>光电传感器是眼睛：检测送纸到位、缺纸自动停机；</li>
+        <li>伺服送纸是手：底部纸间隙控制在 0.1mm 内，省纸提精度。</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary><span>第 6 课 ｜ 从参数到生意（产能换算·回本·建厂）</span><span class="chev">▶</span></summary>
+    <div class="body">
+      <p><span class="tag t-brand">学习目标</span>把机器参数翻译成客户口袋里的钱。这是 G3/G4 卡点的解药。</p>
+      <h3>净产出公式（§3.4，必会算）</h3>
+      <div class="okbox">实际净产出 ≈ 额定速度 × 70–80%（换卷、卡纸、质检损耗）<br>
+      单班产量 = 额定速度 × 75% × 8h × 60min</div>
+      <p><b>标准示例</b>（OC12 PRO，额定 90 pcs/min）：90 × 75% × 8 × 60 ≈ <b>32,400 只/单班</b>，双班约 6.5 万只。</p>
+      <h3>选型公式</h3>
+      <p>所需机台数 = 需求峰值日产量 × 1.2（增长缓冲） ÷ (净速度 × 每日运行小时)</p>
+      <h3>三个隐形成本提醒（讲给客户显得专业）</h3>
+      <ul>
+        <li><b>换模时间</b>：多杯型客户必问 8oz→12oz 换模时长（行业案例：高速机换模 90 分钟，一天换 6 次损失大半产能）[研究]；</li>
+        <li><b>边料损耗</b>：普通机器 8–10%，高精度裁切 3–5%——百万只杯子的纸钱差距不小；</li>
+        <li><b>省人账</b>：全自动线 1 人看 2–3 台；全自动比半自动贵约 $30,000，但三班制每班省 1 人（合计 3 人），回本常 &lt;12 个月 [研究]。</li>
+      </ul>
+      <h3>建厂落地条件（卡点 6）</h3>
+      <ul>
+        <li>电力：标准 380V/三相（行业最低门槛），约需 5HP/5KVA [研究]；印度 415V、部分国家 220V 需定制变压器；</li>
+        <li>气源：配套空压机（气动元件驱动）；</li>
+        <li>运输：整机约 2.5 吨，按 20GP 集装箱规划。</li>
+      </ul>
+      <div class="note">🎯 口头禅练习：「这个数据我给您按实际生产算」「机器是拿来赚钱的，我们先算账」。</div>
+    </div>
+  </details>
+</section>
+
+<!-- ================= QUIZ ================= -->
+<section id="quiz">
+  <div class="card">
+    <h2>新人必考题库</h2>
+    <p>共 40 题：单选 20 + 判断 8 + 简答 8 + 场景 4。每道题作答后可展开解析，解析末尾标注 MEMORY 出处。选择题点击选项即判分；简答/场景题为自测对照。</p>
+    <p class="progress-wrap"><span class="progress"><i id="quizbar" style="width:0%"></i></span><span id="quizstat" style="font-size:13px;color:var(--sub)">已完成 0 / 28 客观题</span></p>
+  </div>
+
+  <div class="card"><h2>一、单选题（20 题）</h2><div id="mc"></div></div>
+  <div class="card"><h2>二、判断题（8 题）</h2><div id="tf"></div></div>
+  <div class="card"><h2>三、简答题（8 题，自测对照）</h2><div id="sa"></div></div>
+  <div class="card"><h2>四、场景演练题（4 题，对应关卡 1/3/4/5）</h2><div id="sc"></div></div>
+</section>
+
+<!-- ================= EXAM ================= -->
+<section id="exam">
+  <div class="card">
+    <h2>模拟考（关卡 6 预演）</h2>
+    <p>从题库随机抽取 <b>20 道客观题</b>（14 单选 + 6 判断），限时交卷后自动评分。</p>
+    <p><span class="tag t-ok">通过标准：≥85 分（即 ≥17 题正确）</span> 与 SOP 关卡 6 笔试标准一致。</p>
+    <button class="btn" onclick="startExam()">开始模拟考</button>
+    <button class="btn ghost" onclick="resetExam()">重新抽题</button>
+    <div id="examArea"></div>
+  </div>
+</section>
+
+<!-- ================= SCENE ================= -->
+<section id="scene">
+  <div class="card">
+    <h2>场景演练室（A3 陪练入口）</h2>
+    <p>以下场景对应 SOP 四大关卡。建议先在「场景演练题」写出你的答案，再请祺工（AI 陪练）扮演买家实战追问。</p>
+  </div>
+  <div class="card">
+    <h2>Lv1–Lv4 陪练买家难度说明</h2>
+    <table>
+      <tr><th>级别</th><th>买家类型</th><th>会问什么</th><th>你要练的</th></tr>
+      <tr><td>Lv1</td><td>入门买家</td><td>只要 price 和 catalog</td><td>需求四问引导、不冷场</td></tr>
+      <tr><td>Lv2</td><td>内行买家</td><td>速度真实性、换模、易损件、能耗</td><td>净产出话术、数据应对</td></tr>
+      <tr><td>Lv3</td><td>专家买家</td><td>凸轮结构、超声波频率、PLA 温差、要 FAT 视频</td><td>结构原理、升级流程边界</td></tr>
+      <tr><td>Lv4</td><td>谈判买家</td><td>「印度供应商只要 $11,000」、压价、90 天账期</td><td>总拥有成本话术、报价边界（拍板在老板）</td></tr>
+    </table>
+    <p><span class="tag t-brand">评分口径</span>参数准确性 30% + 结构原理理解 20% + 商业意识 20% + 英文表达 15% + 信任建设 15%。</p>
+  </div>
+  <div class="card">
+    <h2>异议应对弹药库（§4.3）</h2>
+    <ul>
+      <li>「你们比印度供应商贵」→ 不比价格比总拥有成本：净产出率、纸耗 3–5% vs 8–10%、备件供应、远程支持；</li>
+      <li>「速度是真的 100 pcs/min 吗」→ 主动讲额定 vs 净产出，邀请视频试机或 FAT；</li>
+      <li>「你们工厂可信吗」→ 16 年金品 + SGS 认证 + Trade Assurance + 视频验厂三连。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= TERM ================= -->
+<section id="term">
+  <div class="card">
+    <h2>中英术语卡（20 张，MEMORY §6）</h2>
+    <p>点击卡片翻转看备注。目标：每天 5 张，4 天过一轮。关卡 2 快问快答从这里出。</p>
+    <div class="grid" id="flash"></div>
+  </div>
+</section>
+
+</main>
+<footer>祺臣机械新人学习系统 v1.0 ｜ 数据来源：machine-china.en.alibaba.com + 行业研究（Saintyco / Discover Machinery / BioResources）｜ 所有参数以 MEMORY.md 为准，对外输出须标注出处</footer>
+
+<script>
+/* ================= DATA ================= */
+const MC = [
+{q:"ZBJ-OC12 PRO 的额定速度和杯型范围是？",o:["70–80 pcs/min，2.5–12oz","80–100 pcs/min，3–16oz","110–150 pcs/min，2–12oz","70–80 pcs/min，2–22oz"],a:1,s:"MEMORY §2.1：OC12 PRO 80–100 pcs/min、3–16oz；OC12 是 70–80、2.5–12oz；G12 是 110–150、2–12oz；WT-22 是 70–80、2–22oz。"},
+{q:"客户要开一家咖啡店，做双层咖啡杯（8–12oz），首选机型？",o:["ZBJ-OC12","WT-22","ZBJ-DP35","PL-145"],a:1,s:"MEMORY §2.1：WT-22 是双层咖啡杯专家，杯型覆盖 2–22oz 最广。OC12 是单层入门；DP35 是纸碗机；PL-145 是杯盖机。"},
+{q:"ZBJ-DP35 纸碗机的封合方式是？",o:["热风封合","胶水粘合","超声波焊接+伺服送纸","激光焊接"],a:2,s:"MEMORY §2.2/§3.2：DP35 14KW、超声波焊接+伺服送纸，专为双面 PE 淋膜纸设计。"},
+{q:"G12 高速纸杯机的额定速度和功率是？",o:["70–80 pcs/min，3KW","80–100 pcs/min，8KW","110–150 pcs/min，20KW","100–120 pcs/min，14KW"],a:2,s:"MEMORY §2.1：G12 高速主力，110–150 pcs/min、20KW、2–12oz、参考价 $24,000–25,000。"},
+{q:"冷饮纸杯（如冰咖啡）通常用什么淋膜纸？",o:["单面 PE","双面 PE","无淋膜","牛皮纸不淋膜"],a:1,s:"MEMORY §3.3：双面 PE 内外都淋膜，防外壁冷凝水浸软，冷饮与冰淇淋碗必用。"},
+{q:"双面 PE 淋膜纸的正确封合方案是？",o:["热风封合即可","必须超声波封合","胶水封合","加大热风温度强行封"],a:1,s:"MEMORY §3.2：双面淋膜纸用热风封不住，超声波封合专为此设计——这是 DP35 的差异化卖点。"},
+{q:"PLA 环保材料与 PE 相比，封合特点是？",o:["温度窗口高 10–15°C，时间更短","温度窗口低 10–15°C，封合时间更长","完全相同","不需要加热"],a:1,s:"MEMORY §3.3：PLA 封合温度窗口比 PE 低 10–15°C、时间更长；跑 PLA 需独立温控加热区。"},
+{q:"小杯（65–90ml）常用的原纸克重是？",o:["100–120gsm","155–165gsm + 13–15g PE 膜","190–220gsm + 15–17g PE 膜","350gsm"],a:1,s:"MEMORY §3.3 GSM 适配规律：小杯 155–165gsm + 13–15g 膜；中大杯（120ml+）190–220gsm + 15–17g 膜。"},
+{q:"额定速度 90 pcs/min 的机器，8 小时单班的合理产量预估是？",o:["43,200 只（按额定满算）","约 32,400 只（额定×75%）","约 10,000 只","约 65,000 只"],a:1,s:"MEMORY §3.4：净产出=额定×70–80%，取 75%：90×0.75×8×60≈32,400 只/单班。SOUL 铁律 2：必须主动向客户讲净产出。"},
+{q:"实际净产出约为额定速度的多少？",o:["95–100%","70–80%","50–60%","40%"],a:1,s:"MEMORY §3.4：换卷、卡纸、质检、清理损耗导致实际净产出≈额定×70–80%。"},
+{q:"标准机型的电力要求是？",o:["220V 单相","380V/三相，约需 5HP/5KVA","12V 直流","随意电压"],a:1,s:"MEMORY §3.5 + Saintyco FAQ：标准 380V/三相（行业最低门槛），约 5HP/5KVA；出口需确认当地电压（印度 415V 等）。"},
+{q:"PL-145 杯盖机的参数是？",o:["70–100 pcs/min，12KW","110–150 pcs/min，20KW","70–80 pcs/min，3KW","50 pcs/min，8KW"],a:0,s:"MEMORY §2.3：PL-145 70–100 pcs/min、12KW、PLC 控制，参考价 $26,000–28,000。"},
+{q:"客户问机器重量与运输，正确的说法是？",o:["约 500kg，空运即可","约 2.5 吨，按 20GP 集装箱规划","约 10 吨，需散货船","不清楚"],a:1,s:"MEMORY §3.5：整机约 2.5 吨、尺寸约 2700×1400×1900mm，运输按 20GP 集装箱规划。"},
+{q:"全自动纸杯生产线正常需要几个操作工？",o:["每台 3 人","1 人可看 2–3 台","必须 5 人","10 人"],a:1,s:"MEMORY §5 FAQ#5：全自动线 1 人可看 2–3 台——这是省人账的核心话术。"},
+{q:"行业质保惯例是多久？",o:["3 个月","1–2 年","10 年","无质保"],a:1,s:"MEMORY §3.5/§5 FAQ#8：一年质保（行业惯例 1–2 年），易损件包随货，国际服务中心。"},
+{q:"客户是初创投资人问「how much to start a cup factory」，正确策略是？",o:["直接甩 KBM 高端线报价","算账给他听，推 OC12/OC12 PRO 入门线","不回复，等他说清楚","只发目录"],a:1,s:"MEMORY §4.1 买家画像：初创投资人预算敏感、关注总价与回本——算账给他听，推入门线。"},
+{q:"纸碗机 GH1500 的定位是？",o:["小生意入门机","牛皮纸汤碗高产能线（~$44,000）","杯盖机","包装机"],a:1,s:"MEMORY §2.2：GH1500 高速、牛皮纸汤碗、全自动产线级，参考价约 $44,000。"},
+{q:"客户问能否做 PLA 杯，业务员的标准动作是？",o:["立刻答应「没问题」","立刻拒绝","说明需确认机型温控配置，升级至工厂工程师确认","让客户自己猜"],a:2,s:"MEMORY §5 FAQ#10 + SOUL 边界：PLA 兼容性需逐机型确认，超出知识范围要标注「升级至工厂工程师」，不装懂。"},
+{q:"以下哪个不属于纸杯机 8 工位流程？",o:["卷筒成型","侧缝封合","四色印刷","滚花压实"],a:2,s:"MEMORY §3.1：八工位为送纸→卷筒成型→侧缝封合→上油→卷口→底部冲切→底部预热压合→滚花压实。印刷是上游工序，不在成型机内。"},
+{q:"WT-22 额定 70–80 pcs/min，8 小时单班合理净产出约？",o:["25,000–29,000 只","34,000–43,000 只","50,000 只","5,000 只"],a:0,s:"IDENTITY 标准话术：70–80×75%×480min ≈ 25,200–28,800，即约 2.5–2.9 万只/班。报满算数字违反 SOUL 铁律 2。"}
+];
+const TF = [
+{q:"额定速度 100 pcs/min 的机器，可以承诺客户实际每天按 100 pcs/min 满产。",a:false,s:"错。净产出仅为额定 70–80%（MEMORY §3.4）。承诺满产=夸大，违反 SOUL 铁律 2。"},
+{q:"OC12/WT-22 系列的核心传动是开式凸轮间歇分度 + 齿轮传动。",a:true,s:"对。MEMORY §3.1：凸轮把连续旋转变成工位间歇运动，齿轮保证同步。"},
+{q:"单面 PE 淋膜纸适合做冷饮杯。",a:false,s:"错。单 PE 适合热饮；冷饮需双面 PE 防冷凝水浸软（MEMORY §3.3）。"},
+{q:"纸杯机需要配套空压机提供气源。",a:true,s:"对。气动元件由压缩空气驱动（MEMORY §3.5 + Saintyco）。"},
+{q:"客户问到折扣幅度和独家代理，业务员可以直接拍板答应。",a:false,s:"错。SOUL 行为边界：折扣、特殊交期、独家代理、付款让步须标注「需老板确认」，不代替决策。"},
+{q:"底部纸用完时机器会自动停机，防止废品、节省纸张。",a:true,s:"对。MEMORY §3.1：底部纸用完自动停机是设计特性。"},
+{q:"热风封合可以牢固封合双面 PE 淋膜纸。",a:false,s:"错。双面淋膜纸热风封不住，必须超声波（MEMORY §3.2）——这是 DP35 的卖点。"},
+{q:"报价时建议客户随货备易损件包（切刀、加热元件、滚花轮、超声波焊头）。",a:true,s:"对。MEMORY §3.5：易损件明确列出，报价时主动建议备件包。"}
+];
+const SA = [
+{q:"S1（第1课）：用 2 分钟向客户讲清纸杯机 8 工位流程。",ref:"① 送纸 → ② 卷筒成型 → ③ 侧缝封合（热风/超声波）→ ④ 上油润滑 → ⑤ 卷口 → ⑥ 底部冲切 → ⑦ 底部预热+压合密封 → ⑧ 滚花压实出杯。加分点：提到三个转盘完成全部动作、伺服送纸精度 0.1mm、缺纸自动停机。（MEMORY §3.1）"},
+{q:"S2（第2课）：客户要开咖啡店，做 8oz/12oz 双层杯，日需求 2.5 万只，推荐什么机型并说明理由。",ref:"推荐 WT-22（双层杯专家，2–22oz，70–80 pcs/min）。算账：净产出约 2.5–2.9 万只/单班，刚好覆盖 2.5 万只需求且留小余量；同时主动提示：若旺季冲 3 万只，可谈双班或升级 G12。配套提空压机+包装机。（MEMORY §2.1/§3.4 + IDENTITY 话术）"},
+{q:"S3（第3课）：解释单 PE、双 PE、PLA 三种淋膜的区别与适用场景。",ref:"单 PE：内壁单层，成本低，热饮；双 PE：内外双层，防冷凝水，冷饮/冰淇淋碗必用，热风封不住需超声波；PLA：可降解，封合温度窗口低 10–15°C、时间长，需独立温控加热区，欧美环保订单。（MEMORY §3.3）"},
+{q:"S4（第4课）：客户问「What is the price of the machine?」，写出你的完整回答思路（中英皆可）。",ref:"① 给机型区间价+配置说明（如 OC12 PRO $16,000–17,000 含 PLC 控制）；② 不直接甩死价，反问产能需求：目标日产量？主力杯型？热饮冷饮？当地电压？③ 说明精确报价按配置（辅机、模具、易损件包）出具；④ 涉及折扣须「需老板确认」。（MEMORY §5 FAQ#4 + A1 需求四问）"},
+{q:"S5（第5课）：向客户解释热风封合与超声波封合的区别，并说明 DP35 为什么用超声波。",ref:"热风：加热 PE 膜熔合，适合单 PE，成本低，但温度过高/过低都致渗漏；超声波：高频振动摩擦生热，不伤纸纤维，可封双面 PE 与 PLA。DP35 面向双面淋膜的汤碗/冰淇淋碗，热风封不住双面 PE，所以超声波是刚需+差异化卖点。（MEMORY §3.2）"},
+{q:"S6（第6课）：额定 90 pcs/min 的机器，双班 16 小时，日产量预估多少？写计算过程。",ref:"90 × 75% × 16 × 60 ≈ 64,800 只/日（约 6.5 万只）。必须向客户说明：这是按 75% 净产出系数估的，换卷、卡纸、质检有损耗；选型还要留 1.2 倍增长缓冲。（MEMORY §3.4）"},
+{q:"S7（卡点7）：客户说「印度供应商报价比你们低」，你的应对思路？",ref:"不比价格比总拥有成本：① 净产出率差异（虚标速度=实际产能缩水）；② 纸张边料损耗 3–5% vs 8–10%，百万只杯子的纸钱差；③ 备件供应与远程支持（国际服务中心）；④ 16 年金品+SGS+Trade Assurance 信任背书。不贬低同行，只讲客观差异。（MEMORY §4.3 + SOUL 边界）"},
+{q:"S8（行为边界）：客户当场要求 15% 折扣并承诺今天下单，你怎么回？",ref:"不当场答应：感谢认可→说明价格需按配置与老板审批流程确认（标注「需老板确认」）→把话题拉回价值（净产出、纸耗、服务）→争取以视频验厂/试机推进。核心：SOUL 铁律 4，信任未建立前逼单与乱让步都是负分。"}
+];
+const SC = [
+{q:"场景 1【关卡1·选型】：客户 A：做茶水杯小厂，预算有限；客户 B：大型饮品厂扩产，要 2–12oz 高速生产；客户 C：冰淇淋厂，要双面 PE 大碗；客户 D：咖啡店连锁，双层杯+杯盖一站式。分别推荐什么机型组合？",ref:"A：ZBJ-X35（茶水杯专用，$17,000）或 OC12 入门；B：G12（110–150 pcs/min）或 KBM 高端线；C：ZBJ-DP35（双面 PE 超声波）大碗可看 X64/X135；D：WT-22 + PL-145 杯盖机 + 空压机 + 包装机「咖啡店一站式产线」。（MEMORY §2）"},
+{q:"场景 2【关卡3·算账】：客户目标日产 5 万只 12oz 热饮杯，单班 8 小时，预算中等。选型并算给他听。",ref:"需求 5 万×1.2 缓冲=6 万。OC12 PRO（取额定 90）：净 90×75%×480≈32,400/班，不够→双班约 6.5 万只可覆盖，或单班用 G12（110–150：净约 4–5.4 万/班）。给两个方案对比：OC12 PRO 双班（便宜、多一台备用）vs G12 单班（高速、省场地），让客户按预算与厂房选。报价需老板确认。（MEMORY §2.1/§3.4）"},
+{q:"场景 3【关卡4·诊断】：询盘原文：「Hi, I want to start a paper cup business in Lagos. Please send me your best price machine.」——写出 A1 诊断卡五要素。",ref:"① 画像：初创投资人，尼日利亚，预算敏感；② 需求：机型未定、杯型未定、产能未定；③ 信息缺口：目标日产量？杯型？热饮冷饮（决定单/双 PE）？当地电压（不同国家标准不同，须让客户确认，标准机为 380V/三相）？有无厂房与空压机？；④ 等级：B（有意向但信息不全）；⑤ 风险：「best price」措辞——先养需求再报价，防低价试探。（AGENTS A1 + 需求四问）"},
+{q:"场景 4【关卡5·英文回复】：为场景 3 的客户起草英文首复（按六段结构写提纲）。",ref:"① 称呼+感谢+共鸣（starting a cup business in Lagos is a great move）；② 不急着报「best price」，先给入门机型方向（OC12/OC12 PRO，70–100 pcs/min，$16,000–17,000 区间）+一句原理说明（open cam + PLC）；③ 翻译成生意：net output ≈ 75% → 每班次 2.5–3.6 万只；④ 反问缺口：daily target? cup sizes? hot/cold drinks? local voltage?；⑤ 信任背书：16 years Gold Supplier, SGS onsite, Trade Assurance, video factory tour；⑥ 下一步：约 WhatsApp/视频通话或先发 catalog+建厂条件清单。（AGENTS A2 + SOUL 铁律 2）"}
+];
+const TERMS = [
+["Paper Cup Forming/Making Machine","纸杯成型机","ZBJ 系列"],
+["Double Wall Cup","双层杯","咖啡杯主流"],
+["Ripple Sleeve Cup","波纹套筒杯","有对应机型"],
+["Open Cam","开式凸轮","OC12 的 O"],
+["Intermittent Indexing","间歇分度","凸轮核心动作"],
+["Ultrasonic Sealing/Welding","超声波封合","DP35 卖点"],
+["Hot Air Sealing","热风封合","传统方式"],
+["Single PE Coated","单面淋膜","热饮"],
+["Double PE Coated","双面淋膜","冷饮"],
+["GSM","克重（克/平方米）","纸张厚度指标"],
+["Knurling Roller","滚花轮","杯底压实"],
+["Curling (rim)","卷边","杯口工艺"],
+["Changeover Time","换模时间","隐形产能杀手"],
+["Net Effective Output","净产出","额定×70–80%"],
+["FAT (Factory Acceptance Test)","工厂验收测试","信任大杀器"],
+["Trade Assurance","信保","阿里担保交易"],
+["Servo Paper Feeding","伺服送纸","DP35 配置"],
+["Cup Lid/Cover Machine","杯盖机","PL 系列"],
+["Paper Bowl Machine","纸碗机","汤碗/冰淇淋碗"],
+["Wear Parts / Spare Parts","易损件","切刀/加热元件"]
+];
+
+/* ================= NAV ================= */
+function go(id){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  document.querySelector(`nav button[data-tab="${id}"]`).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ================= QUIZ RENDER ================= */
+let answered = new Set();
+const OBJ_TOTAL = MC.length + TF.length;
+
+function updateBar(){
+  const pct = Math.round(answered.size / OBJ_TOTAL * 100);
+  document.getElementById('quizbar').style.width = pct + '%';
+  document.getElementById('quizstat').textContent = `已完成 ${answered.size} / ${OBJ_TOTAL} 客观题`;
+}
+
+function renderMC(){
+  const box = document.getElementById('mc');
+  box.innerHTML = MC.map((m,i)=>`
+    <div class="q" id="mc${i}">
+      <div class="meta">单选 ${i+1} / ${MC.length}</div>
+      <div class="stem">${i+1}. ${m.q}</div>
+      ${m.o.map((o,j)=>`<label class="opt" onclick="pick(${i},${j})"><input type="radio" name="mc${i}">${String.fromCharCode(65+j)}. ${o}</label>`).join('')}
+      <div class="explain" id="mce${i}"></div>
+    </div>`).join('');
+}
+
+function pick(i,j){
+  if(answered.has('mc'+i)) return;
+  answered.add('mc'+i);
+  const opts = document.querySelectorAll(`#mc${i} .opt`);
+  opts[j].classList.add(j===MC[i].a ? 'right':'wrong');
+  if(j!==MC[i].a) opts[MC[i].a].classList.add('right');
+  const ex = document.getElementById('mce'+i);
+  ex.innerHTML = `<b>${j===MC[i].a?'✔ 回答正确':'✘ 回答错误'}。</b>${MC[i].s}`;
+  ex.style.display='block';
+  updateBar();
+}
+
+function renderTF(){
+  const box = document.getElementById('tf');
+  box.innerHTML = TF.map((t,i)=>`
+    <div class="q" id="tf${i}">
+      <div class="meta">判断 ${i+1} / ${TF.length}</div>
+      <div class="stem">${i+1}. ${t.q}</div>
+      <label class="opt" onclick="pickTF(${i},true)">◯ 正确</label>
+      <label class="opt" onclick="pickTF(${i},false)">✕ 错误</label>
+      <div class="explain" id="tfe${i}"></div>
+    </div>`).join('');
+}
+
+function pickTF(i,val){
+  if(answered.has('tf'+i)) return;
+  answered.add('tf'+i);
+  const opts = document.querySelectorAll(`#tf${i} .opt`);
+  const picked = val ? 0 : 1, correct = TF[i].a ? 0 : 1;
+  opts[picked].classList.add(picked===correct ? 'right':'wrong');
+  if(picked!==correct) opts[correct].classList.add('right');
+  const ex = document.getElementById('tfe'+i);
+  ex.innerHTML = `<b>${val===TF[i].a?'✔ 回答正确':'✘ 回答错误'}。</b>${TF[i].s}`;
+  ex.style.display='block';
+  updateBar();
+}
+
+function renderSA(){
+  const box = document.getElementById('sa');
+  box.innerHTML = SA.map((s,i)=>`
+    <div class="q">
+      <div class="stem">${s.q}</div>
+      <textarea class="ans" placeholder="先自己写，再展开参考答案对照…"></textarea>
+      <button class="btn ghost" style="margin-top:8px" onclick="this.nextElementSibling.style.display='block';this.disabled=true">展开参考答案</button>
+      <div class="explain" style="display:none">${s.ref}</div>
+    </div>`).join('');
+}
+
+function renderSC(){
+  const box = document.getElementById('sc');
+  box.innerHTML = SC.map((s,i)=>`
+    <div class="q">
+      <div class="stem">${s.q}</div>
+      <textarea class="ans" style="min-height:120px" placeholder="这是关卡实战题，建议写完整话术…"></textarea>
+      <button class="btn ghost" style="margin-top:8px" onclick="this.nextElementSibling.style.display='block';this.disabled=true">展开参考答案</button>
+      <div class="explain" style="display:none">${s.ref}</div>
+    </div>`).join('');
+}
+
+/* ================= EXAM ================= */
+let examQs = [], examDone = false;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+function startExam(){
+  const area = document.getElementById('examArea');
+  examQs = shuffle([...MC.map((m,i)=>({t:'mc',i}))]).slice(0,14)
+         .concat(shuffle([...TF.map((t,i)=>({t:'tf',i}))]).slice(0,6));
+  examDone = false;
+  area.innerHTML = `
+    <div class="card" style="margin-top:14px">
+      <p>共 20 题（14 单选 + 6 判断）。作答完毕点击下方交卷。</p>
+      ${examQs.map((e,k)=>{
+        if(e.t==='mc'){const m=MC[e.i];return `<div class="q"><div class="stem">${k+1}. ${m.q}</div>${m.o.map((o,j)=>`<label class="opt" onclick="this.parentElement.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));this.classList.add('sel')"><input type="radio" name="eq${k}" value="${j}" style="display:none">${String.fromCharCode(65+j)}. ${o}</label>`).join('')}</div>`}
+        else{const t=TF[e.i];return `<div class="q"><div class="stem">${k+1}. ${t.q}</div><label class="opt" onclick="this.parentElement.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));this.classList.add('sel')"><input type="radio" name="eq${k}" value="t" style="display:none">◯ 正确</label><label class="opt" onclick="this.parentElement.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));this.classList.add('sel')"><input type="radio" name="eq${k}" value="f" style="display:none">✕ 错误</label></div>`}
+      }).join('')}
+      <button class="btn" onclick="gradeExam()">交卷评分</button>
+    </div>`;
+}
+
+function gradeExam(){
+  if(examDone) return;
+  let correct = 0, missed = [];
+  examQs.forEach((e,k)=>{
+    const sel = document.querySelector(`input[name="eq${k}"]:checked`);
+    let ok = false;
+    if(e.t==='mc'){ ok = sel && parseInt(sel.value)===MC[e.i].a; }
+    else{ ok = sel && ((sel.value==='t')===TF[e.i].a); }
+    if(ok) correct++; else missed.push(k+1);
+  });
+  const score = Math.round(correct/20*100);
+  const pass = score>=85;
+  examDone = true;
+  document.getElementById('examArea').insertAdjacentHTML('beforeend',`
+    <div class="score-panel">
+      <div class="big">${score} 分</div>
+      <p>${correct} / 20 题正确 ｜ ${pass?'✔ 达到关卡 6 笔试通过线（≥85）':'✘ 未达 85 分，回炉复习错题对应章节'}</p>
+      ${missed.length?`<p class="pill">错题题号：${missed.join('、')}</p>`:'<p class="pill">全对！直接去挑战 Lv3 陪练</p>'}
+      <p style="font-size:13px;opacity:.85;margin-top:8px">错题请到「必考题库」找到对应题目查看解析，解析末尾标注 MEMORY 出处。</p>
+    </div>`);
+}
+
+function resetExam(){ document.getElementById('examArea').innerHTML=''; startExam(); }
+
+/* ================= FLASHCARDS ================= */
+function renderTerms(){
+  document.getElementById('flash').innerHTML = TERMS.map((t,i)=>`
+    <div class="flash" onclick="this.querySelector('.note2').style.display=this.querySelector('.note2').style.display==='block'?'none':'block'">
+      <div class="en">${t[0]}</div>
+      <div class="zh">${t[1]}</div>
+      <div class="note2" style="display:none">📌 ${t[2]}</div>
+    </div>`).join('');
+}
+
+/* ================= INIT ================= */
+renderMC(); renderTF(); renderSA(); renderSC(); renderTerms();
+</script>
+</body>
+</html>
