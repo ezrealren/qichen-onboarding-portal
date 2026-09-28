@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>祺臣机械 · 客户询盘产品目录册</title>
+<style>
+:root{--page:#f1f5f9;--panel:#fff;--line:#e2e8f0;--ink:#1e293b;--sub:#64748b;
+--brand:#0f766e;--brand2:#115e59;--brand-l:#ccfbf1;
+--gold:#b45309;--gold-l:#fef3c7;--red:#b91c1c;--red-l:#fee2e2;
+--ok:#15803d;--ok-l:#dcfce7;--blue:#1d4ed8;--blue-l:#dbeafe;--purple:#7c3aed;--purple-l:#ede9fe}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI","Microsoft YaHei",sans-serif;background:var(--page);color:var(--ink);line-height:1.6}
+header{background:linear-gradient(135deg,#134e4a,#0f766e 55%,#0d9488);color:#fff;padding:30px 24px;text-align:center}
+header h1{font-size:26px;letter-spacing:1px}
+header .sub{opacity:.87;font-size:13px;margin-top:8px}
+.badges{display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.badges span{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:14px;padding:4px 14px;font-size:12px}
+nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;background:#134e4a;padding:10px 14px;position:sticky;top:0;z-index:60;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+nav button{background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;padding:7px 15px;border-radius:18px;cursor:pointer;font-size:13px}
+nav button:hover{background:rgba(255,255,255,.15)}
+nav button.on{background:#fff;color:var(--brand2);font-weight:700;border-color:#fff}
+main{max-width:1120px;margin:0 auto;padding:22px 16px 90px}
+section{display:none}section.on{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:16px;box-shadow:0 1px 3px rgba(15,23,42,.06)}
+.card h2{font-size:17.5px;color:var(--brand2);border-left:4px solid var(--brand);padding-left:10px;margin-bottom:10px}
+.card h3{font-size:14.5px;margin:12px 0 6px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:var(--brand-l);color:var(--brand2);white-space:nowrap}
+tr:nth-child(even) td{background:#f8fafc}
+.tag{display:inline-block;font-size:11px;padding:2px 9px;border-radius:10px;margin:0 4px 0 0;white-space:nowrap}
+.t-brand{background:var(--brand-l);color:var(--brand2)}.t-gold{background:var(--gold-l);color:var(--gold)}
+.t-blue{background:var(--blue-l);color:var(--blue)}.t-ok{background:var(--ok-l);color:var(--ok)}
+.t-purple{background:var(--purple-l);color:var(--purple)}.t-red{background:var(--red-l);color:var(--red)}
+.note{background:var(--brand-l);border-left:4px solid var(--brand);padding:9px 13px;border-radius:6px;font-size:13px;margin:10px 0}
+.goldnote{background:var(--gold-l);border-left:4px solid var(--gold);padding:9px 13px;border-radius:6px;font-size:13px;margin:10px 0}
+.rednote{background:var(--red-l);border-left:4px solid var(--red);padding:9px 13px;border-radius:6px;font-size:13px;margin:10px 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:860px){.grid3{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}}
+.prod{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;transition:.2s;margin-bottom:14px}
+.prod:hover{border-color:var(--brand);box-shadow:0 4px 14px rgba(15,118,110,.13)}
+.prod .ph{padding:13px 16px;color:#fff}
+.prod .ph b{font-size:15.5px;display:block}
+.prod .ph .cat{font-size:11.5px;opacity:.9;margin-top:2px;display:block}
+.prod .pimg{background:#f8fafc;text-align:center;padding:8px;min-height:150px;display:flex;align-items:center;justify-content:center}
+.prod .pimg img{max-height:150px;max-width:100%;border-radius:8px;object-fit:contain}
+.prod .pimg .noimg{font-size:12px;color:var(--sub);padding:20px}
+.cat-cup{background:linear-gradient(110deg,#0f766e,#0d9488)}
+.cat-cup2{background:linear-gradient(110deg,#0e7490,#06b6d4)}
+.cat-bowl{background:linear-gradient(110deg,#b45309,#d97706)}
+.cat-lid{background:linear-gradient(110deg,#1d4ed8,#3b82f6)}
+.cat-aux{background:linear-gradient(110deg,#7c3aed,#8b5cf6)}
+.prod .pb{padding:13px 16px;flex:1;display:flex;flex-direction:column}
+.prod table{font-size:12.5px;margin:6px 0}
+.prod .why{background:#f0fdfa;border:1px solid #99f6e4;border-radius:9px;padding:8px 11px;font-size:12.5px;margin-top:auto}
+.prod .why b{color:var(--brand2);font-size:12px}
+.prod .price{font-size:15px;font-weight:800;color:var(--brand2);margin:6px 0}
+.prod .persona{font-size:12px;color:var(--sub);margin-top:6px}
+.btn{background:var(--brand);color:#fff;border:none;border-radius:9px;padding:9px 18px;font-size:13.5px;cursor:pointer;margin:6px 6px 0 0}
+.btn:hover{background:var(--brand2)}
+.btn.ghost{background:#fff;color:var(--brand2);border:1px solid var(--brand)}
+label.f{display:block;font-size:12.5px;color:var(--sub);margin:9px 0 3px;font-weight:600}
+select,input[type=number],input[type=text]{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13.5px;background:#fff}
+.rec{border:1px solid var(--line);border-left:5px solid var(--brand);border-radius:11px;background:#fff;padding:13px 16px;margin:10px 0;font-size:13.5px}
+.rec b{color:var(--brand2)}
+footer{text-align:center;color:var(--sub);font-size:12px;padding:18px;border-top:1px solid var(--line);background:#fff}
+@media print{nav,.btn,.no-print{display:none}section{display:block!important}}
+</style>
+</head>
+<body>
+<header>
+<h1>祺臣机械 · 客户询盘产品目录册</h1>
+<div class="sub">QiChen Machinery Product Catalog ｜ 纸杯 / 纸碗 / 杯盖成型机与整线配套 ｜ 数据基准：MEMORY.md（核实于 2026-08-10）｜ 价格为挂牌参考价，成交价以正式报价为准</div>
+<div class="badges">
+<span>🏆 16 年金品供应商</span><span>✅ SGS 实地认证</span><span>🛡 Alibaba Trade Assurance</span><span>🚚 准时发货率 100%</span><span>⚡ 平均响应 ≤6h</span>
+</div>
+</header>
+<nav>
+<button class="on" data-t="home" onclick="go('home')">目录总览</button>
+<button data-t="cup" onclick="go('cup')">① 纸杯成型机</button>
+<button data-t="bowl" onclick="go('bowl')">② 纸碗机</button>
+<button data-t="lid" onclick="go('lid')">③ 杯盖机</button>
+<button data-t="aux" onclick="go('aux')">④ 辅机与配套</button>
+<button data-t="rec" onclick="go('rec')">⑤ 智能选型推荐</button>
+<button data-t="trust" onclick="go('trust')">⑥ 信任与询盘</button>
+<button data-t="compare" onclick="go('compare')">⑦ 多维对比决策</button>
+<button data-t="ppt" onclick="go('ppt')">⑧ PPT目录册生成</button>
+</nav>
+<main>
+
+<!-- ============ 总览 ============ -->
+<section id="home" class="on">
+<div class="card">
+<h2>产品目录总览</h2>
+<p style="font-size:14px">祺臣机械位于浙江温州（瑞安）——中国纸包装机械产业带，8,400㎡ 厂区、约 76 名员工，提供图纸定制、国际服务中心、质量管控与成品检验四大服务能力。以下目录覆盖四大品类：</p>
+<table>
+<tr><th>品类</th><th>机型</th><th>速度区间</th><th>挂牌参考价（USD）</th><th>一句话定位</th></tr>
+<tr><td rowspan="6"><span class="tag t-brand">① 纸杯成型机</span></td><td>ZBJ-OC12</td><td>70–80 pcs/min</td><td>$16,000–17,000</td><td>入门主力，小生意首选</td></tr>
+<tr><td>ZBJ-OC12 PRO</td><td>80–100 pcs/min</td><td>$16,000–17,000</td><td>OC12 升级版，更快更大杯型</td></tr>
+<tr><td>WT-22（双层）</td><td>70–80 pcs/min</td><td>$16,000–19,000</td><td>双层咖啡杯专家，杯型覆盖最广</td></tr>
+<tr><td>G12（高速）</td><td>110–150 pcs/min</td><td>$24,000–25,000</td><td>高速主力，中大型工厂</td></tr>
+<tr><td>KBM（超高速）</td><td>超高速全伺服</td><td>$51,000–55,000</td><td>高端产线，大产能客户</td></tr>
+<tr><td>ZBJ-X35</td><td>中速</td><td>$17,000</td><td>茶水杯专用</td></tr>
+<tr><td rowspan="3"><span class="tag t-gold">② 纸碗机</span></td><td>ZBJ-DP35</td><td>70–80 pcs/min</td><td>$22,000–25,000</td><td>汤碗/冰淇淋碗主力，双面PE克星</td></tr>
+<tr><td>ZBJ-X64 / X135</td><td>中速</td><td>约 $30,000</td><td>大碗/爆米花桶专用</td></tr>
+<tr><td>GH1500</td><td>高速产线级</td><td>约 $44,000</td><td>牛皮纸汤碗高产能线</td></tr>
+<tr><td rowspan="2"><span class="tag t-blue">③ 杯盖机</span></td><td>PL-02</td><td>高速</td><td>$31,000–35,000</td><td>平面印刷纸盖，小生意可做</td></tr>
+<tr><td>PL-145</td><td>70–100 pcs/min</td><td>$26,000–28,000</td><td>纸杯盖主力机型，PLC 控制</td></tr>
+<tr><td rowspan="5"><span class="tag t-purple">④ 辅机与配套</span></td><td>CP650 包装机</td><td>—</td><td>询价</td><td>冷热饮纸杯包装</td></tr>
+<tr><td>LP-450 包装机</td><td>—</td><td>询价</td><td>冰淇淋杯/碗盖包装</td></tr>
+<tr><td>QH-9905 纸箱机</td><td>—</td><td>$21,000–22,000</td><td>纸箱成型/立箱机</td></tr>
+<tr><td>V-Bottom 纸袋机</td><td>—</td><td>约 $29,000</td><td>V 底纸袋</td></tr>
+<tr><td>易损件包</td><td>—</td><td>按件询价</td><td>切刀/加热元件/滚花轮/超声波焊头</td></tr>
+</table>
+<div class="goldnote">📌 使用提示：① 所有速度为额定值，实际净产出约为额定的 70–80%（诚实口径）；② 价格为挂牌参考价，正式报价按配置与老板确认出具；③ 不确定选哪款？用「⑤ 智能选型推荐」三问定位。</div>
+</div>
+<div class="card">
+<h2>配套销售逻辑（整线思维）</h2>
+<ul style="font-size:13.5px;padding-left:22px">
+<li><b>纸杯机必须配空压机</b>（气源）<b>+ 成品包装机</b>才能成产线；</li>
+<li><b>双层杯机常与杯盖机打包</b>成「咖啡店一站式产线」（WT-22 + PL-145 + 空压机 + CP650）；</li>
+<li>报价建议随附<b>易损件包</b>（切刀、加热元件、滚花轮、超声波焊头）——客户记住你替他省心。</li>
+</ul>
+</div>
+</section>
+
+<!-- ============ ① 纸杯成型机 ============ -->
+<section id="cup">
+<div class="card">
+<h2>① 纸杯成型机（Paper Cup Forming Machine）</h2>
+<div class="note">选型口诀：<b>单层入门 OC12，要快上 G12，双层咖啡 WT-22，大产能 KBM，茶水杯 X35。</b>全系标准电压 380V/三相；实际净产出按额定速度 ×70–80% 计算。</div>
+</div>
+<div class="grid3">
+
+<div class="prod"><div class="ph cat-cup"><b>ZBJ-OC12</b><span class="cat">入门主力 · 小生意首选</span></div>
+<div class="pimg"><img src="https://sc04.alicdn.com/kf/H68cffa3cdf5346918a0c512e105b9774y/QiChen-Middle-Speed-Open-PLC-Controlled-Motorized.png_350x350.png" alt="ZBJ-OC12 实拍图" loading="lazy"></div><div class="pb">
+<table><tr><th>额定速度</th><td>70–80 pcs/min</td></tr><tr><th>杯型范围</th><td>2.5–12oz</td></tr><tr><th>功率</th><td>~3–8KW</td></tr><tr><th>结构</th><td>开式凸轮 + 齿轮传动</td></tr></table>
+<div class="price">USD 16,000–17,000</div>
+<div class="persona"><span class="tag t-brand">适合画像</span>P1 初创投资人：预算敏感、第一次建厂</div>
+<div class="why"><b>推荐理由：</b>全线门槛最低的投资入口，开式凸轮结构成熟可靠；按净产出 75% 算单班约 2.5–2.9 万只，覆盖小型饮品店与区域批发需求，回本周期短，是「how much to start a cup factory」客户的标准答案。</div>
+</div></div>
+
+<div class="prod"><div class="ph cat-cup"><b>ZBJ-OC12 PRO</b><span class="cat">升级版 · 更快更大杯型</span></div>
+<div class="pimg"><img src="https://sc04.alicdn.com/kf/H6e95e611adc44533ba57533e7e66ca70v/OC12-Pro-Middle-Speed-80-100-Pcs.png_350x350.png" alt="ZBJ-OC12 PRO 实拍图" loading="lazy"></div><div class="pb">
+<table><tr><th>额定速度</th><td>80–100 pcs/min</td></tr><tr><th>杯型范围</th><td>3–16oz</td></tr><tr><th>功率</th><td>8KW</td></tr><tr><th>结构</th><td>PLC + 电机 + 齿轮 + 轴承</td></tr></table>
+<div class="price">USD 16,000–17,000</div>
+<div class="persona"><span class="tag t-brand">适合画像</span>P1 进阶 / P3 贸易商走量款</div>
+<div class="why"><b>推荐理由：</b>与 OC12 同价位段，速度提升 20%+、杯型上限扩到 16oz——同样的预算买更大的产能弹性；PLC 控制让新手操作更稳，是入门档的性价比之王。</div>
+</div></div>
+
+<div class="prod"><div class="ph cat-cup2"><b>WT-22（双层）</b><span class="cat">双层咖啡杯专家 · 杯型覆盖最广</span></div>
+<div class="pimg"><img src="https://sc04.alicdn.com/kf/Hc356011200b6404185f3d157a28b9a41O/WT22-Middle-Speed-70-80-Pcs-min.png_350x350.png" alt="WT-22 双层纸杯机实拍图" loading="lazy"></div><div class="pb">
+<table><tr><th>额定速度</th><td>70–80 pcs/min</td></tr><tr><th>杯型范围</th><td>2–22oz（全线最广）</td></tr><tr><th>功率</th><td>3KW</td></tr><tr><th>结构</th><td>开式间歇分度凸轮 + PLC</td></tr><tr><th>署名</th><td>Qichen & Guohao Machinery</td></tr></table>
+<div class="price">USD 16,000–19,000</div>
+<div class="persona"><span class="tag t-blue">适合画像</span>P4 连锁咖啡/餐饮自用：要双层杯+杯盖整线</div>
+<div class="why"><b>推荐理由：</b>咖啡连锁的双层杯刚需机型，2–22oz 一台覆盖全杯型，3KW 低能耗；与 PL-145 杯盖机打包成「咖啡店一站式产线」，净产出约 2.5–2.9 万只/班，正好覆盖中型连锁日用量。</div>
+</div></div>
+
+<div class="prod"><div class="ph cat-cup"><b>G12（高速）</b><span class="cat">高速主力 · 中大型工厂</span></div>
+<div class="pimg"><img src="https://sc04.alicdn.com/kf/H934f516eb597438b8260201d1b323666n/G12-High-Speed-110-150pcs-min-3.png_350x350.png" alt="G12 高速纸杯机实拍图" loading="lazy"></div><div class="pb">
+<table><tr><th>额定速度</th><td>110–150 pcs/min</td></tr><tr><th>杯型范围</th><td>2–12oz</td></tr><tr><th>功率</th><td>20KW</td></tr><tr><th>结构</th><td>PLC + 电机 + 齿轮</td></tr></table>
+<div class="price">USD 24,000–25,000</div>
+<div class="persona"><span class="tag t-blue">适合画像</span>P2 工厂扩产：参数内行、要真实产能</div>
+<div class="why"><b>推荐理由：</b>扩产客户的产能主力：净产出按 75% 算单班约 4–5.4 万只，一台顶两台 OC12；对内行客户主动报额定+净产出双数据、邀请视频试机，用诚实数据赢专业买家。</div>
+</div></div>
+
+<div class="prod"><div class="ph cat-cup"><b>KBM（超高速）</b><span class="cat">全伺服高端产线</span></div>
+<div class="pimg"><div class="noimg">📷 实拍图待工厂提供（高端线建议安排视频验厂展示）</div></div><div class="pb">
+<table><tr><th>定位</th><td>超高速全伺服高端线</td></tr><tr><th>适用</th><td>大产能工厂 / 产线级投资</td></tr><tr><th>速度</th><td>具体速度以工厂确认为准</td></tr></table>
+<div class="price">USD 51,000–55,000</div>
+<div class="persona"><span class="tag t-purple">适合画像</span>P2 大型工厂：产线级预算、长期扩产规划</div>
+<div class="why"><b>推荐理由：</b>面向大产能客户的全伺服旗舰，自动化与稳定性对标产线级需求；具体速度/配置参数升级工厂工程师确认后提供——高端客户要的是严谨，不是拍脑袋的数字。</div>
+</div></div>
+
+<div class="prod"><div class="ph cat-cup"><b>ZBJ-X35</b><span class="cat">茶水杯专用</span></div>
+<div class="pimg"><div class="noimg">📷 实拍图待工厂提供</div></div><div class="pb">
+<table><tr><th>额定速度</th><td>中速</td></tr><tr><th>适用</th><td>茶水杯（Tea Cup）</td></tr><tr><th>配置</th><td>全自动</td></tr></table>
+<div class="price">USD 17,000</div>
+<div class="persona"><span class="tag t-brand">适合画像</span>区域茶饮市场客户（中东/非洲茶饮场景常见）</div>
+<div class="why"><b>推荐理由：</b>专机专用：只做茶水杯的客户不必为用不上的杯型范围付费，全自动配置省心；针对茶饮市场询盘直接亮出专用机型，比通用机更显「懂行」。</div>
+</div></div>
+
+</div>
+</section>
+
+<!-- ============ ② 纸碗机 ============ -->
+<section id="bowl">
+<div class="card">
+<h2>② 纸碗机（Paper Bowl Machine）</h2>
+<div class="note">选型口诀：<b>汤碗冰淇淋找 DP35，大碗爆米花桶 X64/X135，牛皮纸大线 GH1500。</b>关键认知：双面 PE 淋膜纸热风封不住，必须超声波封合——这是 DP35 的差异化价值。</div>
+</div>
+<div class="grid3">
+
+<div class="prod"><div class="ph cat-bowl"><b>ZBJ-DP35</b><span class="cat">汤碗/冰淇淋碗主力 · 双面PE克星</span></div>
+<div class="pimg"><img src="https://sc04.alicdn.com/kf/H7c38c68722df48778cc20764ffad40016/ZBJ-DP35-70-80-Pcs-min-Servo.png_350x350.png" alt="ZBJ-DP35 纸碗机实拍图" loading="lazy"></div><div class="pb">
+<table><tr><th>额定速度</th><td>70–80 pcs/min</td></tr><tr><th>碗型范围</th><td>10–35oz</td></tr><tr><th>功率</th><td>14KW</td></tr><tr><th>封合</th><td>超声波焊接 + 伺服送纸</td></tr></table>
+<div class="price">USD 22,000–25,000</div>
+<div class="persona"><span class="tag t-gold">适合画像</span>P2 食品包装厂 / P4 冰淇淋、汤品连锁</div>
+<div class="why"><b>推荐理由：</b>冷饮与汤碗必用双面 PE 淋膜纸，热风封合根本封不住——DP35 的超声波封合专为此设计，伺服送纸保证精度。客户提「别家热风机器封双面纸失败」时，这台就是答案。</div>
+</div></div>
+
+<div class="prod"><div class="ph cat-bowl"><b>ZBJ-X64 / X135</b><span class="cat">大口径 · 大碗/爆米花桶专用</span></div>
+<div class="pimg"><div class="noimg">📷 实拍图待工厂提供</div></div><div class="pb">
+<table><tr><th>额定速度</th><td>中速</td></tr><tr><th>口径</th><td>大口径（爆米花桶级）</td></tr></table>
+<div class="price">约 USD 30,000</div>
+<div class="persona"><span class="tag t-gold">适合画像</span>影院/餐饮大碗、爆米花桶类客户</div>
+<div class="why"><b>推荐理由：</b>常规碗机口径做不了爆米花桶这类大口径产品，X64/X135 专攻大口径成型——细分需求专机专用，避免客户拿小碗机改造踩坑。</div>
+</div></div>
+
+<div class="prod"><div class="ph cat-bowl"><b>GH1500</b><span class="cat">牛皮纸汤碗高产能线</span></div>
+<div class="pimg"><div class="noimg">📷 实拍图待工厂提供</div></div><div class="pb">
+<table><tr><th>定位</th><td>高速、全自动产线级</td></tr><tr><th>适用</th><td>牛皮纸（Kraft）汤碗</td></tr></table>
+<div class="price">约 USD 44,000</div>
+<div class="persona"><span class="tag t-purple">适合画像</span>P2 大型食品包装厂：牛皮纸高端线、大产能</div>
+<div class="why"><b>推荐理由：</b>牛皮纸汤碗视觉高端、餐饮品牌需求上升，GH1500 是产线级高产能方案；面向有规模化牛皮纸碗需求的工厂，一台线解决从成型到产能的核心瓶颈。</div>
+</div></div>
+
+</div>
+</section>
+
+<!-- ============ ③ 杯盖机 ============ -->
+<section id="lid">
+<div class="card">
+<h2>③ 杯盖机（Cup Lid Machine）</h2>
+<div class="note">双层咖啡杯客户几乎都要杯盖——<b>杯盖机与双层杯机打包销售</b>是提高客单价与成单率的标准动作。</div>
+</div>
+<div class="grid3">
+
+<div class="prod"><div class="ph cat-lid"><b>PL-02</b><span class="cat">高速平面印刷纸盖</span></div>
+<div class="pimg"><div class="noimg">📷 实拍图待工厂提供</div></div><div class="pb">
+<table><tr><th>额定速度</th><td>高速</td></tr><tr><th>适用</th><td>平面印刷纸盖</td></tr></table>
+<div class="price">USD 31,000–35,000</div>
+<div class="persona"><span class="tag t-blue">适合画像</span>杯盖产能需求较高 / 小生意独立做盖</div>
+<div class="why"><b>推荐理由：</b>高速平面印刷纸盖机型，既能配套自有杯线，也能作为独立的杯盖生意入口；对杯盖需求量大或想单独做盖的客户是主力选择。</div>
+</div></div>
+
+<div class="prod"><div class="ph cat-lid"><b>PL-145</b><span class="cat">纸杯盖主力机型 · PLC 控制</span></div>
+<div class="pimg"><img src="https://sc04.alicdn.com/kf/Hf220a97362494c4685069c134a3c688cx/PL145-Middle-Speed-70-100-Pcs-min.png_350x350.png" alt="PL-145 杯盖机实拍图" loading="lazy"></div><div class="pb">
+<table><tr><th>额定速度</th><td>70–100 pcs/min</td></tr><tr><th>功率</th><td>12KW</td></tr><tr><th>控制</th><td>PLC 控制</td></tr></table>
+<div class="price">USD 26,000–28,000</div>
+<div class="persona"><span class="tag t-blue">适合画像</span>P4 连锁咖啡：WT-22 整线标配杯盖机</div>
+<div class="why"><b>推荐理由：</b>杯盖主力机型，PLC 控制稳定、价格比 PL-02 低一档；与 WT-22 组成「双层杯+杯盖」咖啡店一站式产线的首选配套，打包报价显著提升客单价。</div>
+</div></div>
+
+</div>
+</section>
+
+<!-- ============ ④ 辅机与配套 ============ -->
+<section id="aux">
+<div class="card">
+<h2>④ 辅机与配套（Auxiliary & Line Support）</h2>
+<div class="goldnote">📌 纸杯机<b>必须配空压机（气源）+ 成品包装机</b>才能成产线。辅机询价项目前按「询价（需老板确认）」口径处理，正式报价由老板定价。</div>
+</div>
+<div class="grid3">
+
+<div class="prod"><div class="ph cat-aux"><b>CP650 包装机</b><span class="cat">冷热饮纸杯包装</span></div>
+<div class="pimg"><div class="noimg">📷 实拍图待工厂提供</div></div><div class="pb">
+<table><tr><th>适用</th><td>冷热饮纸杯自动包装</td></tr></table>
+<div class="price">询价（需老板确认）</div>
+<div class="why"><b>推荐理由：</b>成型后杯子需自动包装才进成品区，CP650 是纸杯线的标配下游设备；整线报价必含，缺了它客户产线不完整。</div>
+</div></div>
+
+<div class="prod"><div class="ph cat-aux"><b>LP-450 包装机</b><span class="cat">冰淇淋杯/碗盖包装</span></div>
+<div class="pimg"><div class="noimg">📷 实拍图待工厂提供</div></div><div class="pb">
+<table><tr><th>适用</th><td>冰淇淋杯、碗盖包装</td></tr></table>
+<div class="price">询价（需老板确认）</div>
+<div class="why"><b>推荐理由：</b>面向冰淇淋碗与杯盖产线的包装配套，与 DP35/PL 系列搭配；冷饮与杯盖客户整线方案的标准下游设备。</div>
+</div></div>
+
+<div class="prod"><div class="ph cat-aux"><b>QH-9905 纸箱成型机</b><span class="cat">纸箱成型/立箱机</span></div>
+<div class="pimg"><div class="noimg">📷 实拍图待工厂提供</div></div><div class="pb">
+<table><tr><th>适用</th><td>纸箱成型、立箱</td></tr></table>
+<div class="price">USD 21,000–22,000</div>
+<div class="why"><b>推荐理由：</b>成品纸杯装箱发货前的纸箱自动化设备，为有规模化出货需求的客户补齐包装段；属于增值配套，提升整线客单价。</div>
+</div></div>
+
+<div class="prod"><div class="ph cat-aux"><b>V-Bottom 纸袋机</b><span class="cat">V 底纸袋</span></div>
+<div class="pimg"><div class="noimg">📷 实拍图待工厂提供</div></div><div class="pb">
+<table><tr><th>适用</th><td>V 底纸袋生产</td></tr></table>
+<div class="price">约 USD 29,000</div>
+<div class="why"><b>推荐理由：</b>面向纸袋品类客户的独立产品，纸杯厂客户拓展纸袋业务时的一站式采购选项——品类延伸机会。</div>
+</div></div>
+
+<div class="prod"><div class="ph cat-aux"><b>易损件包</b><span class="cat">Spare Parts Package</span></div>
+<div class="pimg"><div class="noimg">📦 按件询价，建议随主机备货</div></div><div class="pb">
+<table><tr><th>内容</th><td>切刀、加热元件、滚花轮、超声波焊头</td></tr></table>
+<div class="price">按件询价</div>
+<div class="why"><b>推荐理由：</b>报价时主动建议随货备易损件包——机器在海外跑起来后，客户最感谢的就是当初多备的这一包；也是售后复购入口。</div>
+</div></div>
+
+</div>
+</section>
+
+<!-- ============ ⑤ 智能选型推荐 ============ -->
+<section id="rec">
+<div class="card">
+<h2>⑤ 智能选型推荐器（三问定位）</h2>
+<div class="note">逻辑基于 MEMORY 选型公式与画像策略：<b>净产出 = 额定 × 70–80%</b>；机台数 = 峰值日产量 × 1.2 ÷（净速度 × 运行小时）。结果仅为初判，正式报价走 A4 参谋 + 老板确认。</div>
+<div class="grid3">
+<div><label class="f">客户类型</label>
+<select id="r_type"><option value="start">初创投资人（预算敏感）</option><option value="scale">工厂扩产（要产能）</option><option value="trader">贸易商（走量）</option><option value="chain">连锁/餐饮自用</option></select></div>
+<div><label class="f">产品类型</label>
+<select id="r_prod"><option value="cup">单层纸杯（热饮）</option><option value="double">双层咖啡杯</option><option value="bowl">纸碗（汤碗/冰淇淋碗）</option><option value="tea">茶水杯</option><option value="lid">杯盖</option></select></div>
+<div><label class="f">目标日产量（只）</label><input type="number" id="r_daily" min="0" value="30000"></div>
+</div>
+<div class="grid2">
+<div><label class="f">班制</label>
+<select id="r_shift"><option value="8">单班 8 小时</option><option value="16">双班 16 小时</option><option value="24">三班 24 小时</option></select></div>
+<div><label class="f">淋膜要求（纸碗必问）</label>
+<select id="r_coat"><option value="single">单面 PE（热饮）</option><option value="double">双面 PE（冷饮/冰淇淋碗）</option><option value="unknown">不确定</option></select></div>
+</div>
+<button class="btn" onclick="recommend()">生成选型推荐</button>
+<div id="recOut"></div>
+</div>
+</section>
+
+<!-- ============ ⑥ 信任与询盘 ============ -->
+<section id="trust">
+<div class="card">
+<h2>⑥ 信任背书与询盘引导</h2>
+<div class="grid2">
+<div>
+<h3>为什么选择祺臣（对外三连话术）</h3>
+<ul style="font-size:13.5px;padding-left:20px">
+<li>"16 years Gold Supplier on Alibaba.com, onsite-verified by SGS."</li>
+<li>"8,400㎡ factory, 76 staff — you are welcome to a video factory tour anytime."</li>
+<li>"100% on-time dispatch record, covered by Alibaba Trade Assurance."</li>
+<li>图纸定制（Drawing-based customization）+ 国际服务中心 + 质量管控 + 成品检验</li>
+<li>位于浙江温州（瑞安）——中国纸包装机械产业带，供应链配套成熟</li>
+</ul>
+</div>
+<div>
+<h3>诚实口径（SOUL 铁律 2）</h3>
+<ul style="font-size:13.5px;padding-left:20px">
+<li>额定速度 ≠ 实际产能：净产出按额定 ×70–80% 主动告知；</li>
+<li>换模时间、电耗、PLA 兼容等实测数据以工厂确认为准（待补项如实说明进度）；</li>
+<li>价格为挂牌参考价，成交价以老板确认的正式报价为准。</li>
+</ul>
+<h3>询盘引导（下一步行动）</h3>
+<ul style="font-size:13.5px;padding-left:20px">
+<li>告诉客户：发「日产量 + 杯型 + 热饮/冷饮」三项，我们 24h 内出选型方案；</li>
+<li>邀请视频验厂 / 视频试机（FAT）——信任大杀器；</li>
+<li>A 级询盘 6h 首复、B 级 24h 补齐信息、C 级进培育序列（SOP S3/S4 口径）。</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============ ⑦ 多维对比决策 ============ -->
+<section id="compare">
+<div class="card">
+<h2>⑦ 多维对比与决策引导（帮客户快速下单）</h2>
+<div class="note">给客户讲差异的六维度：<b>速度档位 · 杯型范围 · 功率能耗 · 价格区间 · 单班净产出 · 适配画像</b>。价格差用「每天多产多少只」来翻译——客户买的不是机器，是产量与回本速度。</div>
+<div style="overflow-x:auto"><table>
+<tr><th>维度</th><th>ZBJ-OC12<br>(入门)</th><th>OC12 PRO<br>(进阶)</th><th>WT-22<br>(双层)</th><th>G12<br>(高速)</th><th>KBM<br>(旗舰)</th></tr>
+<tr><td><b>额定速度</b></td><td>70–80</td><td>80–100</td><td>70–80</td><td><span class="tag t-ok">110–150 最快</span></td><td>超高速·待工厂确认</td></tr>
+<tr><td><b>杯型范围</b></td><td>2.5–12oz</td><td>3–16oz</td><td><span class="tag t-ok">2–22oz 最广</span></td><td>2–12oz</td><td>产线级定制</td></tr>
+<tr><td><b>功率</b></td><td>~3–8KW</td><td>8KW</td><td><span class="tag t-ok">3KW 最省电</span></td><td>20KW</td><td>待确认</td></tr>
+<tr><td><b>参考价(USD)</b></td><td>16,000–17,000</td><td>16,000–17,000</td><td>16,000–19,000</td><td>24,000–25,000</td><td>51,000–55,000</td></tr>
+<tr><td><b>单班净产出*</b></td><td>≈2.5–2.9 万只</td><td>≈2.9–3.6 万只</td><td>≈2.5–2.9 万只</td><td><span class="tag t-ok">≈4–5.4 万只</span></td><td>待工厂实测</td></tr>
+<tr><td><b>适配画像</b></td><td>P1 初创</td><td>P1进阶/P3贸易商</td><td>P4 连锁咖啡</td><td>P2 工厂扩产</td><td>P2 大型产线</td></tr>
+<tr><td><b>一句话差异</b></td><td>门槛最低</td><td>同价位更快更大杯</td><td>双层杯唯一解</td><td>一台顶两台</td><td>产线级自动化</td></tr>
+</table></div>
+<p style="font-size:12px;color:var(--sub)">* 净产出 = 额定速度 × 75%（区间 70–80%）× 8h × 60min，单班口径（MEMORY §3.4）。</p>
+</div>
+
+<div class="card">
+<h2>价格差异决策话术（把差价翻译成产量）</h2>
+<table>
+<tr><th>客户对比</th><th>价格差</th><th>标准话术（翻译给客户听）</th></tr>
+<tr><td>OC12 vs OC12 PRO</td><td>≈ $0（同区间）</td><td>同样预算，PRO 速度上限 +20%、杯型到 16oz——没有理由不选 PRO，这是免费升级。</td></tr>
+<tr><td>OC12 PRO vs G12</td><td>≈ +$8,000</td><td>多 $8,000 买 110–150 pcs/min：单班净产出从约 3.2 万跳到 4–5.4 万只，日多产 1–2 万只，旺季不用加夜班加机器——差价通常数月内由产量赚回。</td></tr>
+<tr><td>单层机 vs WT-22 双层</td><td>≈ +$0–2,000</td><td>咖啡店只要双层杯，热风单层机做不了——WT-22 不是贵不贵的问题，是能不能做的问题。</td></tr>
+<tr><td>G12 vs KBM</td><td>≈ +$27,000</td><td>KBM 全伺服产线级，面向日产 10 万+ 的大客户；产能没到这个量级，G12 性价比最高——帮客户省钱也是建立信任。</td></tr>
+<tr><td>DP35 vs 热风碗机</td><td>按配置</td><td>双面 PE 淋膜纸热风封不住，超声波是唯一解——问客户用什么纸，答案自己出现。</td></tr>
+</table>
+<div class="goldnote">📌 决策引导三步：① 先问日产量定位档位 → ② 用对比表圈出 2 个候选 → ③ 用「差价 ÷ 每日多产只数」算回本天数。客户算得过账，决策就快。</div>
+</div>
+</section>
+
+<!-- ============ ⑧ PPT 目录册生成 ============ -->
+<section id="ppt">
+<div class="card">
+<h2>⑧ PPT 机械推荐目录册生成器（中英双语）</h2>
+<div class="note">按客户参数自动生成推荐目录册 PPT：封面 → 客户需求 → 推荐机型（参数+实拍照）→ 多维对比 → 价格差异决策 → 信任背书。推荐机型自动取自「⑤ 智能选型推荐」的结果。</div>
+<div class="grid2">
+<div>
+<label class="f">客户名称（写入封面）</label><input type="text" id="ppt_client" placeholder="如：CairoPack Co. / Ahmed">
+<label class="f">国家/市场</label><input type="text" id="ppt_country" placeholder="如：Egypt">
+<label class="f">语言版本</label>
+<select id="ppt_lang"><option value="en">English Version</option><option value="zh">中文版</option><option value="both">中英双版（下载两份）</option></select>
+</div>
+<div>
+<label class="f">客户参数（同 ⑤ 选型器，自动读取）</label>
+<div class="goldnote" style="margin-top:4px">请先在「⑤ 智能选型推荐」输入产品类型/日产量/班制并点击生成，推荐机型将自动带入 PPT。未生成时使用默认示例（双层咖啡杯 3 万只/日）。</div>
+<button class="btn" onclick="genCatalogPPT()">📥 生成 PPT 目录册</button>
+<div id="pptMsg" style="margin-top:8px"></div>
+</div>
+</div>
+<div class="rednote">⚠ PPT 中价格为挂牌参考价，正式报价须老板确认；净产出口径 70–80% 已写入对比页，不得删除（SOUL 铁律 2）。</div>
+</div>
+</section>
+
+</main>
+<footer>祺臣机械 · 客户询盘产品目录册 v1.1 ｜ 图片来自店铺产品页实拍（machine-china.en.alibaba.com）｜ 数据以 MEMORY.md 为唯一事实源 ｜ 价格为挂牌参考价 ｜ 编制：祺工</footer>
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+
+<script>
+function go(id){
+  document.querySelectorAll('section').forEach(function(s){s.classList.remove('on')});
+  document.querySelectorAll('nav button').forEach(function(b){b.classList.remove('on')});
+  document.getElementById(id).classList.add('on');
+  var b=document.querySelector('nav button[data-t="'+id+'"]');if(b)b.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function gv(id){return document.getElementById(id).value}
+function fmt(n){return n.toLocaleString('en-US')}
+function recommend(){
+  var type=gv('r_type'),prod=gv('r_prod'),daily=parseInt(gv('r_daily'))||0;
+  var hours=parseInt(gv('r_shift')),coat=gv('r_coat');
+  var main='',alt='',whyMain='',rated=null;
+  /* rated = 额定速度区间中值（pcs/min），仅对有明确速度区间的机型赋值；X35/KBM 速度无明确数据不参与量化 */
+  if(prod==='cup'){
+    if(daily<=25000){rated=90;main='ZBJ-OC12 PRO（80–100 pcs/min，3–16oz，$16,000–17,000）';alt='ZBJ-OC12（入门）';whyMain='入门档性价比之王，同价位速度更快、杯型更宽';}
+    else if(daily<=50000){rated=130;main='G12 高速（110–150 pcs/min，2–12oz，$24,000–25,000）';alt='OC12 PRO 双班';whyMain='净产出单班约 4–5.4 万只，覆盖中型产能';}
+    else{rated=130;main='G12 × 多台 或 KBM 全伺服高端线（$51,000–55,000）';alt='按机台数公式配置';whyMain='大产能走多机台/全伺服产线，KBM 具体速度以工厂确认为准（机台数按 G12 口径估算）';}
+  }else if(prod==='double'){
+    rated=75;
+    main='WT-22 双层（70–80 pcs/min，2–22oz，$16,000–19,000）'+(daily>30000?' × 多台':'');
+    alt='配套 PL-145 杯盖机打包整线';
+    whyMain='双层咖啡杯专家，杯型覆盖全线最广，净产出约 2.5–2.9 万只/班';
+  }else if(prod==='bowl'){
+    rated=75;
+    if(coat==='double'){main='ZBJ-DP35（70–80 pcs/min，10–35oz，超声波+伺服送纸，$22,000–25,000）';alt='大口径看 X64/X135（约 $30,000）';whyMain='双面 PE 淋膜纸热风封不住，DP35 超声波封合专为此设计';}
+    else{main='ZBJ-DP35（汤碗/冰淇淋碗主力，$22,000–25,000）';alt='牛皮纸大产能看 GH1500（约 $44,000）';whyMain='碗机主力机型，大口径/牛皮纸另有专机';}
+  }else if(prod==='tea'){
+    rated=null; /* X35 速度 MEMORY 仅记「中速」，不量化 */
+    main='ZBJ-X35 茶水杯专用（全自动，$17,000）';alt='—';whyMain='专机专用，茶饮市场标准答案';
+  }else{
+    rated=85;
+    main='PL-145 杯盖主力（70–100 pcs/min，12KW，$26,000–28,000）';alt='PL-02 高速（$31,000–35,000）';whyMain='PLC 控制稳定，双层杯线标配配套';
+  }
+  var lineCount='';
+  if(rated&&daily>0){
+    var net=rated*0.75*hours*60;
+    var need=Math.ceil(daily*1.2/net);
+    lineCount='按选型公式估算：净速度约 '+fmt(Math.round(net))+' 只/日/台（额定 '+rated+' ×75% × '+hours+'h），目标 '+fmt(daily)+' ×1.2 缓冲 → 约需 <b>'+need+' 台</b>（参考值，正式方案以确认为准）。';
+  }else if(daily>0){
+    lineCount='该机型速度暂无明确数据（MEMORY 记「中速」），机台数量化估算升级工厂工程师确认——不编造速度，是祺臣的规矩。';
+  }
+  var personaTip={start:'对初创客户：讲回本账——净产出×本地杯价估回本周期，强调 1 人看 2–3 台省人工。',scale:'对扩产客户：数据硬碰硬——主动报额定+净产出双数据，邀请视频试机/FAT。',trader:'对贸易商：谈批量与供应稳定性——16 年金品+100% 准时发货背书。',chain:'对连锁客户：推整线+信保+长期协议——WT-22+PL-145 咖啡店一站式。'}[type];
+  var aux='整线配套提醒：空压机（必配）+ 包装机（CP650/LP-450 询价）+ 易损件包随货建议。';
+  document.getElementById('recOut').innerHTML=
+    '<div class="rec"><b>🎯 主推机型：</b>'+main+'<br><span style="font-size:12.5px;color:var(--sub)">理由：'+whyMain+'</span></div>'+
+    (alt&&alt!=='—'?'<div class="rec" style="border-left-color:var(--gold)"><b>备选/配套：</b>'+alt+'</div>':'')+
+    (lineCount?'<div class="rec" style="border-left-color:var(--blue)"><b>📐 机台数估算：</b>'+lineCount+'</div>':'')+
+    '<div class="rec" style="border-left-color:var(--purple)"><b>💬 画像话术：</b>'+personaTip+'<br>'+aux+'</div>'+
+    '<div class="goldnote">⚠ 推荐为初判：正式报价走 A4 参谋结构（主机+辅机分项、EXW/FOB、30/70 或信保），价格与交期须老板确认。净产出 70–80% 口径必须向客户主动说明。</div>';
+}
+
+/* ================= ⑧ PPT 目录册生成（pptxgenjs，中英双语） ================= */
+var IMG={
+ 'OC12':'https://sc04.alicdn.com/kf/H68cffa3cdf5346918a0c512e105b9774y/QiChen-Middle-Speed-Open-PLC-Controlled-Motorized.png_350x350.png',
+ 'OC12 PRO':'https://sc04.alicdn.com/kf/H6e95e611adc44533ba57533e7e66ca70v/OC12-Pro-Middle-Speed-80-100-Pcs.png_350x350.png',
+ 'WT-22':'https://sc04.alicdn.com/kf/Hc356011200b6404185f3d157a28b9a41O/WT22-Middle-Speed-70-80-Pcs-min.png_350x350.png',
+ 'G12':'https://sc04.alicdn.com/kf/H934f516eb597438b8260201d1b323666n/G12-High-Speed-110-150pcs-min-3.png_350x350.png',
+ 'DP35':'https://sc04.alicdn.com/kf/H7c38c68722df48778cc20764ffad40016/ZBJ-DP35-70-80-Pcs-min-Servo.png_350x350.png',
+ 'PL-145':'https://sc04.alicdn.com/kf/Hf220a97362494c4685069c134a3c688cx/PL145-Middle-Speed-70-100-Pcs-min.png_350x350.png'
+};
+function pptKeyFromMain(main){ /* 从推荐机型文本匹配图片键 */
+  if(main.indexOf('OC12 PRO')>=0||main.indexOf('OC12-Pro')>=0)return 'OC12 PRO';
+  if(main.indexOf('WT-22')>=0)return 'WT-22';
+  if(main.indexOf('G12')>=0)return 'G12';
+  if(main.indexOf('DP35')>=0)return 'DP35';
+  if(main.indexOf('PL-145')>=0)return 'PL-145';
+  if(main.indexOf('OC12')>=0)return 'OC12';
+  return null;
+}
+function buildPPT(lang){
+  var client=gv('ppt_client')||'Valued Customer';
+  var country=gv('ppt_country')||'';
+  var en=(lang==='en');
+  /* 从⑤选型器读取客户参数 */
+  var prod=gv('r_prod'),daily=parseInt(gv('r_daily'))||30000,hours=parseInt(gv('r_shift'))||8;
+  var recText=document.getElementById('recOut').innerText||'';
+  var mMain=recText.match(/主推机型：([^\n]+)/);
+  var main=mMain?mMain[1].trim():'';
+  if(!main){ /* 未跑选型器时用默认示例 */
+    main=en?'WT-22 Double Wall Cup Machine (70-80 pcs/min, 2-22oz, USD 16,000-19,000)':'WT-22 双层纸杯机（70–80 pcs/min，2–22oz，$16,000–19,000）';
+  }
+  var imgKey=pptKeyFromMain(main);
+  var prodName={cup:(en?'Single Wall Paper Cups (Hot Drinks)':'单层纸杯（热饮）'),double:(en?'Double Wall Coffee Cups':'双层咖啡杯'),bowl:(en?'Paper Bowls (Soup/Ice Cream)':'纸碗（汤碗/冰淇淋碗）'),tea:(en?'Tea Cups':'茶水杯'),lid:(en?'Cup Lids':'杯盖')}[prod]||(en?'Paper Cups':'纸杯');
+  var netLine=(daily>0)?(en?('Net output estimate: rated speed x 75% x '+hours+'h x 60min, target '+fmt(Math.round(daily*1.2))+' pcs/day with 1.2 buffer.')
+    :('净产出估算：额定速度 ×75% × '+hours+'h × 60min，目标 '+fmt(Math.round(daily*1.2))+' 只/日（含 1.2 倍缓冲）。')):'';
+
+  var pptx=new PptxGenJS();
+  pptx.defineLayout({name:'A4L',width:13.33,height:7.5});pptx.layout='A4L';
+  var C1='134E4A',C2='0F766E',GOLD='B45309',FN='Microsoft YaHei';
+  /* 封面 */
+  var s1=pptx.addSlide();s1.background={color:C1};
+  s1.addText(en?'QiChen Machinery':'祺臣机械',{x:.6,y:1.2,w:12.1,h:.9,fontSize:40,bold:true,color:'FFFFFF',fontFace:FN});
+  s1.addText(en?'Paper Cup / Bowl Forming Machinery Catalog':'纸杯 / 纸碗成型机械推荐目录册',{x:.6,y:2.3,w:12.1,h:.6,fontSize:22,color:'CCFBF1',fontFace:FN});
+  s1.addText((en?'Prepared for: ':'为「')+(country?client+' ('+country+')':client)+(en?'':'」准备'),{x:.6,y:3.6,w:12.1,h:.6,fontSize:16,color:'FFFFFF',fontFace:FN});
+  s1.addText(en?'Wenzhou Qichen Trading Co., Ltd. | machine-china.en.alibaba.com | 16 YRS Gold Supplier | SGS Verified':'温州祺臣机械 | machine-china.en.alibaba.com | 16 年金品供应商 | SGS 实地认证',{x:.6,y:6.6,w:12.1,h:.5,fontSize:12,color:'99F6E4',fontFace:FN});
+  /* 客户需求页 */
+  var s2=pptx.addSlide();
+  s2.addText(en?'Your Requirements':'客户需求',{x:.6,y:.4,w:12.1,h:.6,fontSize:26,bold:true,color:C1,fontFace:FN});
+  s2.addText([
+    {text:(en?'Product: ':'产品：')+prodName+'\n',options:{fontSize:16,bold:true,color:C2,lineSpacing:26}},
+    {text:(en?'Target daily output: ':'目标日产量：')+fmt(daily)+' pcs\n',options:{fontSize:16,lineSpacing:26}},
+    {text:(en?'Shift: ':'班制：')+hours+(en?' h/day':' 小时/天')+'\n',options:{fontSize:16,lineSpacing:26}},
+    {text:netLine,options:{fontSize:13,italic:true,color:'64748B',lineSpacing:20}}
+  ],{x:.6,y:1.3,w:12.1,h:2.9,valign:'top',fontFace:FN});
+  s2.addText(en?'Note: Rated speed ≠ actual capacity. Net effective output ≈ 70-80% of rated speed (roll changes, jams, QC). We always state this openly.':'说明：额定速度≠实际产能，实际净产出约为额定的 70–80%（换卷、卡纸、质检损耗），我们主动如实告知。',{x:.6,y:5.8,w:12.1,h:.8,fontSize:12,italic:true,color:GOLD,fontFace:FN});
+  /* 推荐机型页 */
+  var s3=pptx.addSlide();
+  s3.addText(en?'Our Recommendation':'推荐机型',{x:.6,y:.4,w:12.1,h:.6,fontSize:26,bold:true,color:C1,fontFace:FN});
+  s3.addText(main,{x:.6,y:1.15,w:7.4,h:1.3,fontSize:18,bold:true,color:C2,fontFace:FN,valign:'top'});
+  if(recText){var mWhy=recText.match(/理由：([^\n]+)/);if(mWhy)s3.addText(mWhy[1].trim(),{x:.6,y:2.6,w:7.4,h:2.4,fontSize:13,color:'334155',fontFace:FN,valign:'top',lineSpacing:20});}
+  if(imgKey&&IMG[imgKey]){s3.addImage({path:IMG[imgKey],x:8.4,y:1.3,w:4.2,h:4.2,sizing:{type:'contain',w:4.2,h:4.2}});}
+  s3.addText(en?'Reference list price; final price subject to official quotation & approval.':'挂牌参考价，最终价格以正式报价与确认为准。',{x:.6,y:6.6,w:12.1,h:.5,fontSize:11,italic:true,color:GOLD,fontFace:FN});
+  /* ★ 新增：推荐机型组合一览页（一页四卡，主推高亮） */
+  var s3b=pptx.addSlide();
+  s3b.addText(en?'Recommended Model Portfolio':'推荐机型组合一览',{x:.6,y:.3,w:12.1,h:.55,fontSize:24,bold:true,color:C1,fontFace:FN});
+  var cards=[
+    {key:'OC12 PRO',name:'ZBJ-OC12 PRO',spec:'80–100 pcs/min｜3–16oz｜8KW',price:'USD 16,000–17,000',
+     desc:en?'Entry champion: best value, PLC control, ideal for startups.':'入门性价比之王：PLC 控制，初创建厂首选。'},
+    {key:'WT-22',name:'WT-22 Double Wall',spec:'70–80 pcs/min｜2–22oz｜3KW',price:'USD 16,000–19,000',
+     desc:en?'Double wall coffee cup expert; widest cup range (2–22oz).':'双层咖啡杯专家，杯型覆盖 2–22oz 全线最广。'},
+    {key:'G12',name:'G12 High Speed',spec:'110–150 pcs/min｜2–12oz｜20KW',price:'USD 24,000–25,000',
+     desc:en?'High-speed workhorse: ≈40,000–54,000 cups/shift net output.':'高速主力：单班净产出约 4–5.4 万只。'},
+    {key:'DP35',name:'ZBJ-DP35 Bowl',spec:'70–80 pcs/min｜10–35oz｜14KW',price:'USD 22,000–25,000',
+     desc:en?'Ultrasonic sealing for double-PE bowls (soup/ice cream).':'超声波封合专治双面 PE 纸碗（汤碗/冰淇淋碗）。'}];
+  var cw=2.95,ch=5.0,gap=.18,x0=.6,y0=1.05;
+  cards.forEach(function(c,i){
+    var x=x0+i*(cw+gap);
+    var star=(imgKey===c.key); /* 主推机型高亮 */
+    s3b.addShape(pptx.ShapeType.rect,{x:x,y:y0,w:cw,h:ch,fill:{color:star?'CCFBF1':'FFFFFF'},line:{color:star?C2:'CBD5E1',width:star?2.5:1},rectRadius:.08});
+    if(IMG[c.key])s3b.addImage({path:IMG[c.key],x:x+.32,y:y0+.15,w:cw-.64,h:cw-.64,sizing:{type:'contain',w:cw-.64,h:cw-.64}});
+    s3b.addText(c.name+(star?(en?' ★':' ★'):''),{x:x+.1,y:y0+2.45,w:cw-.2,h:.5,fontSize:13.5,bold:true,color:star?C2:'1E293B',fontFace:FN,align:'center',valign:'middle'});
+    s3b.addText(c.spec,{x:x+.1,y:y0+2.95,w:cw-.2,h:.75,fontSize:10.5,color:'475569',fontFace:FN,align:'center',valign:'top',lineSpacing:14});
+    s3b.addText(c.price,{x:x+.1,y:y0+3.72,w:cw-.2,h:.4,fontSize:11.5,bold:true,color:C2,fontFace:FN,align:'center'});
+    s3b.addText(c.desc,{x:x+.15,y:y0+4.15,w:cw-.3,h:.8,fontSize:10,color:'334155',fontFace:FN,align:'center',valign:'top',lineSpacing:13});
+  });
+  s3b.addText(en?'★ = recommended for your requirement. Net output ≈ 70–80% of rated speed.':'★ = 针对您需求的推荐机型。净产出约为额定速度 70–80%。',{x:.6,y:6.35,w:12.1,h:.5,fontSize:11,italic:true,color:GOLD,fontFace:FN});
+  /* 对比页 */
+  var s4=pptx.addSlide();
+  s4.addText(en?'Multi-dimension Comparison':'多维对比',{x:.6,y:.3,w:12.1,h:.5,fontSize:24,bold:true,color:C1,fontFace:FN});
+  var head=en?['Model','Speed(pcs/min)','Cup Range','Power','Price(USD)','Net Output/Shift']:['机型','速度(只/分)','杯型范围','功率','参考价(USD)','单班净产出'];
+  var rows=[head,
+    ['ZBJ-OC12','70–80','2.5–12oz','~3–8KW','16,000–17,000','≈25,000–29,000'],
+    ['OC12 PRO','80–100','3–16oz','8KW','16,000–17,000','≈29,000–36,000'],
+    ['WT-22','70–80','2–22oz','3KW','16,000–19,000','≈25,000–29,000'],
+    ['G12','110–150','2–12oz','20KW','24,000–25,000','≈40,000–54,000'],
+    ['KBM',en?'Ultra-high (TBC)':'超高速(待确认)','—','—','51,000–55,000','—'],
+    ['ZBJ-DP35','70–80','10–35oz','14KW','22,000–25,000','≈25,000–29,000']];
+  s4.addTable(rows,{x:.5,y:1.0,w:12.3,fontSize:13,fontFace:FN,color:'1E293B',rowH:.5,
+    border:{type:'solid',color:'CBD5E1',pt:1}});
+  s4.addText(en?'Net output = rated x 75% (70-80% range) x 8h x 60min.':'净产出 = 额定 × 75%（区间 70–80%）× 8h × 60min。',{x:.6,y:5.4,w:12.1,h:.4,fontSize:11,italic:true,color:'64748B',fontFace:FN});
+  /* 价格差异决策页 */
+  var s5=pptx.addSlide();
+  s5.addText(en?'Price Difference = Production Gain':'价格差异 = 产量收益',{x:.6,y:.3,w:12.1,h:.5,fontSize:24,bold:true,color:C1,fontFace:FN});
+  s5.addText(en?
+    'OC12 → OC12 PRO: same price band, +20% speed, wider cup range — a free upgrade.\n\nOC12 PRO → G12: +USD 8,000 buys 110-150 pcs/min. Net output jumps from ~32,000 to 40,000-54,000 cups/shift. The extra 8,000-22,000 cups per shift typically pays back the difference within months.\n\nG12 → KBM: +USD 27,000 for full-servo production line, for 100,000+/day capacity. Below that scale, G12 is the best value.\n\nDouble wall cups need WT-22 — single-wall machines simply cannot make them.':
+    'OC12 → OC12 PRO：同价位段，速度 +20%、杯型更宽——相当于免费升级。\n\nOC12 PRO → G12：多约 $8,000 换 110–150 只/分，单班净产出从约 3.2 万跳到 4–5.4 万只，每班多产 0.8–2.2 万只，差价通常数月内由产量赚回。\n\nG12 → KBM：多约 $27,000 换全伺服产线，适合日产 10 万+ 的客户；产能未到该量级，G12 性价比最高。\n\n双层杯必须用 WT-22——单层机根本做不了双层杯。',
+    {x:.6,y:.95,w:12.1,h:5.2,fontSize:14,color:'334155',fontFace:FN,lineSpacing:22,valign:'top'});
+  /* 信任页 */
+  var s6=pptx.addSlide();s6.background={color:C1};
+  s6.addText(en?'Why QiChen':'为什么选择祺臣',{x:.6,y:.6,w:12.1,h:.7,fontSize:30,bold:true,color:'FFFFFF',fontFace:FN});
+  s6.addText(en?
+    '• 16 years Gold Supplier on Alibaba.com, onsite-verified by SGS.\n• 8,400㎡ factory, 76 staff — video factory tour anytime.\n• 100% on-time dispatch record, covered by Alibaba Trade Assurance.\n• Drawing-based customization, International Service Centers, QC & finished product inspection.\n• Honest engineering: rated vs. net output always disclosed; no inflated specs.':
+    '• 阿里国际站 16 年金品供应商，SGS 实地认证。\n• 8,400㎡ 厂区、76 名员工，随时视频验厂。\n• 准时发货率 100%，阿里信保担保交易。\n• 图纸定制、国际服务中心、质量管控、成品检验。\n• 诚实工程：额定与净产出如实告知，绝不虚标。',
+    {x:.6,y:1.6,w:12.1,h:4.2,fontSize:17,color:'FFFFFF',fontFace:FN,lineSpacing:32});
+  s6.addText(en?'Next step: confirm cup size & paper material, we send official quotation within 24h.':'下一步：确认杯型与纸张材料，24 小时内发送正式报价。',{x:.6,y:6.4,w:12.1,h:.6,fontSize:14,bold:true,color:'FDE68A',fontFace:FN});
+  return pptx;
+}
+function genCatalogPPT(){
+  var msg=document.getElementById('pptMsg');
+  if(typeof PptxGenJS==='undefined'){msg.innerHTML='<span class="tag t-red">PPT 引擎未加载，请联网后刷新页面（依赖 pptxgenjs CDN）</span>';return;}
+  var lang=gv('ppt_lang');
+  var langs=lang==='both'?['en','zh']:[lang];
+  var names=[];
+  langs.forEach(function(l){
+    var pptx=buildPPT(l);
+    var fname='QiChen_Catalog_'+(l==='en'?'EN':'ZH')+'_'+new Date().toISOString().slice(0,10)+'.pptx';
+    pptx.writeFile({fileName:fname});names.push(fname);
+  });
+  msg.innerHTML='<span class="tag t-ok">✅ 已生成并下载：'+names.join('、')+'</span>';
+}
+</script>
+</body>
+</html>
