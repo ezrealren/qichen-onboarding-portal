@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>祺臣机械 · 新人业务员日报系统</title>
+<style>
+:root{--page:#f1f5f9;--panel:#fff;--line:#e2e8f0;--ink:#1e293b;--sub:#64748b;
+--brand:#0f766e;--brand2:#115e59;--brand-l:#ccfbf1;
+--ai:#7c3aed;--ai-l:#ede9fe;--gold:#b45309;--gold-l:#fef3c7;
+--red:#b91c1c;--red-l:#fee2e2;--ok:#15803d;--ok-l:#dcfce7;--blue:#1d4ed8;--blue-l:#dbeafe}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI","Microsoft YaHei",sans-serif;background:var(--page);color:var(--ink);line-height:1.65}
+header{background:linear-gradient(135deg,#134e4a,#0f766e 55%,#0d9488);color:#fff;padding:22px 24px}
+.hd{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+header h1{font-size:22px;letter-spacing:.5px}
+header .sub{opacity:.85;font-size:12.5px;margin-top:4px}
+.hdr-r{text-align:right}
+.hdr-r .date{font-size:15px;font-weight:700}
+.hdr-r .streak{font-size:12.5px;opacity:.9;margin-top:3px}
+.badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:14px;padding:3px 12px;font-size:12px;margin-left:6px}
+nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;background:#134e4a;padding:10px 14px;position:sticky;top:0;z-index:60;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+nav button{background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;padding:7px 15px;border-radius:18px;cursor:pointer;font-size:13px}
+nav button:hover{background:rgba(255,255,255,.15)}
+nav button.on{background:#fff;color:var(--brand2);font-weight:700;border-color:#fff}
+main{max-width:1080px;margin:0 auto;padding:20px 16px 90px}
+section{display:none}section.on{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:16px;box-shadow:0 1px 3px rgba(15,23,42,.06)}
+.card h2{font-size:17px;color:var(--brand2);border-left:4px solid var(--brand);padding-left:10px;margin-bottom:10px}
+.card h3{font-size:14px;margin:12px 0 6px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:760px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
+.stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-align:center}
+.stat b{display:block;font-size:26px;color:var(--brand2)}
+.stat span{font-size:12px;color:var(--sub)}
+.stat.ai{background:var(--ai-l);border-color:#ddd6fe}.stat.ai b{color:var(--ai)}
+.stat.warn{background:var(--red-l);border-color:#fecaca}.stat.warn b{color:var(--red)}
+.stat.ok{background:var(--ok-l);border-color:#bbf7d0}.stat.ok b{color:var(--ok)}
+.tag{display:inline-block;font-size:11.5px;padding:2px 9px;border-radius:10px;margin:0 4px 0 0;white-space:nowrap}
+.t-ai{background:var(--ai-l);color:var(--ai)}.t-gold{background:var(--gold-l);color:var(--gold)}
+.t-red{background:var(--red-l);color:var(--red)}.t-ok{background:var(--ok-l);color:var(--ok)}
+.t-blue{background:var(--blue-l);color:var(--blue)}.t-brand{background:var(--brand-l);color:var(--brand2)}
+.note{background:var(--ai-l);border-left:4px solid var(--ai);padding:9px 13px;border-radius:6px;font-size:13px;margin:10px 0}
+.goldnote{background:var(--gold-l);border-left:4px solid var(--gold);padding:9px 13px;border-radius:6px;font-size:13px;margin:10px 0}
+.oknote{background:var(--ok-l);border-left:4px solid var(--ok);padding:9px 13px;border-radius:6px;font-size:13px;margin:10px 0}
+.task{border:1px solid var(--line);border-radius:11px;padding:11px 14px;margin:8px 0;background:#fff;display:flex;gap:10px;align-items:flex-start}
+.task .ic{flex-shrink:0;width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff}
+.ic.due{background:#ef4444}.ic.over{background:#b91c1c}.ic.new{background:#7c3aed}.ic.learn{background:#0f766e}
+.task .tt{flex:1}
+.task .tt b{font-size:13.5px}
+.task .tt .m{font-size:12px;color:var(--sub);margin-top:2px}
+.task .act{display:flex;gap:6px;flex-wrap:wrap}
+.btn{background:var(--brand);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:12.5px;cursor:pointer}
+.btn:hover{background:var(--brand2)}
+.btn.ghost{background:#fff;color:var(--brand2);border:1px solid var(--brand)}
+.btn.ai{background:var(--ai)}.btn.ai:hover{background:#6d28d9}
+.btn.sm{padding:5px 11px;font-size:12px}
+label.f{display:block;font-size:12.5px;color:var(--sub);margin:9px 0 3px;font-weight:600}
+input[type=text],input[type=date],input[type=number],select,textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13.5px;background:#fff;font-family:inherit}
+textarea{min-height:70px;resize:vertical}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:var(--brand-l);color:var(--brand2);white-space:nowrap}
+.pill-grade{display:inline-block;border-radius:10px;padding:1px 9px;font-size:11.5px;font-weight:700}
+.gA{background:var(--ok-l);color:var(--ok)}.gB{background:var(--blue-l);color:var(--blue)}.gC{background:var(--gold-l);color:var(--gold)}
+.qcard{background:var(--brand-l);border:1px solid #99f6e4;border-radius:11px;padding:13px 16px;margin:10px 0}
+.qcard .q{font-weight:700;font-size:13.5px}
+.qcard .a{display:none;margin-top:8px;background:#fff;border-radius:8px;padding:9px 12px;font-size:13px;border:1px dashed var(--brand)}
+footer{text-align:center;color:var(--sub);font-size:12px;padding:18px;border-top:1px solid var(--line);background:#fff}
+@media print{nav,.btn{display:none}section{display:block!important}}
+</style>
+<script src="data/data_feed.js"></script>
+</head>
+<body>
+<header>
+<div class="hd">
+<div>
+<h1>祺臣机械 · 新人业务员日报系统</h1>
+<div class="sub">New Sales Daily Report &amp; Follow-up Engine ｜ AI 自动读取更新 + 业务手动填写 ｜ 事实源：MEMORY.md + 画像跟进规则 + 100问案例库</div>
+</div>
+<div class="hdr-r">
+<div class="date" id="hdDate"></div>
+<div class="streak" id="hdStreak"></div>
+</div>
+</div>
+</header>
+<nav>
+<button class="on" data-t="dash" onclick="go('dash')">今日看板</button>
+<button data-t="report" onclick="go('report')">日报填写</button>
+<button data-t="newcust" onclick="go('newcust')">新客户登记</button>
+<button data-t="inquiry" onclick="go('inquiry')">询盘管理</button>
+<button data-t="coach" onclick="go('coach')">AI教练点评</button>
+</nav>
+<main>
+
+<section id="dash" class="on">
+<div class="grid4" id="kpiRow"></div>
+<div class="card">
+<h2>📡 数据中枢同步状态 <span class="tag t-ai">Accio Agent 自动同步</span></h2>
+<div id="feedStatus"><div class="note">正在读取数据中枢（data/data_feed.js）…</div></div>
+</div>
+<div class="card">
+<h2>🤖 AI 自动任务区 <span class="tag t-ai">每日自动刷新</span></h2>
+<div class="note">任务由系统按<b>询盘分级（A/B/C）首复时限</b>、<b>画像跟进频率（P1–P4）</b>、<b>14 天沉默激活规则</b>自动计算生成；其中「新询盘」条目来自 Accio 每日 8:00 自动同步。红色=已逾期，请立即处理。</div>
+<div id="aiTasks"></div>
+</div>
+<div class="grid2">
+<div class="card">
+<h2>📚 每日一题 <span class="tag t-brand">AI 自动抽题</span></h2>
+<div class="goldnote">从 100 问知识库按今日日期自动抽取。坚持 30 天覆盖全部核心题。</div>
+<div id="dailyQ"></div>
+</div>
+<div class="card">
+<h2>🎯 今日开单助攻 <span class="tag t-ai">AI 建议</span></h2>
+<div id="dealTip"></div>
+</div>
+</div>
+</section>
+
+<section id="report">
+<div class="card">
+<h2>📝 业务手动填写区 <span class="tag t-gold">每日必填</span></h2>
+<div class="note">填写规则：先处理 AI 任务区的到期任务 → 记录今日动作 → 保存后系统自动生成 AI 教练点评，并更新连续打卡与 KPI。</div>
+</div>
+<div class="card">
+<h3>① 今日工作量</h3>
+<div class="grid4">
+<div><label class="f">新询盘处理数</label><input type="number" id="r_new" min="0" value="0"></div>
+<div><label class="f">老询盘跟进数</label><input type="number" id="r_follow" min="0" value="0"></div>
+<div><label class="f">发出报价数</label><input type="number" id="r_quote" min="0" value="0"></div>
+<div><label class="f">视频/验厂安排数</label><input type="number" id="r_video" min="0" value="0"></div>
+</div>
+<h3>② 今日关键动作记录</h3>
+<textarea id="r_actions" placeholder="例：给埃及客户 Ahmed 发了 WT-22 选型算账表，客户已回复日产量 2 万只，明天出正式报价…"></textarea>
+<h3>③ 遇到的问题 / 需要支持</h3>
+<textarea id="r_issues" placeholder="例：客户问 PL-145 换模时间，知识库待补，已按流程承诺 3 天内答复，请技术部提供…"></textarea>
+<h3>④ 今日学习（每日一题/案例）</h3>
+<textarea id="r_learn" placeholder="例：背了 Q49–Q53 封合专题；看了案例 C4 冰淇淋碗双面淋膜陷阱…"></textarea>
+<h3>⑤ 明日计划</h3>
+<textarea id="r_plan" placeholder="例：1) 给 Ahmed 出报价（需老板确认折扣空间）2) 激活沉默 14 天的巴基斯坦客户…"></textarea>
+<button class="btn" onclick="saveReport()">保存今日日报</button>
+<button class="btn ghost" onclick="exportReport()">导出日报文本</button>
+<textarea id="r_out" style="display:none;margin-top:10px;min-height:120px" readonly></textarea>
+<div id="saveMsg"></div>
+</div>
+</section>
+
+<section id="newcust">
+<div class="card">
+<h2>➕ 新客户登记（新询盘处理记录）</h2>
+<div class="note">每条新询盘必须登记并定级（S1 规则）：参数信息充分=A；有意向但信息不全=B；泛泛询价=C。<b>登记后系统自动生成首复倒计时</b>（A 级 6h / B 级 24h / C 级 48h，对齐 SOP S3）。</div>
+<div class="grid3">
+<div><label class="f">客户姓名/公司 *</label><input type="text" id="c_name" placeholder="Mr. Ahmed / CairoPack"></div>
+<div><label class="f">国家/地区</label><input type="text" id="c_country" placeholder="埃及"></div>
+<div><label class="f">渠道</label><select id="c_channel"><option>国际站询盘</option><option>RFQ</option><option>邮件</option><option>WhatsApp</option><option>其他</option></select></div>
+<div><label class="f">询盘分级 *</label><select id="c_grade"><option value="A">A（参数明确，可直接报价）</option><option value="B">B（有意向但信息不全）</option><option value="C">C（泛泛询价，先养）</option></select></div>
+<div><label class="f">主画像</label><select id="c_persona"><option>P1 初创投资人</option><option>P2 纸杯工厂扩产</option><option>P3 贸易商</option><option>P4 餐饮/连锁自用</option><option>待确认</option></select></div>
+<div><label class="f">初判机型方向</label><input type="text" id="c_machine" placeholder="WT-22（MEMORY §2.1）"></div>
+</div>
+<label class="f">备注（需求/缺口/风险信号）</label>
+<input type="text" id="c_note" placeholder="缺口：日产量、电压未确认；无风险信号">
+<button class="btn" onclick="addCustomer()">登记并生成跟进任务</button>
+<div id="addMsg"></div>
+</div>
+<div class="card">
+<h3>询盘池（全部客户与状态）</h3>
+<div style="overflow-x:auto"><table id="custTable"></table></div>
+</div>
+</section>
+
+<section id="inquiry">
+<div class="card">
+<h2>🔁 老询盘跟进看板（AI 任务引擎数据源）</h2>
+<div class="note">跟进频率规则（画像指南）：P2 工厂扩产 3–5 天（按 5 天预警）/ P1 初创 5–7 天（按 7 天）/ P3 贸易商 3 天 / P4 连锁 7 天；沉默满 14 天触发激活预案（换触点→换新价值→三次无回应降培育池月度轻触达）。每次跟进后点「已跟进」刷新计时。</div>
+<div style="overflow-x:auto"><table id="followTable"></table></div>
+</div>
+</section>
+
+<section id="coach">
+<div class="card">
+<h2>🧑‍🏫 AI 教练点评 <span class="tag t-ai">保存日报后自动生成</span></h2>
+<div class="note">点评逻辑基于 SOUL 铁律 + SOP 门槛：工作量是否达标、有无逾期任务、求助意识、报价后回访纪律。这是祺工（A5 教练）每日给你的复盘。每日 18:00 Accio 定时任务也会自动汇总并推送点评。</div>
+<div id="coachOut"><div class="goldnote">今天还没有保存日报，填写并保存后 AI 教练为你复盘。</div></div>
+<h3>🤖 Agent 每日汇总点评（18:00 自动生成）</h3>
+<div id="agentCoach"><div class="note">等待 Accio 定时任务首次运行（每日 18:00）。</div></div>
+</div>
+<div class="card">
+<h2>📈 本周打卡与 KPI</h2>
+<div class="grid3" id="weekKpi"></div>
+<h3>近 7 天日报记录</h3>
+<div style="overflow-x:auto"><table id="historyTable"></table></div>
+</div>
+</section>
+
+</main>
+<footer>祺臣机械 · 新人业务员日报系统 v1.0 ｜ 数据保存在本机浏览器（localStorage），请勿清缓存 ｜ 事实源：MEMORY.md + 全流程SOP + 画像跟进规则 + 100问案例库 ｜ 编制：祺工</footer>
+
+<script>
+/* ================= 数据层 ================= */
+var KEY='qcDaily';
+var DB=JSON.parse(localStorage.getItem(KEY)||'{"customers":[],"reports":[],"streak":0,"lastReport":""}');
+function save(){localStorage.setItem(KEY,JSON.stringify(DB))}
+function today(){return new Date().toISOString().slice(0,10)}
+function daysBetween(d1,d2){return Math.round((new Date(d2)-new Date(d1))/86400000)}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+/* 画像跟进频率（天）——取画像指南区间上限做预警线：P1 5–7天 / P2 3–5天 / P3 报价后3天 / P4 方案书节奏 */
+var FOLLOW_DAYS={'P1 初创投资人':7,'P2 纸杯工厂扩产':5,'P3 贸易商':3,'P4 餐饮/连锁自用':7,'待确认':5};
+/* 首复时限（小时）——对齐 SOP S3 */
+var REPLY_HOURS={A:6,B:24,C:48};
+var GRADE_CLS={A:'gA',B:'gB',C:'gC'};
+
+/* 100问精选（每日一题抽题池，摘录自《专业知识100问》） */
+var QPOOL=[
+{q:"Q13 纸杯成型机的 8 工位流程是什么？",a:"① 送纸 → ② 卷筒成型 → ③ 侧缝封合（热风/超声波）→ ④ 上油/润滑 → ⑤ 卷口 → ⑥ 底部冲切 → ⑦ 底部预热+压合密封 → ⑧ 滚花压实出杯。（MEMORY §3.1）"},
+{q:"Q29 ZBJ-OC12 的核心参数与定位？",a:"70–80 pcs/min、2.5–12oz、~3–8KW、开式凸轮+齿轮传动；参考价 $16,000–17,000；入门主力，小生意首选。（MEMORY §2.1）"},
+{q:"Q31 WT-22 为什么叫「双层咖啡杯专家」？",a:"专做双层杯，杯型覆盖 2–22oz（全线最广），70–80 pcs/min、3KW；参考价 $16,000–19,000。（MEMORY §2.1）"},
+{q:"Q32 G12 高速机的参数与目标客户？",a:"110–150 pcs/min、2–12oz、20KW；参考价 $24,000–25,000；面向中大型工厂。（MEMORY §2.1）"},
+{q:"Q35 ZBJ-DP35 纸碗机的完整参数？",a:"70–80 pcs/min、10–35oz、14KW、超声波焊接+伺服送纸；参考价 $22,000–25,000；汤碗/冰淇淋碗主力。（MEMORY §2.2）"},
+{q:"Q36 DP35 的差异化卖点一句话怎么说？",a:"「双面 PE 淋膜纸用热风封不住，DP35 的超声波封合专为此设计」——双面淋膜的克星。（MEMORY §3.2）"},
+{q:"Q52 客户问 Single PE 还是 Double PE，怎么答？",a:"热饮用单 PE（内壁单层，成本低）；冷饮/冰淇淋碗用双面 PE（防外壁冷凝水浸软）；再据此推荐封合方式匹配的机型。（MEMORY §3.3）"},
+{q:"Q53 PLA 材料封合有什么特殊性？",a:"可降解环保淋膜，封合温度窗口比 PE 低 10–15°C、时间更长，跑 PLA 需独立温控加热区。（MEMORY §3.3）"},
+{q:"Q55/Q56 小杯与中大杯的纸张规格？",a:"小杯（65–90ml）155–165gsm+13–15g PE 膜；中大杯（120ml+）190–220gsm+15–17g PE 膜。（MEMORY §3.3）"},
+{q:"Q65 额定速度和实际产能是一回事吗？",a:"不是。实际净产出≈额定速度×70–80%（换卷、卡纸、质检损耗），必须主动向客户说明。（MEMORY §3.4 + SOUL 铁律2）"},
+{q:"Q66 额定 90 pcs/min 单班 8h 产量怎么算？",a:"90×75%×8×60 ≈ 32,400 只/单班。（MEMORY §3.4）"},
+{q:"Q68 选型机台数公式是什么？",a:"所需机台数 = 需求峰值日产量×1.2（增长缓冲）÷（净速度×每日运行小时）。（MEMORY §3.4）"},
+{q:"Q74 纸张边料损耗行业水平？",a:"普通机器 8–10%，高精度裁切 3–5%——百万只杯子的纸钱差距不小，是总拥有成本论据。（MEMORY §3.4）"},
+{q:"Q84 Power / voltage? 怎么答？",a:"标准 380V/三相，按机型报 KW；可定制当地电压（印度 415V 等）。（MEMORY §5 FAQ#6）"},
+{q:"Q89 Payment terms? 怎么答？",a:"标准口径 30% 定金+70% 发货前，或 Trade Assurance；任何让步需老板确认。（MEMORY §5 FAQ#12 + SOUL 边界）"},
+{q:"Q93 买家下单前 6 个必答题？",a:"① 净速度实测 ② 换模时长（要视频）③ 每千杯电耗 ④ 远程诊断/48h 备件 ⑤ PLA+PE 兼容 ⑥ 易损件寿命。（MEMORY §4.2）"},
+{q:"Q95 客户说印度供应商更便宜，怎么应对？",a:"不比价格比总拥有成本：净产出率、纸耗 3–5% vs 8–10%、备件供应、远程支持；不贬低同行。（MEMORY §4.3）"},
+{q:"Q97 客户问工厂可信吗，三连话术？",a:"16 年金品 + SGS 认证 + Trade Assurance + 视频验厂。（MEMORY §4.3）"},
+{q:"Q99 客户当场要 15% 折扣逼单，怎么处理？",a:"不当场答应；感谢认可→说明价格需按配置走老板审批→把话题拉回价值（净产出、纸耗、服务）→以视频验厂/试机推进。（SOUL 铁律4 + 行为边界）"},
+{q:"Q100 业务员对外三条红线？",a:"① 不编造参数 ② 不夸大产能（额定≠净产出）③ 不越权承诺（折扣/交期/独家/付款让步须老板拍板）。（SOUL 铁律+边界）"}
+];
+
+/* 开单助攻话术库（每日轮播） */
+var TIPS=[
+"💰 A 级询盘是开单生命线：今天所有 A 级客户必须推进到报价或视频通话，6h 首复时限别破。",
+"💰 B 级客户卡在哪？用「需求四问」（日产量/杯型/热饮冷饮/电压）补信息，补齐一个就转 A 级。",
+"💰 报价后 3 天没回音的贸易商，发一段试机视频再跟进——比催单有效。",
+"💰 初创客户别只聊机器：把净产出×本地杯价算成回本周期表，回本数字是他们的决策开关。",
+"💰 有沉默超 14 天的客户吗？按激活预案：换触点（邮件→WhatsApp）+换新价值（案例/验厂邀请）。",
+"💰 客户问的参数你不会答？标准动作：「工程师确认中，X 天内答复」+升级技术部，绝不编造（铁律 1）。",
+"💰 今天至少邀请 1 个客户视频验厂——16 年金品+SGS+8400㎡ 工厂是最强信任弹药，别藏着。",
+"💰 双层杯客户记得打包杯盖机（PL-145）+空压机报整线——客单价和成单率都更高。"
+];
+
+/* ================= AI 任务引擎 ================= */
+function buildTasks(){
+  var tasks=[];var now=new Date();
+  DB.customers.forEach(function(c){
+    if(c.status==='成交'||c.status==='流失')return;
+    if(!c.replied){
+      var due=new Date(c.created+'T00:00:00');due.setHours(due.getHours()+REPLY_HOURS[c.grade]);
+      var hrsLeft=Math.round((due-now)/3600000);
+      tasks.push({type:hrsLeft<0?'over':'due',
+        title:'首复：'+c.name+'（'+c.grade+'级，'+(hrsLeft<0?'已逾期'+(-hrsLeft)+'小时':'剩'+Math.max(hrsLeft,0)+'小时')+'）',
+        meta:c.grade+' 级首复时限 '+REPLY_HOURS[c.grade]+'h｜画像 '+c.persona+'｜按六段式结构回复，别忘反问需求四问',
+        btn:'标记已首复',act:"markReplied('"+c.id+"')"});
+    }else{
+      var gap=FOLLOW_DAYS[c.persona]||5;
+      var d=daysBetween(c.lastFollow||c.created,today());
+      if(d>=14)tasks.push({type:'over',
+        title:'⚠ 激活预案：'+c.name+' 沉默 '+d+' 天',
+        meta:'换触点（邮件→WhatsApp）→换新价值（新机型/PLA 趋势/验厂邀请）→三次无回应降培育池月度轻触达；记录沉默原因供复盘',
+        btn:'标记已激活',act:"markFollowed('"+c.id+"')"});
+      else if(d>=gap)tasks.push({type:d>=gap*2?'over':'due',
+        title:'跟进到期：'+c.name+'（已 '+d+' 天未跟进，频率 '+gap+' 天）',
+        meta:'画像 '+c.persona+'｜带新价值跟进（数据/视频/案例/算账），禁止空手催单',
+        btn:'标记已跟进',act:"markFollowed('"+c.id+"')"});
+    }
+  });
+  tasks.push({type:'learn',title:'今日学习：完成每日一题 + 背 5 张术语卡',meta:'学习是开单的弹药，每天 15 分钟',btn:'展开今日题',act:"showDailyQ()"});
+  return tasks;
+}
+function showDailyQ(){go('dash');var el=document.getElementById('dailyQ');if(el)el.scrollIntoView({behavior:'smooth'})}
+
+/* ================= 数据中枢（Accio Agent 同步数据） ================= */
+function hasFeed(){return typeof window.QC_FEED==='object'&&window.QC_FEED!==null}
+function renderFeedStatus(){
+  var box=document.getElementById('feedStatus');
+  if(!box)return;
+  if(!hasFeed()){
+    box.innerHTML='<div class="goldnote">⚠ 未检测到数据中枢（data/data_feed.js）。请确认本文件与工作区 data/ 目录在同一文件夹；Agent 每日 8:00 自动同步询盘。</div>';
+    return;
+  }
+  var m=window.QC_FEED.meta||{};var st=m.stats||{};
+  var sync=m.lastInquirySync?('最近询盘同步：'+m.lastInquirySync):'询盘通道已连通，暂无同步记录（首次自动同步为每日 8:00）';
+  var coach=m.lastCoachSync?('最近日报点评：'+m.lastCoachSync):'日报点评待 18:00 定时任务首次运行';
+  box.innerHTML=
+    '<div style="display:flex;gap:10px;flex-wrap:wrap">'+
+    '<div class="stat" style="flex:1;min-width:130px"><b>'+(st.totalInquiries||0)+'</b><span>中枢询盘总数</span></div>'+
+    '<div class="stat '+(st.gradeA?'warn':'')+'" style="flex:1;min-width:130px"><b>'+(st.gradeA||0)+'</b><span>A级询盘</span></div>'+
+    '<div class="stat" style="flex:1;min-width:130px"><b>'+(st.pendingFollowups||0)+'</b><span>待跟进任务</span></div>'+
+    '</div>'+
+    '<div style="font-size:12.5px;color:var(--sub);margin-top:8px">📡 '+esc(sync)+' ｜ '+esc(coach)+' ｜ 通道：'+esc(m.inquiryChannel||'')+'</div>';
+}
+/* Agent 同步的询盘 → 并入 AI 任务区 */
+function feedInquiryTasks(){
+  if(!hasFeed())return [];
+  var out=[];
+  var todayStr=today();
+  (window.QC_FEED.followups||[]).forEach(function(f){
+    if(f.done)return;
+    var over=f.due&&f.due<todayStr;
+    out.push({type:over?'over':'due',
+      title:(over?'⚠ 逾期·':'')+(f.title||'跟进任务')+'（Agent同步）',
+      meta:(f.detail||'')+'｜截止：'+(f.due||'—'),
+      btn:'去处理',act:"go('inquiry')"});
+  });
+  (window.QC_FEED.inquiries||[]).slice(0,5).forEach(function(q){
+    out.push({type:'new',title:'新询盘：'+(q.country||'未知国家')+' · '+(q.product||'待识别')+'（'+q.grade+'级/'+q.persona+'）',
+      meta:esc(q.text||'').slice(0,80)+(q.gaps?'｜缺口：'+q.gaps:''),
+      btn:'去登记',act:"go('newcust')"});
+  });
+  return out;
+}
+function renderAgentCoach(){
+  var box=document.getElementById('agentCoach');
+  if(!box)return;
+  if(!hasFeed()||!(window.QC_FEED.coach||[]).length){
+    box.innerHTML='<div class="note">等待 Accio 定时任务首次运行（每日 18:00）。点评将自动显示在这里。</div>';
+    return;
+  }
+  var latest=window.QC_FEED.coach[window.QC_FEED.coach.length-1];
+  var html='<div class="note" style="background:var(--ok-l);border-color:var(--ok)"><b>'+esc(latest.date||'')+' 点评（得分 '+(latest.score!=null?latest.score:'—')+'/100）</b></div>';
+  (latest.points||[]).forEach(function(p){html+='<div style="font-size:13px;margin:3px 0">· '+esc(p)+'</div>'});
+  if((latest.alerts||[]).length){
+    html+='<div class="rednote" style="margin-top:6px"><b>⚠ 预警：</b>';
+    latest.alerts.forEach(function(a){html+='<div>· '+esc(a)+'</div>'});
+    html+='</div>';
+  }
+  box.innerHTML=html;
+}
+</script>
+
+<script>
+/* ================= 渲染 ================= */
+function renderDash(){
+  var cs=DB.customers;
+  var active=cs.filter(function(c){return c.status!=='成交'&&c.status!=='流失'});
+  var gradeA=active.filter(function(c){return c.grade==='A'}).length;
+  var tasks=buildTasks().filter(function(t){return t.type!=='learn'});
+  var overdue=tasks.filter(function(t){return t.type==='over'}).length;
+  document.getElementById('kpiRow').innerHTML=
+    '<div class="stat"><b>'+cs.length+'</b><span>累计询盘</span></div>'+
+    '<div class="stat '+(gradeA?'warn':'')+'"><b>'+gradeA+'</b><span>A级客户（开单生命线）</span></div>'+
+    '<div class="stat '+(overdue?'warn':'ok')+'"><b>'+overdue+'</b><span>逾期任务</span></div>'+
+    '<div class="stat ai"><b>'+DB.streak+'</b><span>连续打卡（天）</span></div>';
+  var list=buildTasks().concat(feedInquiryTasks());
+  var html='';
+  if(list.length){
+    list.forEach(function(t){
+      var ic=t.type==='over'?'!':(t.type==='due'?'⏰':(t.type==='new'?'✉':'📖'));
+      html+='<div class="task"><div class="ic '+t.type+'">'+ic+'</div>'+
+        '<div class="tt"><b>'+esc(t.title)+'</b><div class="m">'+esc(t.meta)+'</div></div>'+
+        '<div class="act"><button class="btn sm" onclick="'+t.act+'">'+esc(t.btn)+'</button></div></div>';
+    });
+  }else{
+    html='<div class="oknote">✅ 今日无到期任务。去开发新询盘，或给沉默客户做一次激活触达。</div>';
+  }
+  document.getElementById('aiTasks').innerHTML=html;
+  var idx=Math.abs(daysBetween('2026-01-01',today()))%QPOOL.length;
+  var q=QPOOL[idx];
+  document.getElementById('dailyQ').innerHTML=
+    '<div class="qcard"><div class="q">'+esc(q.q)+'</div>'+
+    '<button class="btn sm ghost" style="margin-top:8px" onclick="this.nextElementSibling.style.display=\'block\';this.disabled=true">展开参考答案</button>'+
+    '<div class="a">'+esc(q.a)+'</div></div>';
+  document.getElementById('dealTip').innerHTML=
+    '<div class="note">'+TIPS[Math.abs(daysBetween('2026-01-01',today()))%TIPS.length]+'</div>'+
+    '<div style="font-size:12.5px;color:var(--sub)">助攻建议每日自动轮换；针对性辅导请找祺工（A3 陪练 / A5 教练）。</div>';
+}
+function renderCustTable(){
+  var t=document.getElementById('custTable');
+  var head='<tr><th>客户</th><th>国家</th><th>分级</th><th>画像</th><th>状态</th><th>首复</th><th>最近跟进</th><th>操作</th></tr>';
+  var rows='';
+  if(DB.customers.length){
+    DB.customers.forEach(function(c){
+      rows+='<tr><td><b>'+esc(c.name)+'</b><div style="font-size:11.5px;color:var(--sub)">'+esc(c.machine||'')+'</div></td>'+
+        '<td>'+esc(c.country||'-')+'</td>'+
+        '<td><span class="pill-grade '+GRADE_CLS[c.grade]+'">'+c.grade+'</span></td>'+
+        '<td>'+esc(c.persona)+'</td><td>'+esc(c.status)+'</td>'+
+        '<td>'+(c.replied?'✔ 已首复':'<span style="color:var(--red)">待首复</span>')+'</td>'+
+        '<td>'+esc(c.lastFollow||c.created)+'</td>'+
+        '<td>'+(c.status!=='成交'?'<button class="btn sm" onclick="setStatus(\''+c.id+'\',\'成交\')">成交</button> ':'')+
+        (c.status!=='流失'?'<button class="btn sm ghost" onclick="setStatus(\''+c.id+'\',\'流失\')">流失</button>':'')+'</td></tr>';
+    });
+  }else{
+    rows='<tr><td colspan="8" style="text-align:center;color:var(--sub)">暂无客户，去「新客户登记」添加第一条询盘</td></tr>';
+  }
+  t.innerHTML=head+rows;
+}
+function renderFollowTable(){
+  var t=document.getElementById('followTable');
+  var rows=DB.customers.filter(function(c){return c.status!=='成交'&&c.status!=='流失'});
+  var head='<tr><th>客户</th><th>分级</th><th>画像</th><th>跟进频率</th><th>距上次跟进</th><th>状态</th><th>操作</th></tr>';
+  var body='';
+  if(rows.length){
+    rows.forEach(function(c){
+      var d=c.replied?daysBetween(c.lastFollow||c.created,today()):0;
+      var gap=FOLLOW_DAYS[c.persona]||5;
+      var st=!c.replied?'⏳ 待首复':(d>=14?'🔴 需激活':(d>=gap?'🟠 跟进到期':'🟢 正常'));
+      body+='<tr><td><b>'+esc(c.name)+'</b></td>'+
+        '<td><span class="pill-grade '+GRADE_CLS[c.grade]+'">'+c.grade+'</span></td>'+
+        '<td>'+esc(c.persona)+'</td><td>'+gap+' 天</td>'+
+        '<td>'+(c.replied?d+' 天':'-')+'</td><td>'+st+'</td>'+
+        '<td>'+(c.replied?'<button class="btn sm" onclick="markFollowed(\''+c.id+'\')">已跟进</button>':'<button class="btn sm ai" onclick="markReplied(\''+c.id+'\')">已首复</button>')+'</td></tr>';
+    });
+  }else{
+    body='<tr><td colspan="7" style="text-align:center;color:var(--sub)">暂无跟进中的客户</td></tr>';
+  }
+  t.innerHTML=head+body;
+}
+function renderHistory(){
+  var wk=document.getElementById('weekKpi');
+  var last7=DB.reports.slice(-7);
+  function sum(k){return last7.reduce(function(s,r){return s+(parseInt(r[k])||0)},0)}
+  wk.innerHTML='<div class="stat"><b>'+last7.length+'</b><span>近7天打卡</span></div>'+
+    '<div class="stat"><b>'+sum('new')+'</b><span>新询盘处理</span></div>'+
+    '<div class="stat"><b>'+sum('follow')+'</b><span>老询盘跟进</span></div>';
+  var t=document.getElementById('historyTable');
+  var head='<tr><th>日期</th><th>新询盘</th><th>跟进</th><th>报价</th><th>视频/验厂</th><th>关键动作摘要</th></tr>';
+  var body='';
+  if(DB.reports.length){
+    DB.reports.slice(-7).reverse().forEach(function(r){
+      var act=r.actions||'';
+      body+='<tr><td>'+esc(r.date)+'</td><td>'+esc(r.new)+'</td><td>'+esc(r.follow)+'</td><td>'+esc(r.quote)+'</td><td>'+esc(r.video)+'</td>'+
+        '<td>'+esc(act.slice(0,60))+(act.length>60?'…':'')+'</td></tr>';
+    });
+  }else{
+    body='<tr><td colspan="6" style="text-align:center;color:var(--sub)">暂无日报记录</td></tr>';
+  }
+  t.innerHTML=head+body;
+}
+
+/* ================= 操作 ================= */
+function addCustomer(){
+  var name=document.getElementById('c_name').value.trim();
+  if(!name){document.getElementById('addMsg').innerHTML='<div class="goldnote">客户姓名/公司为必填项。</div>';return;}
+  var c={
+    id:'C'+Date.now(),name:name,
+    country:document.getElementById('c_country').value.trim(),
+    channel:document.getElementById('c_channel').value,
+    grade:document.getElementById('c_grade').value,
+    persona:document.getElementById('c_persona').value,
+    machine:document.getElementById('c_machine').value.trim(),
+    note:document.getElementById('c_note').value.trim(),
+    created:today(),replied:false,lastFollow:null,status:'跟进中'
+  };
+  DB.customers.push(c);save();renderAll();
+  ['c_name','c_country','c_machine','c_note'].forEach(function(id){document.getElementById(id).value=''});
+  document.getElementById('addMsg').innerHTML='<div class="oknote">✅ 已登记 '+esc(name)+'（'+c.grade+'级）。首复倒计时启动：'+REPLY_HOURS[c.grade]+' 小时内必须完成六段式首复——已同步进入今日 AI 任务区。</div>';
+}
+function markReplied(id){
+  var c=DB.customers.find(function(x){return x.id===id});if(!c)return;
+  c.replied=true;c.lastFollow=today();save();renderAll();
+}
+function markFollowed(id){
+  var c=DB.customers.find(function(x){return x.id===id});if(!c)return;
+  c.lastFollow=today();save();renderAll();
+}
+function setStatus(id,st){
+  var c=DB.customers.find(function(x){return x.id===id});if(!c)return;
+  c.status=st;save();renderAll();
+  if(st==='成交')alert('🎉 恭喜开单！记得把成交经验告诉祺工（A6 复盘官）沉淀进知识库，并 30 天后启动售后回访（S12）。');
+}
+function gv(id){return document.getElementById(id).value}
+function saveReport(){
+  var r={date:today(),new:gv('r_new'),follow:gv('r_follow'),quote:gv('r_quote'),video:gv('r_video'),
+    actions:gv('r_actions').trim(),issues:gv('r_issues').trim(),learn:gv('r_learn').trim(),plan:gv('r_plan').trim()};
+  var i=-1;DB.reports.forEach(function(x,k){if(x.date===today())i=k});
+  if(i>=0)DB.reports[i]=r;else DB.reports.push(r);
+  if(DB.lastReport!==today()){
+    DB.streak=(!DB.lastReport||daysBetween(DB.lastReport,today())===1)?DB.streak+1:1;
+    DB.lastReport=today();
+  }
+  save();renderHistory();renderDash();buildCoach(r);
+  document.getElementById('saveMsg').innerHTML='<div class="oknote">✅ 日报已保存，打卡成功！AI 教练点评已生成，去「AI教练点评」查看。</div>';
+}
+function exportReport(){
+  var txt='【祺臣新人日报】'+today()+
+    '\n① 工作量：新询盘 '+gv('r_new')+' ｜ 老跟进 '+gv('r_follow')+' ｜ 报价 '+gv('r_quote')+' ｜ 视频/验厂 '+gv('r_video')+
+    '\n② 关键动作：'+(gv('r_actions')||'（未填）')+
+    '\n③ 问题与求助：'+(gv('r_issues')||'（未填）')+
+    '\n④ 今日学习：'+(gv('r_learn')||'（未填）')+
+    '\n⑤ 明日计划：'+(gv('r_plan')||'（未填）');
+  var o=document.getElementById('r_out');o.style.display='block';o.value=txt;o.select();
+}
+/* AI 教练点评（基于 SOP 规则的自动复盘） */
+function buildCoach(r){
+  var out=[];
+  var over=buildTasks().filter(function(t){return t.type==='over'});
+  if(parseInt(r.new)+parseInt(r.follow)===0)out.push('🔴 <b>工作量预警</b>：今天新询盘与老跟进都是 0——没有动作就没有开单可能，明天至少处理 1 条询盘。');
+  else out.push('🟢 <b>工作量</b>：今日处理新询盘 '+esc(r.new)+' 条、老跟进 '+esc(r.follow)+' 条，保持这个节奏。');
+  if(over.length)out.push('🔴 <b>逾期任务 '+over.length+' 项</b>：'+over.slice(0,3).map(function(t){return esc(t.title)}).join('；')+'——优先处理，A 级客户逾期=流失风险。');
+  else out.push('🟢 <b>任务纪律</b>：当前无逾期任务，跟进节奏健康。');
+  if((r.issues||'').length<5)out.push('💡 <b>提示</b>：「问题与求助」空着——遇到答不上的参数、拿不准的让步，及时升级（工厂工程师/老板），不要自己扛，更不要编造（铁律 1）。');
+  else out.push('🟢 <b>求助意识</b>：已记录你遇到的问题，会同步给祺工与技术部跟进——升级问题是专业表现，不是弱点。');
+  if(parseInt(r.quote)>0)out.push('💰 <b>报价提醒</b>：今天发出 '+esc(r.quote)+' 份报价——报价后 3 天内必须回访（P3 贸易商规则），别等客户来找你；让步条款确认都经老板批准了吗？');
+  if(!r.plan.trim())out.push('💡 <b>建议</b>：明日计划空着——每天给明早的自己留 3 件事，开单是计划出来的。');
+  out.push('📌 <b>祺工寄语</b>：先信任后成交。今天发出的每一封邮件，都要经得起「参数有出处、产能不夸大、让步守边界」三条检验。');
+  document.getElementById('coachOut').innerHTML='<div style="font-size:13.5px;line-height:2">'+out.map(function(x){return '<div>· '+x+'</div>'}).join('')+'</div>';
+}
+/* ================= 导航与初始化 ================= */
+function go(id){
+  document.querySelectorAll('section').forEach(function(s){s.classList.remove('on')});
+  document.querySelectorAll('nav button').forEach(function(b){b.classList.remove('on')});
+  document.getElementById(id).classList.add('on');
+  var b=document.querySelector('nav button[data-t="'+id+'"]');if(b)b.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function renderAll(){renderFeedStatus();renderDash();renderCustTable();renderFollowTable();renderHistory();renderAgentCoach()}
+function init(){
+  var d=new Date();var wk=['日','一','二','三','四','五','六'][d.getDay()];
+  document.getElementById('hdDate').textContent=d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日 · 星期'+wk;
+  document.getElementById('hdStreak').innerHTML='连续打卡 <span class="badge">'+DB.streak+' 天</span>';
+  renderAll();
+}
+init();
+</script>
+</body>
+</html>
