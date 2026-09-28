@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>祺臣机械 · 业务SOP全流程一体化卡片</title>
+<style>
+:root{--page:#f1f5f9;--panel:#fff;--line:#e2e8f0;--ink:#1e293b;--sub:#64748b;
+--brand:#0f766e;--brand2:#115e59;--brand-l:#ccfbf1;
+--pre:#0e7490;--pre-l:#cffafe;--mid:#1d4ed8;--mid-l:#dbeafe;--del:#b45309;--del-l:#fef3c7;--aft:#15803d;--aft-l:#dcfce7;
+--red:#b91c1c;--red-l:#fee2e2}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI","Microsoft YaHei",sans-serif;background:var(--page);color:var(--ink);line-height:1.7}
+header{background:linear-gradient(135deg,#134e4a,#0f766e 55%,#0d9488);color:#fff;padding:30px 24px;text-align:center}
+header h1{font-size:26px;letter-spacing:1px}
+header .sub{opacity:.88;font-size:13.5px;margin-top:8px}
+nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;background:#134e4a;padding:10px 14px;position:sticky;top:0;z-index:60;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+nav button{background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;padding:7px 16px;border-radius:18px;cursor:pointer;font-size:13.5px}
+nav button:hover{background:rgba(255,255,255,.15)}
+nav button.on{background:#fff;color:var(--brand2);font-weight:700;border-color:#fff}
+main{max-width:1080px;margin:0 auto;padding:22px 16px 90px}
+section{display:none}section.on{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:16px;box-shadow:0 1px 3px rgba(15,23,42,.06)}
+.card h2{font-size:18.5px;color:var(--brand2);border-left:4px solid var(--brand);padding-left:10px;margin-bottom:10px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:var(--brand-l);color:var(--brand2);white-space:nowrap}
+.tag{display:inline-block;font-size:11.5px;padding:2px 9px;border-radius:10px;margin:0 4px 0 0;white-space:nowrap}
+.t-pre{background:var(--pre-l);color:var(--pre)}.t-mid{background:var(--mid-l);color:var(--mid)}
+.t-del{background:var(--del-l);color:var(--del)}.t-aft{background:var(--aft-l);color:var(--aft)}
+.t-red{background:var(--red-l);color:var(--red)}.t-brand{background:var(--brand-l);color:var(--brand2)}
+.note{background:var(--del-l);border-left:4px solid var(--del);padding:9px 13px;border-radius:6px;font-size:13px;margin:10px 0}
+.rednote{background:var(--red-l);border-left:4px solid var(--red);padding:9px 13px;border-radius:6px;font-size:13px;margin:10px 0}
+.toolbar input{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:14px;background:#fff;margin-bottom:12px}
+.flowwrap{display:flex;gap:10px;overflow-x:auto;padding:6px 0}
+.phase{flex:1;min-width:190px;border-radius:12px;padding:12px 14px;color:#fff}
+.phase b{display:block;font-size:15px;margin-bottom:8px}
+.phase .st{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:5px 10px;font-size:12.5px;margin:5px 0;cursor:pointer}
+.phase .st:hover{background:rgba(255,255,255,.32)}
+.ph-pre{background:linear-gradient(160deg,#0e7490,#06b6d4)}
+.ph-mid{background:linear-gradient(160deg,#1d4ed8,#3b82f6)}
+.ph-del{background:linear-gradient(160deg,#b45309,#f59e0b)}
+.ph-aft{background:linear-gradient(160deg,#15803d,#22c55e)}
+.arrow-x{align-self:center;color:var(--brand);font-size:22px;font-weight:800}
+.stage{border:1px solid var(--line);border-radius:14px;background:#fff;margin:12px 0;overflow:hidden}
+.stage .sh{padding:13px 18px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;color:#fff}
+.stage.pre .sh{background:linear-gradient(90deg,#0e7490,#0891b2)}
+.stage.mid .sh{background:linear-gradient(90deg,#1d4ed8,#2563eb)}
+.stage.del .sh{background:linear-gradient(90deg,#b45309,#d97706)}
+.stage.aft .sh{background:linear-gradient(90deg,#15803d,#16a34a)}
+.stage .sh b{font-size:15.5px}
+.stage .sb{padding:14px 18px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:760px){.stage .sb{grid-template-columns:1fr}}
+.cell{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:9px 13px;font-size:13px}
+.cell>b{display:block;font-size:12px;color:var(--sub);margin-bottom:3px}
+.cell ol,.cell ul{padding-left:18px;margin:2px 0}
+.cell li{margin:2px 0}
+.cell.warn{background:var(--red-l);border-color:#fecaca}
+.cell.link{background:var(--brand-l);border-color:#99f6e4}
+footer{text-align:center;color:var(--sub);font-size:12.5px;padding:18px;border-top:1px solid var(--line);background:#fff}
+@media print{nav,.toolbar{display:none}section{display:block!important}}
+</style>
+</head>
+<body>
+<header>
+<h1>祺臣机械 · 业务 SOP 全流程一体化卡片</h1>
+<div class="sub">From Inquiry to After-sales ｜ 售前 → 售中 → 交付 → 售后维护跟踪 ｜ 版本 v1.0 · 2026-08-10 ｜ 事实源：MEMORY.md + AGENTS 六角色 + 画像指南 + 100问案例库</div>
+</header>
+<nav>
+<button class="on" data-t="map" onclick="go('map')">全流程地图</button>
+<button data-t="stages" onclick="go('stages')">12阶段SOP卡片</button>
+<button data-t="raci" onclick="go('raci')">角色职责矩阵</button>
+<button data-t="exc" onclick="go('exc')">异常分支预案</button>
+<button data-t="kpi" onclick="go('kpi')">KPI看板</button>
+</nav>
+<main>
+
+<section id="map" class="on">
+<div class="card">
+<h2>全流程总览（四大阶段 · 12 个 SOP 卡片）</h2>
+<div class="flowwrap">
+<div class="phase ph-pre"><b>一、售前（获客与建信）</b>
+<div class="st" onclick="jump('s1')">S1 询盘接收与分级</div>
+<div class="st" onclick="jump('s2')">S2 客户画像诊断卡</div>
+<div class="st" onclick="jump('s3')">S3 首次响应（六段式）</div>
+<div class="st" onclick="jump('s4')">S4 培育跟进节奏</div></div>
+<div class="arrow-x">→</div>
+<div class="phase ph-mid"><b>二、售中（方案与成交）</b>
+<div class="st" onclick="jump('s5')">S5 需求确认与选型算账</div>
+<div class="st" onclick="jump('s6')">S6 报价方案（A4）</div>
+<div class="st" onclick="jump('s7')">S7 谈判让步与成交</div>
+<div class="st" onclick="jump('s8')">S8 合同与付款</div></div>
+<div class="arrow-x">→</div>
+<div class="phase ph-del"><b>三、交付（生产与物流）</b>
+<div class="st" onclick="jump('s9')">S9 生产QC与出厂验收</div>
+<div class="st" onclick="jump('s10')">S10 物流发货与单证</div></div>
+<div class="arrow-x">→</div>
+<div class="phase ph-aft"><b>四、售后（维护与经营）</b>
+<div class="st" onclick="jump('s11')">S11 安装调试与培训</div>
+<div class="st" onclick="jump('s12')">S12 质保维护跟踪与复盘</div></div>
+</div>
+<div class="note">📌 全链路贯穿三条铁律：① 参数有出处、不编造；② 先信任后成交、不逼单；③ 折扣/交期/账期/独家让步须老板拍板（SOUL 行为边界）。每个卡片含：目标、关键动作、输出物、时限、红线、关联知识。</div>
+</div>
+<div class="card">
+<h2>阶段主责角色速览</h2>
+<table>
+<tr><th>阶段</th><th>主责角色</th><th>核心输出物</th><th>进入下一阶段的门槛</th></tr>
+<tr><td><span class="tag t-pre">售前 S1–S4</span></td><td>A1 诊断官 + A2 回复工程师</td><td>诊断卡、画像卡、首复邮件</td><td>分级定档（A/B/C）且画像明确</td></tr>
+<tr><td><span class="tag t-mid">售中 S5–S8</span></td><td>A4 报价参谋（老板拍板）</td><td>选型方案、报价单、合同</td><td>收到定金或信保支付</td></tr>
+<tr><td><span class="tag t-del">交付 S9–S10</span></td><td>工厂生产/QC + 物流</td><td>试机报告、装箱单、提单</td><td>机器到港并通知客户</td></tr>
+<tr><td><span class="tag t-aft">售后 S11–S12</span></td><td>业务员 + 工厂工程师 + A6 复盘官</td><td>安装验收单、维护跟踪表、复盘简报</td><td>客户稳定生产并进入复购培育</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ========== 12阶段SOP卡片 ========== -->
+<section id="stages">
+<div class="card">
+<h2>12 阶段 SOP 卡片（可搜索）</h2>
+<div class="toolbar"><input type="search" id="stageSearch" placeholder="🔍 搜索卡片内容（如：信保 / 换模 / 易损件 / FAT）…" oninput="filterStages(this.value)"></div>
+</div>
+
+<!-- 售前 S1 -->
+<div class="stage pre" id="s1" data-phase="售前">
+<div class="sh"><b>S1 · 询盘接收与分级</b><span class="tag t-pre">售前</span><span>主责：业务员 + A1 诊断官</span></div>
+<div class="sb">
+<div class="cell"><b>目标</b>每条询盘在录入 CRM 的同时完成 A/B/C 分级，资源向 A 级倾斜。</div>
+<div class="cell"><b>关键动作</b><ol>
+<li>登记询盘来源/时间/客户信息（编号 QC-YYYYMMDD-___）；</li>
+<li>勾选信号：参数充分度（杯型/产量/淋膜/技术问句/公司信息）；</li>
+<li>定级：信息≥4项=A；2–3项或有画像信号=B；其余=C；</li>
+<li>同步扫风险清单：只要最低价/回避公司信息/先发货后付款/异常账期。</li>
+</ol></div>
+<div class="cell"><b>输出物 & 时限</b>询盘登记记录 + 分级标签；<b>分级在收到后 2h 内完成</b>。</div>
+<div class="cell warn"><b>红线</b>命中「先发货后付款」=高危，付款必须走 Trade Assurance 或 30/70；未分级不许报价。</div>
+<div class="cell link"><b>关联</b>画像指南·询盘快速分级工具；AGENTS A1；MEMORY §1（响应≤6h 为店铺承诺，A 级首复对齐此时限）。</div>
+</div>
+</div>
+
+<!-- 售前 S2 -->
+<div class="stage pre" id="s2" data-phase="售前">
+<div class="sh"><b>S2 · 客户画像诊断卡</b><span class="tag t-pre">售前</span><span>主责：业务员 + A1 诊断官</span></div>
+<div class="sb">
+<div class="cell"><b>目标</b>为每条 A/B 级询盘建画像卡，确定话术与机型方向。</div>
+<div class="cell"><b>关键动作</b><ol>
+<li>按标准模板填画像卡（基本信息→画像判定→需求→缺口→风险→跟进）；</li>
+<li>判定主画像：P1 初创 / P2 工厂扩产 / P3 贸易商 / P4 连锁自用（混合画像以决策关注点为准）；</li>
+<li>初判推荐机型方向（出处 MEMORY §2）；</li>
+<li>列出「需求四问」缺口：日产量/杯型/热饮冷饮/当地电压。</li>
+</ol></div>
+<div class="cell"><b>输出物 & 时限</b>完整画像卡一张；<b>A 级 4h 内、B 级 24h 内建档</b>。</div>
+<div class="cell warn"><b>红线</b>画像不许编造——判断不了就标「待确认」，用首复反问收集信息。</div>
+<div class="cell link"><b>关联</b>画像指南·标准画像模板；MEMORY §4.1 四类画像；MEMORY §2 机型档案。</div>
+</div>
+</div>
+
+<!-- 售前 S3 -->
+<div class="stage pre" id="s3" data-phase="售前">
+<div class="sh"><b>S3 · 首次响应（六段式英文回复）</b><span class="tag t-pre">售前</span><span>主责：A2 回复工程师</span></div>
+<div class="sb">
+<div class="cell"><b>目标</b>首复建立专业第一印象，并拿到关键缺口信息。</div>
+<div class="cell"><b>关键动作</b>按 A2 六段结构起草：<ol>
+<li>称呼+感谢+需求共鸣；</li>
+<li>推荐机型+2–3 关键参数（出处 MEMORY §2）+一句原理说明；</li>
+<li>参数翻译成生意价值（净产出按额定×70–80% 算）；</li>
+<li>反问 2–3 个缺口（需求四问）；</li>
+<li>信任背书：16 年金品+SGS+Trade Assurance+视频验厂邀请；</li>
+<li>明确下一步行动（视频通话/目录/样品杯）。</li>
+</ol></div>
+<div class="cell"><b>输出物 & 时限</b><b>A 级 6h / B 级 24h / C 级 48h 内发出</b>（对齐店铺 ≤6h 响应承诺，A 级优先）。</div>
+<div class="cell warn"><b>红线</b>首复不报死价（区间价+配置说明，折扣老板拍板）；不夸大产能；不用 best/top quality 空洞词。</div>
+<div class="cell link"><b>关联</b>AGENTS A2；100问 Q81–Q92 买家FAQ口径；案例 C1（信任三连）/C9（多问题逐条答）。</div>
+</div>
+</div>
+
+<!-- 售前 S4 -->
+<div class="stage pre" id="s4" data-phase="售前">
+<div class="sh"><b>S4 · 培育跟进节奏</b><span class="tag t-pre">售前</span><span>主责：业务员（A3 陪练可模拟）</span></div>
+<div class="sb">
+<div class="cell"><b>目标</b>B 级养成 A 级；C 级轻触达不耗资源；沉默客户按预案激活。</div>
+<div class="cell"><b>关键动作</b><ol>
+<li>按画像定频率：P2 工厂扩产 3–5 天、P1 初创 5–7 天、P3 贸易商报价后 3 天内回访、P4 方案书节奏；</li>
+<li>每次跟进必带新价值：数据/视频/案例/算账，禁止空手催单；</li>
+<li>14 天无回应→激活预案：换触点（邮件→WhatsApp）→换新价值（新机型/PLA 趋势/验厂邀请）→三次无回应降培育池月度轻触达；</li>
+<li>跟进记录回写画像卡，标记沉默原因供 A6 复盘。</li>
+</ol></div>
+<div class="cell"><b>输出物</b>跟进记录（日期/内容/客户反应/下一步）；每周随 A6 简报汇总。</div>
+<div class="cell warn"><b>红线</b>禁止连续追问「did you receive my email」；禁止信任未建立前逼单（SOUL 铁律 4）。</div>
+<div class="cell link"><b>关联</b>画像指南·跟进指南阶段 0–4；案例 C10/C12 应对弹药。</div>
+</div>
+</div>
+
+<!-- 售中 S5 -->
+<div class="stage mid" id="s5" data-phase="售中">
+<div class="sh"><b>S5 · 需求确认与选型算账</b><span class="tag t-mid">售中</span><span>主责：业务员 + A4 报价参谋</span></div>
+<div class="sb">
+<div class="cell"><b>目标</b>把模糊需求变成明确选型：机型、数量、配套、产能匹配全部敲定。</div>
+<div class="cell"><b>关键动作</b><ol>
+<li>补齐需求四问（日产量/杯型/热饮冷饮/电压），确认淋膜要求（单PE/双PE/PLA）；</li>
+<li>按选型公式算机台数：峰值日产量×1.2 ÷ (净速度×运行小时)；</li>
+<li>净产出按额定×70–80% 计算并展示给客户（主动讲，不等客户问）；</li>
+<li>确定配套：空压机（必配）+包装机+杯盖机（双层线）+易损件包；</li>
+<li>多杯型客户必讲换模时间（我方实测值待补 Q73，先给流程承诺）。</li>
+</ol></div>
+<div class="cell"><b>输出物</b>选型算账表（机型×数量×产能匹配×配套清单）。</div>
+<div class="cell warn"><b>红线</b>净产出系数不许省略（铁律 2）；PLA 兼容性未确认的机型不承诺能跑（Q78 待补→升级工厂工程师）。</div>
+<div class="cell link"><b>关联</b>100问 Q65–Q72 产能模块；案例 C5（5万只选型）/C6（单双PE纠偏）/C3（咖啡店整线）。</div>
+</div>
+</div>
+
+<!-- 售中 S6 -->
+<div class="stage mid" id="s6" data-phase="售中">
+<div class="sh"><b>S6 · 报价方案（A4 参谋）</b><span class="tag t-mid">售中</span><span>主责：A4 报价参谋 → 老板审批</span></div>
+<div class="sb">
+<div class="cell"><b>目标</b>输出结构化报价单，凸显整线价值与信任保障。</div>
+<div class="cell"><b>关键动作</b><ol>
+<li>整线结构报价：主机+辅机（空压机/包装机/模具/易损件包）分项；</li>
+<li>贸易条款：EXW / FOB Ningbo / CIF 分项呈现，凸显 Trade Assurance；</li>
+<li>附加值包装：安装调试视频指导、操作培训、易损件包、一年质保（行业惯例 1–2 年）；</li>
+<li>付款方式口径：30% 定金+70% 发货前，或信保在线支付；</li>
+<li>价格区间参考 MEMORY §2 挂牌价，成交价由老板定。</li>
+</ol></div>
+<div class="cell"><b>输出物 & 时限</b>正式报价单（PDF）；A 级客户 6h 内出，B 级信息补齐后 24h 内出。</div>
+<div class="cell warn"><b>红线</b>A4 只建议不拍板；折扣幅度、账期、独家代理一律标注「需老板确认」；成本价与利润结构保密（SOUL 保密红线）。</div>
+<div class="cell link"><b>关联</b>AGENTS A4；MEMORY §2 机型价格带；100问 Q43/Q89/Q99。</div>
+</div>
+</div>
+
+<!-- 售中 S7 -->
+<div class="stage mid" id="s7" data-phase="售中">
+<div class="sh"><b>S7 · 谈判让步与成交</b><span class="tag t-mid">售中</span><span>主责：业务员（让步走老板审批）</span></div>
+<div class="sb">
+<div class="cell"><b>目标</b>消除最后顾虑促成签约，同时守住价格与条款底线。</div>
+<div class="cell"><b>关键动作</b><ol>
+<li>按犹豫原因对症：怕机器不行→视频试机/FAT；怕工厂不实→视频验厂+SGS 报告；嫌贵→总拥有成本四件套；</li>
+<li>比价应对（印度供应商等）：净产出率/纸耗 3–5% vs 8–10%/备件服务/认证背书，不贬低同行；</li>
+<li>客户施压折扣/账期：审批流程做挡箭牌，把话题拉回价值（案例 C11 四步拆解）；</li>
+<li>成交信号出现（问付款/安装/合同条款）→立即推进合同流程；</li>
+<li>所有让步逐条记录并报老板审批，批准后方可书面确认。</li>
+</ol></div>
+<div class="cell"><b>输出物</b>谈判记录（客户诉求/我方回应/让步申请/老板批复）。</div>
+<div class="cell warn"><b>红线</b>四类让步（折扣/交期/账期/独家）未经老板书面批准不得写入任何文件；不编造实测数据换成交。</div>
+<div class="cell link"><b>关联</b>案例 C10/C11/C12；100问 Q93–Q99 异议应对；SOUL 行为边界。</div>
+</div>
+</div>
+
+<!-- 售中 S8 -->
+<div class="stage mid" id="s8" data-phase="售中">
+<div class="sh"><b>S8 · 合同与付款</b><span class="tag t-mid">售中</span><span>主责：业务员 + 老板</span></div>
+<div class="sb">
+<div class="cell"><b>目标</b>合同条款与付款落地，锁定订单进入生产。</div>
+<div class="cell"><b>关键动作</b><ol>
+<li>合同要素核对：机型/数量/配置/杯型模具/电压（客户当地标准，印度 415V 等需注明）/交期/付款方式/质保条款；</li>
+<li>付款走 Trade Assurance 或 30% 定金到账；</li>
+<li>交期承诺以老板/生产部确认的口径为准（常规交期待补 Q88，确认前不写入合同）；</li>
+<li>收到定金后 24h 内发确认函+生产排期；</li>
+<li>同步建「交付跟踪单」：订单号/机型/交期/客户联系人/电压特殊要求。</li>
+</ol></div>
+<div class="cell"><b>输出物</b>签署合同 + 定金/信保支付凭证 + 订单确认函。</div>
+<div class="cell warn"><b>红线</b>交期未获生产部确认不得写入合同；电压/定制需求必须白纸黑字进合同，防止交付纠纷。</div>
+<div class="cell link"><b>关联</b>MEMORY §5 FAQ#11/#12；100问 Q25（电压）/Q88/Q89。</div>
+</div>
+</div>
+
+<!-- 交付 S9 -->
+<div class="stage del" id="s9" data-phase="交付">
+<div class="sh"><b>S9 · 生产 QC 与出厂验收</b><span class="tag t-del">交付</span><span>主责：工厂生产/QC + 业务员跟踪</span></div>
+<div class="sb">
+<div class="cell"><b>目标</b>机器按合同配置生产并通过出厂测试，客户远程可见。</div>
+<div class="cell"><b>关键动作</b><ol>
+<li>按合同配置单投产（机型/电压/模具/语言界面）；</li>
+<li>出厂测试：空载运行+带纸试机，记录运行状态；</li>
+<li>试机视频与照片发客户确认（补 Q92 素材缺口的最佳时机——每单积累素材库）；</li>
+<li>易损件包按清单随货装箱（切刀/加热元件/滚花轮/超声波焊头，Q23）；</li>
+<li>客户远程验收确认（视频连线看试机）后安排发货。</li>
+</ol></div>
+<div class="cell"><b>输出物</b>出厂测试记录 + 试机视频 + 装箱清单。</div>
+<div class="cell warn"><b>红线</b>试机视频不许用其他机型素材顶替（真实是信任底线）；易损件包漏装=售后隐患。</div>
+<div class="cell link"><b>关联</b>MEMORY §1 成品检验/QC 服务能力；100问 Q23/Q92。</div>
+</div>
+</div>
+
+<!-- 交付 S10 -->
+<div class="stage del" id="s10" data-phase="交付">
+<div class="sh"><b>S10 · 物流发货与单证</b><span class="tag t-del">交付</span><span>主责：物流/单证 + 业务员通报</span></div>
+<div class="sb">
+<div class="cell"><b>目标</b>机器安全到港，单证齐全，客户全程知情。</div>
+<div class="cell"><b>关键动作</b><ol>
+<li>运输规划：整机约 2.5 吨/约 2700×1400×1900mm，按 20GP 集装箱装载（Q24）；</li>
+<li>出口单证：发票/装箱单/提单/原产地证（按客户要求）；</li>
+<li>发货后 24h 内通报客户：提单号/船期/预计到港；</li>
+<li>到港前 7 天提醒客户准备清关与厂房条件（380V 电力+空压机气源，Q25/Q26）；</li>
+<li>尾款按合同节点收取（发货前或见提单副本，以合同为准）。</li>
+</ol></div>
+<div class="cell"><b>输出物</b>提单 + 全套单证 + 物流节点通报记录。</div>
+<div class="cell warn"><b>红线</b>店铺承诺 100% 准时发货率（MEMORY §1）——排期异常必须提前预警客户，不许瞒报。</div>
+<div class="cell link"><b>关联</b>100问 Q24/Q25/Q26；MEMORY §1 履约数据。</div>
+</div>
+</div>
+
+<!-- 售后 S11 -->
+<div class="stage aft" id="s11" data-phase="售后">
+<div class="sh"><b>S11 · 安装调试与培训</b><span class="tag t-aft">售后</span><span>主责：工厂工程师 + 业务员</span></div>
+<div class="sb">
+<div class="cell"><b>目标</b>机器在客户现场跑起来、工人会操作——这是复购与转介绍的地基。</div>
+<div class="cell"><b>关键动作</b><ol>
+<li>安装方式确认：视频指导（默认）或工程师海外安装（客户承担差旅，Q85）；</li>
+<li>现场条件核查：380V/三相电力、空压机气源、地面水平（Q25/Q26）；</li>
+<li>调试要点传达：热风温度/超声波压力不可过高、滚花轮压力不可随意加大（Q19/Q20/Q21）；</li>
+<li>操作培训：免费培训，教八工位流程与日常维护检查项（加热器/滚花轮/焊头/转盘同步，Q22）；</li>
+<li>试产验收：客户用自购纸试产，确认杯型质量后签验收单。</li>
+</ol></div>
+<div class="cell"><b>输出物</b>安装验收单 + 培训记录 + 客户现场试产视频（入素材库）。</div>
+<div class="cell warn"><b>红线</b>客户纸张与机器不兼容时如实说明并协助调纸，不许硬推机器问题（维护口碑）。</div>
+<div class="cell link"><b>关联</b>100问 Q19–Q22/Q85；案例 C2（操作焦虑化解）。</div>
+</div>
+</div>
+
+<!-- 售后 S12 -->
+<div class="stage aft" id="s12" data-phase="售后">
+<div class="sh"><b>S12 · 质保维护跟踪与复盘</b><span class="tag t-aft">售后</span><span>主责：业务员 + A6 复盘官</span></div>
+<div class="sb">
+<div class="cell"><b>目标</b>质保期内响应快、质保期外不断线；把每台机器变成长期客户与案例源。</div>
+<div class="cell"><b>关键动作</b><ol>
+<li><b>维护跟踪表</b>：每客户一档——机型/出厂日/质保到期日/易损件更换记录/故障记录；</li>
+<li><b>30 天回访</b>：运行情况+易损件提醒（备件包复购机会，Q23）；</li>
+<li><b>90 天回访</b>：产能达成情况+扩产需求探测（P4 加机/P2 加线）；</li>
+<li><b>质保响应口径</b>：一年质保+易损件包+国际服务中心（Q86）；远程诊断与备件时效细则待补 Q80，到位前给「工程师 X 小时内响应」的个案承诺；</li>
+<li><b>案例授权</b>：稳定运行 6 个月后邀请客户授权案例/视频——新客户最高信任弹药；</li>
+<li><b>A6 周复盘</b>：丢单原因/新问题沉淀进 MEMORY（§5 扩展 FAQ 与 §4 买家画像）。</li>
+</ol></div>
+<div class="cell"><b>输出物</b>维护跟踪表 + 回访记录 + 案例授权书 + 周复盘简报。</div>
+<div class="cell warn"><b>红线</b>收款后失联=最大禁忌——机械客户终身价值在备件+加机+转介绍；质保外故障也须响应（报价维修）。</div>
+<div class="cell link"><b>关联</b>画像指南·阶段5 客户成功；AGENTS A6；MEMORY §5 FAQ#8；100问 Q23/Q80/Q86。</div>
+</div>
+</div>
+</section>
+
+<!-- ========== 角色职责矩阵 ========== -->
+<section id="raci">
+<div class="card">
+<h2>角色职责矩阵（谁在哪个阶段干什么）</h2>
+<table>
+<tr><th>角色</th><th>售前</th><th>售中</th><th>交付</th><th>售后</th></tr>
+<tr><td><b>业务员</b></td><td>登记分级、建画像卡、六段式首复、节奏跟进</td><td>需求确认、谈判记录、让步申请上报</td><td>客户通报、单证传递、尾款跟收</td><td>回访、维护跟踪表、扩产探测</td></tr>
+<tr><td><b>A1 诊断官</b></td><td>诊断卡五要素输出、风险预警</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td><b>A2 回复工程师</b></td><td>六段式英文回复起草</td><td>方案书英文包装</td><td>物流节点英文通报</td><td>回访邮件起草</td></tr>
+<tr><td><b>A3 陪练买家</b></td><td>模拟 Lv1–Lv4 买家演练异议场景</td><td>模拟压价/账期谈判</td><td>—</td><td>模拟售后投诉场景</td></tr>
+<tr><td><b>A4 报价参谋</b></td><td>—</td><td>整线报价结构、付款方案（老板拍板）</td><td>—</td><td>备件报价</td></tr>
+<tr><td><b>A5 知识教练</b></td><td colspan="4">贯穿全程：新人按 5 周 7 关培训，卡关项（参数/算账/异议）随时回炉</td></tr>
+<tr><td><b>A6 复盘官</b></td><td colspan="4">贯穿全程：每周简报、丢单复盘、新 FAQ 入库、MEMORY 维护</td></tr>
+<tr><td><b>老板</b></td><td>—</td><td>折扣/交期/账期/独家四类让步拍板、成交价确认</td><td>排期异常决策</td><td>大客户/长期协议条款确认</td></tr>
+<tr><td><b>工厂工程师</b></td><td>待确认技术问题答复（PLA 兼容等）</td><td>实测数据支持</td><td>出厂测试、试机视频</td><td>安装指导、远程诊断、维修方案</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ========== 异常分支预案 ========== -->
+<section id="exc">
+<div class="card">
+<h2>异常分支预案（出了问题按图索骥）</h2>
+<table>
+<tr><th>异常场景</th><th>所属阶段</th><th>处置动作</th><th>红线/升级</th></tr>
+<tr><td>询盘命中高危风险（先发货后付款等）</td><td>S1</td><td>付款只走 Trade Assurance 或 30/70；保留记录，谨慎跟进</td><td>不许为成交放松付款底线</td></tr>
+<tr><td>客户追问的技术参数不在 MEMORY（PLA 兼容/实测数据）</td><td>S3/S5</td><td>统一口径「工程师确认中，X 天内答复」，同步升级工厂工程师</td><td>绝不编造数字（铁律 1）</td></tr>
+<tr><td>客户压价触及底价</td><td>S7</td><td>停止让步→转价值话术（总拥有成本）→报老板裁决</td><td>让步须老板书面批准</td></tr>
+<tr><td>生产排期延误风险</td><td>S8/S9</td><td>第一时间预警客户+给新排期；协商分批交付或部分发货</td><td>不许瞒报——店铺 100% 准时记录靠预警维护</td></tr>
+<tr><td>到港清关受阻（单证问题）</td><td>S10</td><td>24h 内补单证；必要时协调货代与客户报关行三方沟通</td><td>单证错误须当单复盘入 A6 简报</td></tr>
+<tr><td>安装现场条件不达标（电压/气源）</td><td>S11</td><td>给整改清单（变压器/空压机规格），整改后再调试；远程先做培训</td><td>不达标强行开机造成损坏，责任界定要书面</td></tr>
+<tr><td>试产杯型质量不佳</td><td>S11</td><td>先排查纸张（GSM/淋膜是否达标 Q55–57）再排查机器参数（温度/压力 Q19–Q21）</td><td>不硬推机器问题，协助客户调纸</td></tr>
+<tr><td>质保期内故障报修</td><td>S12</td><td>远程诊断优先（视频看故障）→判定易损件/质保范围→寄件或指导更换</td><td>响应时效细则待补 Q80，个案承诺须记录</td></tr>
+<tr><td>客户投诉/差评威胁</td><td>S12</td><td>24h 内响应致歉+方案；升级老板介入重大投诉</td><td>不与顾客争执对错，先解决再复盘</td></tr>
+<tr><td>连续丢单（同类原因 ≥2 次）</td><td>全程</td><td>A6 专项复盘→定位系统性原因→更新 MEMORY 与陪练场景</td><td>复盘结论须落到培训动作，不许只写报告</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ========== KPI看板 ========== -->
+<section id="kpi">
+<div class="card">
+<h2>全流程 KPI 看板（管过程才能管结果）</h2>
+<table>
+<tr><th>阶段</th><th>指标</th><th>标准</th><th>出处/说明</th></tr>
+<tr><td rowspan="3">售前</td><td>首复及时率</td><td>A 级 6h / B 级 24h / C 级 48h</td><td>对齐店铺 ≤6h 响应承诺（MEMORY §1）</td></tr>
+<tr><td>询盘分级覆盖率</td><td>100% 询盘带分级+画像标签</td><td>S1 门槛：未分级不报价</td></tr>
+<tr><td>技术类回复准确率</td><td>≥ 95%</td><td>SOUL 成功标准 3</td></tr>
+<tr><td rowspan="2">售中</td><td>A 级询盘方案转化率</td><td>按周跟踪，A6 简报汇总</td><td>基线由实际数据建立（不预设目标值）</td></tr>
+<tr><td>让步合规率</td><td>100% 让步经老板批准</td><td>SOUL 行为边界</td></tr>
+<tr><td rowspan="2">交付</td><td>准时发货率</td><td>维持 100%</td><td>店铺现有记录（MEMORY §1）</td></tr>
+<tr><td>出厂试机视频覆盖率</td><td>每单 1 条</td><td>补 Q92 素材缺口</td></tr>
+<tr><td rowspan="3">售后</td><td>30/90 天回访完成率</td><td>100%</td><td>S12 标准动作</td></tr>
+<tr><td>备件复购率 / 加机转化率</td><td>按季度跟踪</td><td>机械客户终身价值核心</td></tr>
+<tr><td>案例授权数</td><td>每月沉淀新知识 ≥5 条（含案例）</td><td>SOUL 成功标准 4</td></tr>
+</table>
+<div class="note">📌 KPI 纪律：过程指标每周由 A6 复盘官出简报；不设无基线的拍脑袋目标值——先跑一个月数据再定改进线。</div>
+</div>
+<div class="card">
+<h2>落地三步走</h2>
+<table>
+<tr><th>步骤</th><th>动作</th><th>负责人</th></tr>
+<tr><td>1. 本周</td><td>全员过一遍本 SOP + 100问系统；按 S1 工具把存量询盘重新分级建档</td><td>老板 + 全体业务员</td></tr>
+<tr><td>2. 下周起</td><td>新询盘严格按 S1→S12 流转；每周五 A6 复盘简报上线</td><td>业务员 + 祺工（A6）</td></tr>
+<tr><td>3. 第一个月后</td><td>用实际数据校准 KPI 基线；工厂 FAQ 待补数据到位后升级话术弹药</td><td>老板 + 技术部</td></tr>
+</table>
+</div>
+</section>
+
+</main>
+<footer>祺臣机械 · 业务SOP全流程一体化卡片 v1.0 ｜ 事实源：MEMORY.md + AGENTS 六角色 + 客户画像指南 + 专业知识100问案例库 ｜ 编制：祺工</footer>
+
+<script>
+function go(id){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  const b=document.querySelector('nav button[data-t="'+id+'"]');if(b)b.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function jump(id){
+  go('stages');
+  const el=document.getElementById(id);
+  if(el){setTimeout(function(){el.scrollIntoView({behavior:'smooth'});el.style.boxShadow='0 0 0 3px #f59e0b';setTimeout(function(){el.style.boxShadow=''},2000)},120);}
+}
+function filterStages(v){
+  v=v.trim().toLowerCase();
+  document.querySelectorAll('#stages .stage').forEach(function(s){
+    s.style.display=(!v||s.textContent.toLowerCase().indexOf(v)>=0)?'':'none';
+  });
+}
+</script>
+</body>
+</html>
